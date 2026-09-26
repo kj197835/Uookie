@@ -405,10 +405,10 @@ Work 탭은 최신 챕터가 위, 가장 오래된 챕터가 아래. `bridge`는
 
 ## 9. 배포 (uookie.net)
 
-1. 저장소: https://github.com/kj197835/Uookie (공개, 기본 브랜치 `master`)
-2. `.github/workflows/deploy.yml`: **수동 실행 전용**(사용자가 요청할 때만 배포). 푸시만으로는 배포되지 않는다. Actions → Deploy to GitHub Pages → Run workflow로 `npm ci` → `npm run build` → `dist/` 배포
-3. 저장소 Settings → Pages → Source를 **GitHub Actions**로 설정 (최초 1회)
-4. 커스텀 도메인: `public/CNAME` = `uookie.net`. 도메인 등록처 DNS에 GitHub Pages A 레코드(185.199.108.153 / 109 / 110 / 111)와 `www` → `kj197835.github.io` CNAME 추가, Settings → Pages에서 Enforce HTTPS
+1. 저장소: https://github.com/kj197835/Uookie (공개). 소스는 `master`, 빌드 결과는 `gh-pages` 브랜치
+2. **배포는 요청 시에만**: `npm run deploy` → 빌드 후 `dist/`를 `gh-pages` 브랜치에 SSH로 강제 푸시(`scripts/deploy-pages.mjs`, `.nojekyll` 포함). `master` 푸시만으로는 사이트가 바뀌지 않는다.
+3. GitHub Pages 설정: Settings → Pages → Source **Deploy from a branch** → `gh-pages` / `(root)` (최초 1회). `.github/workflows/deploy.yml`은 예비용(수동 실행 전용)
+4. 커스텀 도메인: `public/CNAME` = `uookie.net` (DNS 연결 완료: A 레코드 185.199.108–111.153, `www` → `kj197835.github.io`). Settings → Pages에서 Enforce HTTPS
 5. 공개 범위: **전체 공개로 결정 (2026-09-26).** 비밀번호 없이 누구나 볼 수 있게 하고, 검색 엔진 노출도 허용한다(`robots.txt` Allow). 작업용 페이지(`/dev/*`)와 준비 중 페이지만 `noindex`.
 6. 폴더 안의 어떤 `.docx`(Word) 파일도 저장소에 올리지 않는다(`.gitignore`의 `*.docx`). GitHub 업로드(푸시)와 배포는 각각 사용자가 요청할 때만 한다.
 

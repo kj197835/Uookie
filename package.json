@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "npm run tokens && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "npm run build && node scripts/deploy-pages.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",
