@@ -42,7 +42,7 @@
 | 폰트 | **Pretendard** (한글·영문), 폴백 `system-ui, sans-serif` | Figma에서도 바로 사용 가능 |
 | 다이어그램 | 인라인 SVG 컴포넌트 (`.astro`) | Figma 붙여넣기 가능 |
 | PDF 생성 | **Playwright** (Chromium) 스크립트 | 인쇄 CSS 기반으로 페이지 단위 PDF 생성 |
-| 호스팅 | **GitHub Pages** (무료, GitHub Actions 자동 빌드) | 저장소 `kj197835/Uookie`에 푸시하면 자동 배포, 커스텀 도메인 `uookie.net` (2026-09-26 Cloudflare Pages에서 변경) |
+| 호스팅 | **GitHub Pages** (무료, GitHub Actions 빌드) | 저장소 `kj197835/Uookie`, 배포는 요청 시 수동 실행, 커스텀 도메인 `uookie.net` (2026-09-26 Cloudflare Pages에서 변경) |
 | 분석 (선택) | Cloudflare Web Analytics | 쿠키 없음, 무료 |
 
 외부 JS 프레임워크(React 등)는 인터랙션이 꼭 필요한 곳에만 Astro Island로 제한적으로 쓴다.
@@ -406,11 +406,11 @@ Work 탭은 최신 챕터가 위, 가장 오래된 챕터가 아래. `bridge`는
 ## 9. 배포 (uookie.net)
 
 1. 저장소: https://github.com/kj197835/Uookie (공개, 기본 브랜치 `master`)
-2. `.github/workflows/deploy.yml`: `master`에 푸시하면 `npm ci` → `npm run build` → `dist/`를 GitHub Pages에 배포
+2. `.github/workflows/deploy.yml`: **수동 실행 전용**(사용자가 요청할 때만 배포). 푸시만으로는 배포되지 않는다. Actions → Deploy to GitHub Pages → Run workflow로 `npm ci` → `npm run build` → `dist/` 배포
 3. 저장소 Settings → Pages → Source를 **GitHub Actions**로 설정 (최초 1회)
 4. 커스텀 도메인: `public/CNAME` = `uookie.net`. 도메인 등록처 DNS에 GitHub Pages A 레코드(185.199.108.153 / 109 / 110 / 111)와 `www` → `kj197835.github.io` CNAME 추가, Settings → Pages에서 Enforce HTTPS
 5. 공개 범위: **전체 공개로 결정 (2026-09-26).** 비밀번호 없이 누구나 볼 수 있게 하고, 검색 엔진 노출도 허용한다(`robots.txt` Allow). 작업용 페이지(`/dev/*`)와 준비 중 페이지만 `noindex`.
-6. 경력기술서 `.docx` 등 개인 연락처가 든 원본 문서는 `.gitignore`로 저장소에 올리지 않는다.
+6. 폴더 안의 어떤 `.docx`(Word) 파일도 저장소에 올리지 않는다(`.gitignore`의 `*.docx`). GitHub 업로드(푸시)와 배포는 각각 사용자가 요청할 때만 한다.
 
 Claude Code는 배포 설정 파일과 안내만 준비하고, 계정 로그인·DNS 변경은 사용자가 직접 한다.
 

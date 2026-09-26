@@ -16,5 +16,7 @@ Thumbs.db
 !.vscode/extensions.json
 
 # private source documents (contain personal contact info) & local tool settings
+# never commit Word files from any folder (incl. Word lock files)
 *.docx
+~$*
 .claude/
