@@ -7,6 +7,7 @@ subtitle: 무선사업부 (MX)
 summary: 9년간 모바일 통신 프로토콜, 시스템 SW, SIM/eSIM을 개발하며 복잡한 기술을 깊이 이해하는 UX 디자이너의 기반을 만들었습니다.
 period: 2005.02 – 2014.03
 role: 모바일 통신 프로토콜, 시스템 SW, SIM/eSIM 개발 (C, Trace32)
+coverVisual: engineer-cover
 background:
   problem: 전 세계 통신 환경에서 안정적으로 동작하는 모바일 통신·시스템 소프트웨어를 만들어야 했습니다.
   context:

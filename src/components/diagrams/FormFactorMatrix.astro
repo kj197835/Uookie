@@ -1,0 +1,119 @@
+---
+/**
+ * New form factor → UX concept → patent → product, one row per concept.
+ * Only product applications stated in CLAUDE.md are marked as applied.
+ * Text: src/content/visuals.<lang>.json → formFactorMatrix.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.formFactorMatrix;
+---
+
+<table class="ffm" aria-label={v.label}>
+  <thead>
+    <tr>
+      {v.cols.map((c, i) => <th scope="col" class={i === 0 ? 'ffm__first' : ''}>{c}</th>)}
+    </tr>
+  </thead>
+  <tbody>
+    {
+      v.rows.map((r) => (
+        <tr>
+          <th scope="row">
+            <span class="ffm__concept">{r.concept}</span>
+            <span class="ffm__sub">{r.sub}</span>
+          </th>
+          <td>{r.patent ? <span class="ffm__patent">{r.patent}</span> : <span class="ffm__empty">{v.empty}</span>}</td>
+          <td>
+            {r.product ? (
+              <span class:list={['ffm__product', r.applied && 'ffm__product--applied']}>
+                {r.applied && '✓ '}
+                {r.product}
+              </span>
+            ) : (
+              <span class="ffm__empty">{v.empty}</span>
+            )}
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>
+
+<style>
+  .ffm {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small, var(--size-small));
+  }
+
+  thead th {
+    padding: 0 calc(10 * var(--px, 1px)) calc(10 * var(--px, 1px)) 0;
+    color: var(--color-accent-strong);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.03em;
+    text-align: left;
+  }
+
+  tbody tr {
+    border-top: var(--stroke-hair) solid var(--color-line);
+  }
+
+  tbody th,
+  td {
+    padding: calc(14 * var(--px, 1px)) calc(10 * var(--px, 1px)) calc(14 * var(--px, 1px)) 0;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  tbody th {
+    width: 44%;
+  }
+
+  .ffm__concept {
+    display: block;
+    color: var(--color-navy);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.35;
+  }
+
+  .ffm__sub {
+    display: block;
+    margin-top: calc(3 * var(--px, 1px));
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-regular);
+    line-height: 1.45;
+  }
+
+  .ffm__patent {
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ffm__product {
+    display: inline-block;
+    padding: 0 calc(10 * var(--px, 1px));
+    border: var(--stroke-hair) solid var(--color-line);
+    border-radius: var(--radius-pill);
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.8;
+    white-space: nowrap;
+  }
+
+  .ffm__product--applied {
+    border-color: transparent;
+    background: var(--color-accent-soft);
+    color: var(--color-navy);
+  }
+
+  .ffm__empty {
+    color: var(--color-line);
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+/**
+ * Research insight → improvement mapping. Filled = applied to the product, dashed = improvement
+ * derived from the research. Qualitative only (no scores). Text: src/content/visuals.<lang>.json → aptInsights.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.aptInsights;
+const ROW = 58;
+const top = (i: number) => 40 + i * ROW;
+---
+
+<svg class="imap" viewBox="0 0 640 390" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <text class="head" x="0" y="20">{v.insightTitle}</text>
+  <text class="head" x="360" y="20">{v.actionTitle}</text>
+  <g id="legend">
+    <rect class="action action--applied" x="514" y="7" width="16" height="16" rx="4" />
+    <text class="legend" x="535" y="20">{v.applied}</text>
+    <rect class="action action--derived" x="572" y="7" width="16" height="16" rx="4" />
+    <text class="legend" x="593" y="20">{v.derived}</text>
+  </g>
+
+  {
+    v.rows.map((r, i) => (
+      <g>
+        <rect class="insight" x="0" y={top(i)} width="300" height="46" rx="10" />
+        <text class="insight-text" x="16" y={top(i) + 28}>{r.insight}</text>
+        <path class="arrow" d={`M306 ${top(i) + 23} H348 M342 ${top(i) + 17} L349 ${top(i) + 23} L342 ${top(i) + 29}`} />
+        <rect class:list={['action', `action--${r.status}`]} x="360" y={top(i)} width="280" height="46" rx="10" />
+        <text class="action-text" x="376" y={top(i) + 28}>{r.action}</text>
+        <text class:list={['tag', `tag--${r.status}`]} x="624" y={top(i) + 28} text-anchor="end">
+          {r.status === 'applied' ? v.applied : v.derived}
+        </text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  .imap {
+    width: 100%;
+    height: auto;
+  }
+
+  .head {
+    fill: var(--color-accent-strong);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .legend {
+    fill: var(--color-muted);
+    font-size: 12px;
+  }
+
+  .insight {
+    fill: var(--color-surface);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+
+  .insight-text {
+    fill: var(--color-text);
+    font-size: 14px;
+  }
+
+  .arrow {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .action {
+    stroke-width: 1.5;
+  }
+
+  .action--applied {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-accent);
+  }
+
+  .action--derived {
+    fill: var(--color-surface);
+    stroke: var(--color-accent);
+    stroke-dasharray: 4 4;
+  }
+
+  .action-text {
+    fill: var(--color-navy);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .tag--applied {
+    fill: var(--color-accent-strong);
+  }
+
+  .tag--derived {
+    fill: var(--color-muted);
+  }
+</style>

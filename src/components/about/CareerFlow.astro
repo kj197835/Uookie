@@ -3,8 +3,10 @@
  * Career flow: three eras (Engineer → UX Designer & Researcher → Principal), column widths
  * roughly proportional to their length, each listing its roles with links to the case pages.
  */
-import career from '@/content/career.ko.json';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+import { getCareer } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const career = getCareer(__lang);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -12,7 +14,7 @@ const t = useTranslations(lang);
 const eras = [
   { key: 'engineer', years: '2005.02 – 2014.03' },
   { key: 'ux', years: '2014.04 – 2022.12' },
-  { key: 'principal', years: lang === 'ko' ? '2023.01 – 현재' : '2023.01 – Present' },
+  { key: 'principal', years: lang === 'ko' ? '2023.01 – 현재' : '2023.01 – present' },
 ] as const;
 
 // Oldest first so the flow reads left → right.
@@ -54,7 +56,7 @@ const items = [...career.items].reverse();
     list-style: none;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px), print {
     .flow {
       grid-template-columns: minmax(0, 9fr) minmax(0, 9fr) minmax(0, 8fr);
       gap: calc(8 * var(--px));

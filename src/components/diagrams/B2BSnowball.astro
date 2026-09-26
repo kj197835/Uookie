@@ -1,0 +1,142 @@
+---
+/**
+ * Cover diagram for the B2B Home IoT case: a snowball research process — circles grow from a
+ * hypothesis → pilot IDI → research-domain definition → large-scale main study → opportunity areas.
+ * Numbers are the ones in CLAUDE.md 6.9 only. Text: src/content/visuals.<lang>.json → b2bSnowball.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.b2bSnowball;
+const [hypo, pilot, domain, main] = v.steps;
+---
+
+<svg class="snowball" viewBox="0 0 460 480" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <text class="title" x="0" y="20">{v.title}</text>
+
+  <!-- rolling path: only between the balls, never through their text -->
+  <path class="path" d="M31 443 L58 422 M102 382 L138 342 M215 261 L251 226" />
+
+  <g id="step-hypothesis">
+    <circle class="ball ball--1" cx="20" cy="452" r="14" />
+    {/* a short label fits inside the small ball; a longer one (EN) sits beside it */}
+    {hypo.title.length <= 4
+      ? <text class="in in--s" x="20" y="456" text-anchor="middle">{hypo.title}</text>
+      : <text class="in in--s" x="38" y="460">{hypo.title}</text>}
+  </g>
+
+  <g id="step-pilot">
+    <circle class="ball ball--2" cx="82" cy="404" r="30" />
+    <text class="in in--b" x="82" y="409" text-anchor="middle">{pilot.title}</text>
+  </g>
+
+  <g id="step-domain">
+    <circle class="ball ball--3" cx="175" cy="300" r="56" />
+    <text class="in in--b" x="175" y="296" text-anchor="middle">{domain.title}</text>
+    <text class="in in--s" x="175" y="314" text-anchor="middle">2019.01</text>
+    {
+      v.domains.map((d, i) => (
+        <g>
+          <rect class="chip" x="244" y={282 + i * 26} width={d.length * 12 + 20} height="20" rx="10" />
+          <text class="chip-text" x="254" y={296 + i * 26}>{d}</text>
+        </g>
+      ))
+    }
+  </g>
+
+  <g id="step-main">
+    <circle class="ball ball--4" cx="330" cy="150" r="110" />
+    <text class="in in--xl" x="330" y="132" text-anchor="middle">{main.title}</text>
+    <text class="in in--m" x="330" y="160" text-anchor="middle">{main.sub}</text>
+    <text class="in in--s" x="330" y="184" text-anchor="middle">{v.methods}</text>
+  </g>
+
+  <g id="outcome">
+    <path class="path path--solid" d="M340 262 V412" />
+    <path class="arrowhead" d="M334 404 L340 414 L346 404" />
+    <rect class="outcome" x="200" y="420" width="260" height="34" rx="17" />
+    <text class="outcome-text" x="330" y="442" text-anchor="middle">{v.outcome}</text>
+  </g>
+</svg>
+
+<style>
+  .snowball {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .title {
+    fill: var(--color-navy);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .path {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 5;
+  }
+
+  .path--solid {
+    stroke-dasharray: none;
+  }
+
+  .arrowhead {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ball {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+  }
+
+  .ball--1 { fill: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+  .ball--2 { fill: color-mix(in srgb, var(--color-accent) 16%, transparent); }
+  .ball--3 { fill: color-mix(in srgb, var(--color-accent) 24%, transparent); }
+  .ball--4 { fill: color-mix(in srgb, var(--color-accent) 34%, transparent); stroke-width: 2; }
+
+  .in {
+    fill: var(--color-navy);
+  }
+
+  .in--xl { font-size: 24px; font-weight: 700; }
+  .in--b { font-size: 13px; font-weight: 700; }
+  .in--m { font-size: 14px; font-weight: 600; }
+  .in--s { font-size: 10.5px; font-weight: 500; opacity: 0.85; }
+
+  .chip {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .chip-text {
+    fill: var(--color-navy);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .outcome {
+    fill: var(--color-accent);
+  }
+
+  .outcome-text {
+    fill: var(--color-surface);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* on the navy cover the accent is light, so keep the pill text dark */
+  :global(.section--navy) .outcome-text {
+    fill: #1f3864;
+  }
+</style>

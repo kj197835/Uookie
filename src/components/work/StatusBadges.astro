@@ -1,0 +1,87 @@
+---
+/** "진행 중" / "대외비" chips for ongoing or confidential work (case frontmatter `status`). */
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  status?: { inProgress?: boolean; confidential?: boolean };
+  class?: string;
+}
+const { status, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+{
+  status && (status.inProgress || status.confidential) && (
+    <span class:list={['badges', className]}>
+      {status.inProgress && (
+        <span class="badge badge--live">
+          <span class="dot" aria-hidden="true" />
+          {t.work.inProgress}
+        </span>
+      )}
+      {status.confidential && (
+        <span class="badge badge--lock" title={t.work.confidentialHint}>
+          <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false">
+            <rect x="3.5" y="7" width="9" height="6.5" rx="1.5" />
+            <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" />
+          </svg>
+          {t.work.confidential}
+        </span>
+      )}
+    </span>
+  )
+}
+
+<style>
+  .badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .badge--live {
+    background: var(--color-accent-soft);
+    color: var(--color-navy);
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  /* On the navy cover the theme tokens flip to light text, so give the chips their own colours. */
+  :global(.section--navy) .badge--live {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+  }
+
+  :global(.section--navy) .dot {
+    background: #8bbbea;
+  }
+
+  .badge--lock {
+    border: 1px solid var(--color-line);
+    color: var(--color-muted);
+  }
+
+  .badge--lock svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+</style>

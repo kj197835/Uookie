@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Lang } from '@/i18n/utils';
 import chaptersKo from '@/content/chapters.ko.json';
+import chaptersEn from '@/content/chapters.en.json';
 
 export type Case = CollectionEntry<'cases'>;
 
@@ -23,8 +24,7 @@ export function caseNumber(entry: Case): string {
 type ChapterData = (typeof chaptersKo)[number];
 export type Chapter = Omit<ChapterData, 'cases'> & { cases: Case[] };
 
-// EN chapters arrive in Phase 6; until then both languages read the KO file.
-const chapterSource: Record<Lang, ChapterData[]> = { ko: chaptersKo, en: chaptersKo };
+const chapterSource: Record<Lang, ChapterData[]> = { ko: chaptersKo, en: chaptersEn };
 
 /**
  * Career chapters, newest first, with their case entries resolved.

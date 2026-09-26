@@ -1,0 +1,199 @@
+---
+/**
+ * Smart-apartment usability research design (full width): pilot → improved method → main study
+ * at three complexes with the same procedure — recruit → onboard → 3-day tasks → survey → FGD →
+ * home visit, narrowing participants, each step with the research document the researcher wrote.
+ * No research results or scores. Text: src/content/visuals.<lang>.json → aptResearch.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.aptResearch;
+const W = 160;
+const GAP = 18;
+const cardX = (i: number) => i * (W + GAP);
+// pill / chip widths per language — English labels run longer
+const L = __lang === 'en'
+  ? { pill: [90, 200, 150], siteW: [140, 200, 146], noteW: 170 }
+  : { pill: [120, 210, 170], siteW: [110, 140, 124], noteW: 140 };
+const pillX = [0, L.pill[0] + 38, L.pill[0] + L.pill[1] + 76];
+const sitesX0 = pillX[2] + L.pill[2] + 44;
+const sitesX = L.siteW.map((_, i) => sitesX0 + L.siteW.slice(0, i).reduce((a, b) => a + b + 6, 0));
+const arrow = (x: number) => `M${x + 8} 31 H${x + 30} M${x + 24} 25 L${x + 31} 31 L${x + 24} 37`;
+---
+
+<svg class="process" viewBox="0 0 1060 300" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <!-- pilot → improve → main study, at three complexes -->
+  <g id="phases">
+    <rect class="pill" x={pillX[0]} y="14" width={L.pill[0]} height="34" rx="17" />
+    <text class="pill-text" x={pillX[0] + L.pill[0] / 2} y="36" text-anchor="middle">{v.pilot}</text>
+    <path class="arrow" d={arrow(pillX[0] + L.pill[0])} />
+    <rect class="pill pill--dashed" x={pillX[1]} y="14" width={L.pill[1]} height="34" rx="17" />
+    <text class="pill-text" x={pillX[1] + L.pill[1] / 2} y="36" text-anchor="middle">{v.improve}</text>
+    <path class="arrow" d={arrow(pillX[1] + L.pill[1])} />
+    <rect class="pill pill--strong" x={pillX[2]} y="14" width={L.pill[2]} height="34" rx="17" />
+    <text class="pill-text pill-text--strong" x={pillX[2] + L.pill[2] / 2} y="36" text-anchor="middle">{v.main}</text>
+    {
+      v.sites.map((s, i) => (
+        <g>
+          <rect class="site" x={sitesX[i]} y="14" width={L.siteW[i]} height="34" rx="8" />
+          <text class="site-text" x={sitesX[i] + L.siteW[i] / 2} y="36" text-anchor="middle">{s}</text>
+        </g>
+      ))
+    }
+    <text class="note" x={sitesX0} y="68">{v.sitesNote}</text>
+    <path class="doc-icon" d={`M${sitesX0 + L.noteW} 58 h7 l3 3 v9 h-10 z`} />
+    <text class="note" x={sitesX0 + L.noteW + 16} y="68">{v.docLabel}</text>
+  </g>
+
+  <!-- six research steps -->
+  <g id="steps">
+    {
+      v.steps.map((s, i) => (
+        <g>
+          <rect class="card" x={cardX(i)} y="90" width={W} height="160" rx="12" />
+          <circle class="no" cx={cardX(i) + 22} cy="114" r="12" />
+          <text class="no-text" x={cardX(i) + 22} y="119" text-anchor="middle">{i + 1}</text>
+          <text class="card-title" x={cardX(i) + 42} y="120">{s.title}</text>
+          {s.items.map((it, j) => (
+            <text class="card-item" x={cardX(i) + 16} y={152 + j * 20}>· {it}</text>
+          ))}
+          <rect class="doc" x={cardX(i) + 12} y="214" width={W - 24} height="24" rx="6" />
+          <path class="doc-icon" d={`M${cardX(i) + 22} 220 h7 l3 3 v9 h-10 z`} />
+          <text class="doc-text" x={cardX(i) + 38} y="231">{s.doc}</text>
+          {i < v.steps.length - 1 && (
+            <path class="arrow" d={`M${cardX(i) + W + 3} 170 H${cardX(i) + W + GAP - 3} M${cardX(i) + W + GAP - 8} 165 L${cardX(i) + W + GAP - 3} 170 L${cardX(i) + W + GAP - 8} 175`} />
+          )}
+        </g>
+      ))
+    }
+  </g>
+
+  <!-- participants narrow from survey to FGD to home visit -->
+  <!-- then: result report → improvements -->
+  <g id="narrowing">
+    <path class="funnel" d={`M${cardX(3)} 262 H896 L872 292 H${cardX(3) + 24} Z`} />
+    <text class="funnel-text" x={(cardX(3) + 896) / 2} y="282" text-anchor="middle">{v.narrow}</text>
+    <path class="arrow" d="M880 277 H902 M896 271 L903 277 L896 283" />
+    <rect class="pill pill--strong" x="908" y="262" width="152" height="30" rx="15" />
+    <text class="pill-text pill-text--strong pill-text--sm" x="984" y="282" text-anchor="middle">{v.report}</text>
+  </g>
+</svg>
+
+<style>
+  .process {
+    width: 100%;
+    height: auto;
+  }
+
+  .pill {
+    fill: var(--color-surface);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+
+  .pill--dashed {
+    stroke: var(--color-accent);
+    stroke-dasharray: 4 4;
+  }
+
+  .pill--strong {
+    fill: var(--color-navy);
+    stroke: none;
+  }
+
+  .pill-text {
+    fill: var(--color-navy);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .pill-text--strong {
+    fill: var(--color-surface);
+  }
+
+  .pill-text--sm {
+    font-size: 12px;
+  }
+
+  .site {
+    fill: var(--color-accent-soft);
+  }
+
+  .site-text {
+    fill: var(--color-navy);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .note {
+    fill: var(--color-muted);
+    font-size: 12px;
+  }
+
+  .arrow {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .card {
+    fill: var(--color-surface);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+
+  .no {
+    fill: var(--color-navy);
+  }
+
+  .no-text {
+    fill: var(--color-surface);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .card-title {
+    fill: var(--color-navy);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .card-item {
+    fill: var(--color-text);
+    font-size: 13px;
+  }
+
+  .doc {
+    fill: var(--color-surface-alt);
+  }
+
+  .doc-icon {
+    fill: none;
+    stroke: var(--color-accent-strong);
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+  }
+
+  .doc-text {
+    fill: var(--color-accent-strong);
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+
+  .funnel {
+    fill: color-mix(in srgb, var(--color-accent) 16%, transparent);
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .funnel-text {
+    fill: var(--color-navy);
+    font-size: 12px;
+    font-weight: 600;
+  }
+</style>

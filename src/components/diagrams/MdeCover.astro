@@ -1,0 +1,141 @@
+---
+/**
+ * Cover diagram for the MDE case: Samsung Connect (predecessor of SmartThings) as the hub of
+ * effortless connection, surrounded by the devices it links, guided by Instant · Intuitive · Consistent.
+ * Redrawn from the concept (not the internal deck). Text: src/content/visuals.<lang>.json → mdeCover.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.mdeCover;
+const C = { x: 230, y: 258 };
+const R = 150;
+const angles = [-90, -30, 30, 90, 150, 210];
+const pos = angles.map((a) => ({
+  x: +(C.x + R * Math.cos((a * Math.PI) / 180)).toFixed(1),
+  y: +(C.y + R * Math.sin((a * Math.PI) / 180)).toFixed(1),
+}));
+const pillW = 104;
+// spokes run from the hub's edge to each device's edge, never through the labels
+const HUB_R = 80;
+const DEV_R = 27;
+const spoke = (p: { x: number; y: number }) => {
+  const dx = p.x - C.x, dy = p.y - C.y, d = Math.hypot(dx, dy);
+  const a = { x: C.x + (dx / d) * (HUB_R + 4), y: C.y + (dy / d) * (HUB_R + 4) };
+  const b = { x: p.x - (dx / d) * (DEV_R + 4), y: p.y - (dy / d) * (DEV_R + 4) };
+  return `M${a.x.toFixed(1)} ${a.y.toFixed(1)} L${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+};
+---
+
+<svg class="mde" viewBox="0 0 460 470" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <text class="title" x="0" y="18">{v.title}</text>
+  {
+    v.principles.map((p, i) => (
+      <g>
+        <rect class="principle" x={i * (pillW + 10)} y="32" width={pillW} height="28" rx="14" />
+        <text class="principle-text" x={i * (pillW + 10) + pillW / 2} y="51" text-anchor="middle">{p}</text>
+      </g>
+    ))
+  }
+
+  <g class="links">
+    {pos.map((p) => <path d={spoke(p)} />)}
+  </g>
+
+  <g id="hub">
+    <circle class="hub" cx={C.x} cy={C.y} r={HUB_R} />
+    <text class="hub-text" x={C.x} y={C.y + 2} text-anchor="middle">{v.hub}</text>
+    <text class="hub-sub" x={C.x} y={C.y + 22} text-anchor="middle">{v.hubSub}</text>
+  </g>
+
+  <g id="devices">
+    {
+      pos.map((p, i) => (
+        <g>
+          <circle class="dev" cx={p.x} cy={p.y} r="27" />
+          {i === 0 && <rect class="icon" x={p.x - 7} y={p.y - 12} width="14" height="24" rx="3" />}
+          {i === 1 && <path class="icon" d={`M${p.x - 13} ${p.y - 9} h26 v16 h-26 z M${p.x - 5} ${p.y + 11} h10`} />}
+          {i === 2 && <path class="icon" d={`M${p.x - 7} ${p.y - 7} h14 v14 h-14 z M${p.x - 4} ${p.y - 7} v-6 h8 v6 M${p.x - 4} ${p.y + 7} v6 h8 v-6`} />}
+          {i === 3 && <path class="icon" d={`M${p.x - 6} ${p.y - 4} a5 5 0 1 0 0.1 0 M${p.x + 6} ${p.y - 4} a5 5 0 1 0 0.1 0 M${p.x - 6} ${p.y + 6} v6 M${p.x + 6} ${p.y + 6} v6`} />}
+          {i === 4 && <path class="icon" d={`M${p.x} ${p.y - 12} a8 8 0 0 1 5 14 v4 h-10 v-4 a8 8 0 0 1 5 -14 z M${p.x - 4} ${p.y + 10} h8`} />}
+          {i === 5 && <path class="icon" d={`M${p.x - 8} ${p.y - 12} h16 v24 h-16 z M${p.x - 8} ${p.y - 3} h16 M${p.x + 4} ${p.y - 9} v3 M${p.x + 4} ${p.y + 1} v4`} />}
+          <text class="dev-text" x={p.x} y={p.y + 44} text-anchor="middle">{v.devices[i]}</text>
+        </g>
+      ))
+    }
+  </g>
+</svg>
+
+<style>
+  .mde {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .title {
+    fill: var(--color-navy);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .principle {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.2;
+  }
+
+  .principle-text {
+    fill: var(--color-navy);
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+
+  .links path {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 5;
+  }
+
+  .hub {
+    fill: color-mix(in srgb, var(--color-accent) 30%, transparent);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+  }
+
+  .hub-text {
+    fill: var(--color-navy);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .hub-sub {
+    fill: var(--color-navy);
+    font-size: 11px;
+    opacity: 0.85;
+  }
+
+  .dev {
+    fill: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    stroke: var(--color-accent);
+    stroke-width: 1.2;
+  }
+
+  .icon {
+    fill: none;
+    stroke: var(--color-navy);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .dev-text {
+    fill: var(--color-navy);
+    font-size: 12px;
+    font-weight: 600;
+  }
+</style>

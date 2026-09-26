@@ -9,10 +9,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@/components/Section.astro';
 import SkillTable from '@/components/about/SkillTable.astro';
 import CopyText from '@/components/CopyText.astro';
-import profile from '@/content/profile.ko.json';
-import career from '@/content/career.ko.json';
 import site from '@/content/site.json';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+import { getCareer, getProfile } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const profile = getProfile(__lang);
+const career = getCareer(__lang);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -51,11 +53,11 @@ const pdfs = [
           }
         </ul>
       </div>
-      <aside class="col-5 stack side">
-        <div>
-          <h2 class="eyebrow">{t.resume.download}</h2>
-          {
-            pdfs.length > 0 ? (
+      {
+        pdfs.length > 0 && (
+          <aside class="col-5 stack side">
+            <div>
+              <h2 class="eyebrow">{t.resume.download}</h2>
               <ul class="pdfs">
                 {pdfs.map((p) => (
                   <li>
@@ -66,15 +68,10 @@ const pdfs = [
                   </li>
                 ))}
               </ul>
-            ) : (
-              <p class="t-small t-muted request">
-                {t.resume.requestPdf}
-                <CopyText text={site.contact.email} class="request__email" />
-              </p>
-            )
-          }
-        </div>
-      </aside>
+            </div>
+          </aside>
+        )
+      }
     </div>
   </Section>
 
@@ -124,6 +121,18 @@ const pdfs = [
       </div>
     </div>
   </Section>
+
+  {/* small note at the very bottom (outside the 16:9 pages, hidden in print) */}
+  {
+    pdfs.length === 0 && (
+      <div class="container request-wrap">
+        <p class="t-caption t-muted request">
+          {t.resume.requestPdf}
+          <CopyText text={site.contact.email} class="request__email" />
+        </p>
+      </div>
+    )
+  }
 </BaseLayout>
 
 <style>
@@ -196,13 +205,30 @@ const pdfs = [
     gap: calc(12 * var(--px));
   }
 
+  /* small PDF-request line at the very bottom of the page */
+  .request-wrap {
+    padding-block: var(--space-4);
+  }
+
   .request {
-    margin-top: calc(10 * var(--px));
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--size-caption);
   }
 
   .request :global(.request__email) {
-    display: flex;
-    margin-top: calc(8 * var(--px));
+    font-size: var(--size-caption);
+  }
+
+  @media print {
+    .request-wrap {
+      display: none;
+    }
+  }
+
+  .request :global(.request__email) {
     color: var(--color-text);
     font-weight: var(--font-weight-medium);
   }
@@ -239,7 +265,7 @@ const pdfs = [
     font-weight: var(--font-weight-regular);
   }
 
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .numbers {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

@@ -1,0 +1,399 @@
+{
+  "genaiHero": {
+    "title": "SmartThings Pro × AI",
+    "image": "/images/genai/smartthings-pro-dashboard.jpg",
+    "imageAlt": "SmartThings Pro dashboard showing connected IoT devices, their operating status and energy use in charts",
+    "aiName": "AI",
+    "userMsg": "Where is energy use high this month?",
+    "aiMsg": "HVAC on floor 3 is above target.",
+    "aiMsg2": "Turn on AI Energy Saving?",
+    "action": "Turn on AI Saving",
+    "caption": "Concept image: AI added to the official SmartThings Pro dashboard",
+    "source": {
+      "label": "Screen: samsung.com SmartThings Pro",
+      "url": "https://www.samsung.com/sec/business/smartthingspro/"
+    },
+    "label": "Concept image: an AI conversation card and an AI orb float over the official SmartThings Pro dashboard, linked to its energy widgets"
+  },
+  "genaiChatbot": {
+    "menuLabel": "SmartThings Pro features",
+    "features": [
+      "Device control",
+      "3D map",
+      "Energy reports",
+      "AI Energy Saving",
+      "Pre-cool/heat",
+      "Safety"
+    ],
+    "chatTitle": "SmartThings Pro · AI chatbot",
+    "messages": {
+      "user1": "Pre-cool 3F meeting room by 9 tomorrow",
+      "ai1": "Pre-cooling set for 08:30 tomorrow.",
+      "cardTitle": "Pre-cool / pre-heat schedule",
+      "cardValue": "Floor 3 meeting room · 08:30",
+      "cardStatus": "Set",
+      "user2": "Show last week's energy report",
+      "ai2": "Here's last week's report."
+    },
+    "placeholder": "Ask anything",
+    "label": "Concept image: the SmartThings Pro feature menus on the left converge into one AI chatbot conversation on the right, which sets a pre-cooling schedule and shows an energy report"
+  },
+  "genaiPipeline": {
+    "sourcesTitle": "PRD",
+    "sources": [
+      {
+        "tool": "Confluence",
+        "text": "Features · requirements"
+      },
+      {
+        "tool": "Jira",
+        "text": "Epics · stories"
+      }
+    ],
+    "tokensTitle": "AI-ready design tokens",
+    "tokens": [
+      "color.background.brand.bold",
+      "space.200",
+      "font.heading.medium",
+      "border.radius.100"
+    ],
+    "tokensNote": "Based on Atlassian design tokens",
+    "agent": "Claude",
+    "agentSub": "+ Figma MCP",
+    "outputTitle": "Figma UI guide",
+    "outputNote": "Auto-generated",
+    "steps": [
+      "① Read",
+      "② Map tokens",
+      "③ Generate"
+    ],
+    "label": "Concept image: Claude reads PRDs from Confluence and Jira and AI-ready design tokens based on Atlassian's system through Figma MCP, maps them, and generates a Figma UI guide"
+  },
+  "b2bSnowball": {
+    "title": "B2B Home IoT snowball research",
+    "steps": [
+      {
+        "title": "Hypothesis",
+        "sub": "1st internal workshop · 2018.11"
+      },
+      {
+        "title": "Pilot"
+      },
+      {
+        "title": "Define domains",
+        "sub": "Korea–US workshops → 2nd internal · 2019.01"
+      },
+      {
+        "title": "Main study",
+        "sub": "US 25+16 · Korea 24+16"
+      }
+    ],
+    "domains": [
+      "Stakeholders",
+      "Devices & context",
+      "Business logic"
+    ],
+    "methods": "IDI · shadowing · home visits",
+    "outcome": "Opportunities · Korea apartments · US MFU",
+    "label": "Snowball research: from a hypothesis, through pilot interviews (US 9, Korea 6) and defining the research domains (stakeholders, devices and context, business logic), to a main study of US 25+16 and Korea 24+16 — the circles grow — leading to two opportunity areas: Korean smart apartments and US multifamily units",
+    "caption": "Research process reconstructed for the portfolio"
+  },
+  "b2bStakeholdersUS": {
+    "owner": "Owner",
+    "ownerSub": "Investor",
+    "developer": "Developer",
+    "developerSub": "Large multifamily developer",
+    "decision": "Decision maker",
+    "architect": "Architect · design",
+    "architectSub": "+ structural, MEP, interior",
+    "gc": "General Contractor",
+    "gcSub": "+ electrical, HVAC subs",
+    "pm": "Property Management",
+    "pmSub": "Resident voice · operations",
+    "residents": "Residents (MFU)",
+    "invest": "Invests",
+    "design": "Design",
+    "build": "Construction",
+    "operate": "Operations",
+    "note": "Everyone else proposes or advises",
+    "label": "US multifamily stakeholder structure: under the investing owner, the developer is the key decision maker; architects, general contractors and property managers propose and advise, and property management connects to residents. Roles only, no company names",
+    "caption": "Research findings reconstructed for the portfolio · roles only, no company or personal names"
+  },
+  "b2bStakeholdersKR": {
+    "before": "Before sale · construction",
+    "after": "After move-in · operation",
+    "developer": "Developer · association",
+    "finance": "Trust · finance",
+    "architect": "Architect",
+    "constructor": "Constructor",
+    "decision": "Home IoT decision maker",
+    "subs": "Subcontractors",
+    "homenet": "Home network · telecom",
+    "homenetSub": "Wall pad · network",
+    "sales": "Sales agency",
+    "rrc": "Residents' committee",
+    "mgmt": "Management company",
+    "residents": "Residents",
+    "moveIn": "Move-in",
+    "label": "Korean apartment stakeholder structure: before sale, the constructor is the Home IoT decision maker, working with the developer or association, trust and finance, architect, subcontractors, home-network and telecom suppliers and the sales agency; after move-in, the residents' committee and management company run operations for residents. Roles only, no company names",
+    "caption": "Research findings reconstructed for the portfolio · roles only, no company or personal names",
+    "salesSub": "Move-in support"
+  },
+  "aptResearch": {
+    "pilot": "1st pilot",
+    "improve": "Refined method · more staff",
+    "main": "2nd usability study",
+    "sites": [
+      "Raemian Leaders One",
+      "Songdo The Sharp Triple Tower",
+      "Hyochang Park Prugio"
+    ],
+    "sitesNote": "Same procedure at all three",
+    "steps": [
+      {
+        "title": "Recruit",
+        "items": [
+          "Recruitment notice",
+          "Screener · quotas"
+        ],
+        "doc": "Notice · screener"
+      },
+      {
+        "title": "Onboard",
+        "items": [
+          "App sign-up",
+          "Wall-pad linking"
+        ],
+        "doc": "Study guide"
+      },
+      {
+        "title": "3-day tasks",
+        "items": [
+          "Control · alerts",
+          "Modes · automation",
+          "Invite family"
+        ],
+        "doc": "Study guide"
+      },
+      {
+        "title": "Survey",
+        "items": [
+          "Online survey",
+          "~30 homes per site"
+        ],
+        "doc": "Questionnaire"
+      },
+      {
+        "title": "Focus groups",
+        "items": [
+          "2 groups × 4 homes",
+          "Young · middle-aged"
+        ],
+        "doc": "FGD guide"
+      },
+      {
+        "title": "Home visits",
+        "items": [
+          "House tour",
+          "Presets · UI review"
+        ],
+        "doc": "Home-visit guide"
+      }
+    ],
+    "narrow": "Selected from survey → focus group → home visit",
+    "report": "Report → improvements",
+    "docLabel": "Written by the researcher",
+    "label": "Research design: after a first pilot, the method was improved and more researchers added for a second usability study. At Raemian Leaders One, Songdo The Sharp Triple Tower and Hyochang Park Prugio, the same six steps ran — recruit, onboard, 3-day tasks, survey, focus groups, home visits — narrowing participants from survey to focus group to home visit. Each step had its own document written by the researcher",
+    "caption": "Research process reconstructed for the portfolio · no research results or scores"
+  },
+  "aptInsights": {
+    "insightTitle": "Research insight",
+    "actionTitle": "Improvement",
+    "applied": "Applied",
+    "derived": "Derived",
+    "rows": [
+      {
+        "insight": "Linking & onboarding is the biggest hurdle",
+        "action": "Simpler linking",
+        "status": "applied"
+      },
+      {
+        "insight": "Hard to picture when to use modes",
+        "action": "Preset modes & automation",
+        "status": "applied"
+      },
+      {
+        "insight": "Family members live differently",
+        "action": "Family sharing · members",
+        "status": "derived"
+      },
+      {
+        "insight": "Alerts get used only if on by default",
+        "action": "Alerts on by default",
+        "status": "derived"
+      },
+      {
+        "insight": "Need room- and home-level lighting",
+        "action": "Lighting groups",
+        "status": "derived"
+      },
+      {
+        "insight": "Home screen is one long list",
+        "action": "Restructured home screen",
+        "status": "derived"
+      }
+    ],
+    "label": "Insight-to-improvement map: simpler linking and preset modes and automation were applied; family sharing and member settings, alerts on by default, lighting groups and a restructured home screen are improvements derived from the research",
+    "caption": "Research findings reconstructed for the portfolio · no research results or scores"
+  },
+  "mdeCover": {
+    "title": "Effortless Connection UX",
+    "principles": [
+      "Instant",
+      "Intuitive",
+      "Consistent"
+    ],
+    "hub": "Samsung Connect",
+    "hubSub": "SmartThings' predecessor",
+    "devices": [
+      "Phone",
+      "TV",
+      "Wearable",
+      "Audio",
+      "IoT devices",
+      "Appliances"
+    ],
+    "label": "Effortless Connection UX: Samsung Connect, the predecessor of SmartThings, connects phones, TVs, wearables, audio, IoT devices and appliances, guided by three principles — Instant, Intuitive, Consistent",
+    "caption": "MDE concept reconstructed for the portfolio"
+  },
+  "mdeAutoSetup": {
+    "steps": [
+      "Open box",
+      "Detect",
+      "One-click",
+      "Done"
+    ],
+    "note": "Connects to a nearby Galaxy the moment it's unboxed",
+    "label": "Automatic setup: open an accessory box, a nearby Galaxy device detects it, and one click connects it"
+  },
+  "mdeAccount": {
+    "cloud": "Samsung account · cloud",
+    "nodes": [
+      "Mobile",
+      "VD (TV)",
+      "Appliances"
+    ],
+    "standard": "Standards",
+    "note": "Devices saved to the account connect on any device",
+    "label": "Account-based auto connection: device information saved to the Samsung account and cloud lets mobile, TV and appliance divisions and standard devices hand over connections the same way"
+  },
+  "engineerCover": {
+    "title": "Software engineer, Mobile · 2005 – 2014",
+    "phones": [
+      {
+        "year": "2005",
+        "name": "Feature phone",
+        "sub": "Samsung"
+      },
+      {
+        "year": "2010",
+        "name": "Galaxy S",
+        "sub": "First Android"
+      },
+      {
+        "year": "2013",
+        "name": "Galaxy S4",
+        "sub": "Android"
+      }
+    ],
+    "eras": [
+      {
+        "title": "Protocols",
+        "sub": "GSM · RRM · E-GPRS"
+      },
+      {
+        "title": "System SW",
+        "sub": "Android · GPS"
+      },
+      {
+        "title": "SIM · eSIM",
+        "sub": "Samsung's first eSIM"
+      }
+    ],
+    "label": "A timeline of growing phones — a 2005 Samsung feature phone, the first Android Galaxy S in 2010 and the Galaxy S4 in 2013 — above three engineering eras: protocols, system software, SIM and eSIM",
+    "caption": "Reconstructed for the portfolio"
+  },
+  "navCover": {
+    "title": "Flexible SW Navigation Key",
+    "lead": "A navigation bar that adapts to each screen",
+    "screens": [
+      {
+        "src": "/images/advanced-ux/nav-1-lock.png",
+        "name": "Lock",
+        "type": "Hidden"
+      },
+      {
+        "src": "/images/advanced-ux/nav-2-home.png",
+        "name": "Home",
+        "type": "Clear"
+      },
+      {
+        "src": "/images/advanced-ux/nav-3-app.png",
+        "name": "Apps",
+        "type": "Opaque"
+      },
+      {
+        "src": "/images/advanced-ux/nav-4-gallery.png",
+        "name": "Gallery",
+        "type": "Translucent"
+      },
+      {
+        "src": "/images/advanced-ux/nav-5-movie.png",
+        "name": "Video",
+        "type": "Hidden"
+      }
+    ],
+    "label": "Five screens — lock, home, general apps, gallery detail and video playback — each with a different bottom navigation bar: hidden, clear, opaque or translucent",
+    "caption": "Screens from the 2016 invention material, re-edited for the portfolio · patent US10852944"
+  },
+  "formFactorMatrix": {
+    "cols": [
+      "New form-factor UX",
+      "Patent",
+      "Product"
+    ],
+    "rows": [
+      {
+        "concept": "Flexible SW Navigation Key",
+        "sub": "On-screen navigation that adapts, replacing physical keys",
+        "patent": "US10852944",
+        "product": "Galaxy S8",
+        "applied": true
+      },
+      {
+        "concept": "Front-camera punch-hole USP",
+        "sub": "UX that uses the camera area inside the screen",
+        "patent": "",
+        "product": "USP concept",
+        "applied": false
+      },
+      {
+        "concept": "Taller screen × multi-window",
+        "sub": "Extra area · landscape keypad",
+        "patent": "US10295870 · US10444920 +",
+        "product": "",
+        "applied": false
+      },
+      {
+        "concept": "Dual-display camera",
+        "sub": "Camera UX for a folding form factor",
+        "patent": "US10681263 +",
+        "product": "Galaxy Fold USP",
+        "applied": true
+      }
+    ],
+    "empty": "—",
+    "label": "From new form-factor UX to patent to product: the Flexible SW Navigation Key was patented (US10852944) and shipped on the Galaxy S8; the front-camera punch-hole was found as a USP concept; taller-screen multi-window UX was patented; the dual-display camera was patented and became a Galaxy Fold USP",
+    "caption": "Reconstructed for the portfolio"
+  }
+}

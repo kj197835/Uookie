@@ -1,5 +1,6 @@
 ---
 import { caseNumber, caseSlug, type Case } from '@/lib/cases';
+import StatusBadges from './StatusBadges.astro';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
 
 interface Props {
@@ -23,6 +24,7 @@ const href = localizePath(`/work/${caseSlug(entry)}`, lang);
   </h3>
   <p class="case-card__summary">{data.summary}</p>
   <p class="case-card__period">{data.period}</p>
+  <StatusBadges status={data.status} />
   {
     data.awards.length > 0 && (
       <ul class="case-card__awards" aria-label={t.work.awards}>

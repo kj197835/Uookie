@@ -10,7 +10,9 @@
     "build": "npm run tokens && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && node scripts/deploy-pages.mjs"
+    "deploy": "npm run build && node scripts/deploy-pages.mjs",
+    "pdf": "npm run build && tsx scripts/build-pdf.ts",
+    "export-svg": "npm run build && tsx scripts/export-svg.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.6.2",
+    "pdf-lib": "^1.17.1",
     "playwright": "^1.63.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"

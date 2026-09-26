@@ -3,9 +3,11 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@/components/Section.astro';
 import SkillTable from '@/components/about/SkillTable.astro';
-import profile from '@/content/profile.ko.json';
-import career from '@/content/career.ko.json';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+import { getCareer, getProfile } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const profile = getProfile(__lang);
+const career = getCareer(__lang);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -171,7 +173,7 @@ const t = useTranslations(lang);
     width: 28%;
   }
 
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .timeline tr {
       display: grid;
       padding-block: calc(10 * var(--px));

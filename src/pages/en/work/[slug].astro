@@ -1,14 +1,16 @@
 ---
-/** English case pages arrive in Phase 6; same slugs as KO so the language toggle never 404s. */
-import PlaceholderPage from '@/components/pages/PlaceholderPage.astro';
+import CasePage from '@/components/pages/CasePage.astro';
 import { caseSlug, getCases } from '@/lib/cases';
 
 export async function getStaticPaths() {
-  const cases = await getCases('ko');
-  return cases.map((entry) => ({ params: { slug: caseSlug(entry) }, props: { title: entry.data.title } }));
+  const cases = await getCases('en');
+  return cases.map((entry, i) => ({
+    params: { slug: caseSlug(entry) },
+    props: { entry, prev: cases[i - 1], next: cases[i + 1] },
+  }));
 }
 
-const { title } = Astro.props;
+const { entry, prev, next } = Astro.props;
 ---
 
-<PlaceholderPage title={title} />
+<CasePage entry={entry} prev={prev} next={next} />

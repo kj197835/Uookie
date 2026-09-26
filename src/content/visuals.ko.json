@@ -1,0 +1,399 @@
+{
+  "genaiHero": {
+    "title": "SmartThings Pro × AI",
+    "image": "/images/genai/smartthings-pro-dashboard.jpg",
+    "imageAlt": "SmartThings Pro 대시보드: 연동된 IoT 기기 정보와 함께 기기 운영 여부, 에너지 사용 데이터를 여러 그래프와 차트로 표시",
+    "aiName": "AI",
+    "userMsg": "이번 달 에너지 사용이 높은 곳은?",
+    "aiMsg": "3층 공조 사용이 목표보다 높아요.",
+    "aiMsg2": "AI 절약모드를 켤까요?",
+    "action": "AI 절약모드 켜기",
+    "caption": "SmartThings Pro 공식 대시보드 화면에 AI를 결합한 컨셉 이미지",
+    "source": {
+      "label": "화면 출처: samsung.com SmartThings Pro",
+      "url": "https://www.samsung.com/sec/business/smartthingspro/"
+    },
+    "label": "SmartThings Pro 공식 대시보드 화면 위에 AI 대화 카드와 AI 오브가 떠 있고, AI가 대시보드의 에너지 위젯과 연결된 컨셉 이미지"
+  },
+  "genaiChatbot": {
+    "menuLabel": "SmartThings Pro 기능",
+    "features": [
+      "기기 제어",
+      "3D 맵",
+      "에너지 분석 및 리포트",
+      "AI 절약모드",
+      "예냉/예열 스케쥴",
+      "안전 관리"
+    ],
+    "chatTitle": "SmartThings Pro · AI 챗봇",
+    "messages": {
+      "user1": "내일 9시 전에 3층 회의실 예냉해 줘",
+      "ai1": "내일 08:30 예냉 스케쥴을 설정했어요.",
+      "cardTitle": "예냉/예열 스케쥴",
+      "cardValue": "3층 회의실 · 내일 08:30",
+      "cardStatus": "설정됨",
+      "user2": "지난주 에너지 리포트 보여줘",
+      "ai2": "지난주 에너지 리포트예요."
+    },
+    "placeholder": "무엇이든 물어보세요",
+    "label": "왼쪽의 여러 SmartThings Pro 기능 메뉴가 오른쪽의 AI 챗봇 대화 하나로 모이고, 대화로 예냉 스케쥴 설정과 에너지 리포트 조회를 수행하는 컨셉 이미지"
+  },
+  "genaiPipeline": {
+    "sourcesTitle": "PRD",
+    "sources": [
+      {
+        "tool": "Confluence",
+        "text": "기능 정의 · 요구사항"
+      },
+      {
+        "tool": "Jira",
+        "text": "에픽 · 스토리"
+      }
+    ],
+    "tokensTitle": "AI-ready 디자인 토큰",
+    "tokens": [
+      "color.background.brand.bold",
+      "space.200",
+      "font.heading.medium",
+      "border.radius.100"
+    ],
+    "tokensNote": "Atlassian 디자인 토큰 체계 기반",
+    "agent": "Claude",
+    "agentSub": "+ Figma MCP",
+    "outputTitle": "Figma UI 가이드",
+    "outputNote": "자동 생성",
+    "steps": [
+      "① 읽기",
+      "② 토큰 매핑",
+      "③ 생성"
+    ],
+    "label": "Confluence·Jira의 PRD와 Atlassian 체계 기반 AI-ready 디자인 토큰을 Claude가 Figma MCP로 읽고 매핑해 Figma UI 가이드를 자동 생성하는 흐름의 컨셉 이미지"
+  },
+  "b2bSnowball": {
+    "title": "B2B Home IoT 스노볼 리서치",
+    "steps": [
+      {
+        "title": "가설",
+        "sub": "1차 내부 워크숍 · 2018.11"
+      },
+      {
+        "title": "Pilot"
+      },
+      {
+        "title": "조사 도메인 정의",
+        "sub": "한·미 워크숍 → 2차 내부 워크숍 · 2019.01"
+      },
+      {
+        "title": "본조사",
+        "sub": "미국 25+16 · 한국 24+16"
+      }
+    ],
+    "domains": [
+      "이해관계자",
+      "기기·맥락",
+      "비즈니스 로직"
+    ],
+    "methods": "IDI · 섀도잉 · 가정 방문",
+    "outcome": "기회 영역 · 한국 스마트 아파트 · 미국 MFU",
+    "label": "스노볼 리서치 도식: 가설에서 시작해 미국 9·한국 6 파일럿 인터뷰, 조사 도메인(이해관계자·기기와 맥락·비즈니스 로직) 정의를 거쳐 미국 25+16·한국 24+16 규모의 본조사로 원이 점점 커지며, 한국 스마트 아파트와 미국 MFU라는 기회 영역으로 이어진다",
+    "caption": "리서치 프로세스를 포트폴리오용으로 재구성한 도식"
+  },
+  "b2bStakeholdersUS": {
+    "owner": "Owner",
+    "ownerSub": "투자자",
+    "developer": "Developer",
+    "developerSub": "대형 멀티패밀리 개발사",
+    "decision": "핵심 의사결정자",
+    "architect": "Architect · 설계팀",
+    "architectSub": "+ 구조·MEP·인테리어 컨설턴트",
+    "gc": "General Contractor",
+    "gcSub": "+ 전기·설비·HVAC 협력사",
+    "pm": "Property Management",
+    "pmSub": "입주민 의견 전달 · 운영",
+    "residents": "입주민 (MFU)",
+    "invest": "투자",
+    "design": "설계 의뢰",
+    "build": "시공 의뢰",
+    "operate": "운영 의뢰",
+    "note": "나머지 이해관계자는 제안·자문 역할",
+    "label": "미국 멀티패밀리 주거 시장의 이해관계자 구조 도식: 투자자인 Owner 아래 Developer가 핵심 의사결정자이고, 설계팀·시공사·자산관리사가 제안·자문 역할을 하며, 자산관리사가 입주민과 연결된다. 기업명 없이 역할만 표기",
+    "caption": "리서치 결과를 포트폴리오용으로 재구성한 도식 · 기업명·인명 없이 역할만 표기"
+  },
+  "b2bStakeholdersKR": {
+    "before": "분양 전 · 건설",
+    "after": "입주 후 · 운영",
+    "developer": "시행사 · 조합",
+    "finance": "신탁 · 금융",
+    "architect": "설계사",
+    "constructor": "시공사",
+    "decision": "Home IoT 핵심 의사결정자",
+    "subs": "협력사",
+    "homenet": "홈넷사 · 통신사",
+    "homenetSub": "월패드 · 네트워크",
+    "sales": "분양대행",
+    "rrc": "입주자대표회의",
+    "mgmt": "관리업체 · 관리 시스템",
+    "residents": "입주민",
+    "moveIn": "입주",
+    "label": "한국 아파트 시장의 이해관계자 구조 도식: 분양 전에는 시행사·조합, 신탁·금융, 설계사, 협력사, 홈넷사·통신사, 분양대행과 함께 시공사가 Home IoT의 핵심 의사결정자이고, 입주 후에는 입주자대표회의와 관리업체가 입주민의 운영을 맡는다. 기업명 없이 역할만 표기",
+    "caption": "리서치 결과를 포트폴리오용으로 재구성한 도식 · 기업명·인명 없이 역할만 표기",
+    "salesSub": "입주 지원"
+  },
+  "aptResearch": {
+    "pilot": "1차 파일럿",
+    "improve": "방법 개선 · 조사 인력 확대",
+    "main": "2차 사용성 조사",
+    "sites": [
+      "래미안 리더스원",
+      "송도 더샵 트리플타워",
+      "효창파크푸르지오"
+    ],
+    "sitesNote": "세 단지 동일 절차",
+    "steps": [
+      {
+        "title": "모집",
+        "items": [
+          "모집 공고",
+          "스크리너 · 쿼터"
+        ],
+        "doc": "공고문 · 스크리너"
+      },
+      {
+        "title": "온보딩",
+        "items": [
+          "앱 가입",
+          "월패드 연동 인증"
+        ],
+        "doc": "조사 가이드"
+      },
+      {
+        "title": "3일 사용 과제",
+        "items": [
+          "기기 제어 · 알림",
+          "모드 · 자동화",
+          "가족 초대"
+        ],
+        "doc": "조사 가이드"
+      },
+      {
+        "title": "정량 조사",
+        "items": [
+          "온라인 설문",
+          "단지별 약 30세대"
+        ],
+        "doc": "설문지"
+      },
+      {
+        "title": "좌담회",
+        "items": [
+          "2그룹 × 4세대",
+          "젊은 · 중장년 세대"
+        ],
+        "doc": "좌담회 가이드"
+      },
+      {
+        "title": "홈 비짓",
+        "items": [
+          "하우스 투어",
+          "프리셋 · UI 평가"
+        ],
+        "doc": "홈 비짓 가이드"
+      }
+    ],
+    "narrow": "설문 참여자 중 선별 → 좌담회 → 가정 방문",
+    "report": "결과 보고 → 개선 적용",
+    "docLabel": "리서처가 만든 문서",
+    "label": "리서치 설계 도식: 1차 파일럿 후 방법을 개선하고 조사 인력을 늘려 2차 사용성 조사를 진행했다. 래미안 리더스원·송도 더샵 트리플타워·효창파크푸르지오 세 단지에서 같은 절차로 모집, 온보딩, 3일 사용 과제, 정량 조사, 좌담회, 홈 비짓을 진행했고, 참여자는 설문에서 좌담회, 가정 방문으로 선별되어 좁혀졌다. 각 단계마다 공고문·스크리너·조사 가이드·설문지·좌담회 가이드·홈 비짓 가이드를 직접 만들었다",
+    "caption": "리서치 과정을 포트폴리오용으로 재구성한 도식 · 조사 결과 수치 미포함"
+  },
+  "aptInsights": {
+    "insightTitle": "리서치 인사이트",
+    "actionTitle": "개선 항목",
+    "applied": "적용",
+    "derived": "도출",
+    "rows": [
+      {
+        "insight": "연동·온보딩이 가장 큰 허들",
+        "action": "연동 간소화",
+        "status": "applied"
+      },
+      {
+        "insight": "모드·자동화는 사용 장면이 안 떠오름",
+        "action": "프리셋 모드·자동화",
+        "status": "applied"
+      },
+      {
+        "insight": "가족마다 다른 생활 패턴",
+        "action": "가족 공유 · 멤버 설정",
+        "status": "derived"
+      },
+      {
+        "insight": "알림은 기본 On이어야 쓰임",
+        "action": "알림 기본 On",
+        "status": "derived"
+      },
+      {
+        "insight": "방별 · 아파트 단위 조명 제어 니즈",
+        "action": "조명 그룹화",
+        "status": "derived"
+      },
+      {
+        "insight": "홈 화면에 기능이 길게 나열",
+        "action": "홈 화면 구조 개선",
+        "status": "derived"
+      }
+    ],
+    "label": "인사이트와 개선 항목 매핑: 연동·온보딩 허들은 연동 간소화로, 모드·자동화의 어려움은 프리셋 모드·자동화로 적용했고, 가족 공유·멤버 설정, 알림 기본 On, 조명 그룹화, 홈 화면 구조 개선은 리서치로 도출한 개선 항목이다",
+    "caption": "리서치 결과를 포트폴리오용으로 재구성한 도식 · 조사 결과 수치 미포함"
+  },
+  "mdeCover": {
+    "title": "Effortless Connection UX",
+    "principles": [
+      "Instant",
+      "Intuitive",
+      "Consistent"
+    ],
+    "hub": "Samsung Connect",
+    "hubSub": "SmartThings의 전신",
+    "devices": [
+      "스마트폰",
+      "TV",
+      "웨어러블",
+      "오디오",
+      "IoT 기기",
+      "가전"
+    ],
+    "label": "Effortless Connection UX 도식: Samsung Connect(SmartThings의 전신)를 중심으로 스마트폰·TV·웨어러블·오디오·IoT 기기·가전이 연결되고, Instant·Intuitive·Consistent 세 원칙이 연결 경험을 이끈다",
+    "caption": "MDE 콘셉트를 포트폴리오용으로 재구성한 도식"
+  },
+  "mdeAutoSetup": {
+    "steps": [
+      "상자 개봉",
+      "주변 기기 감지",
+      "원클릭 연결",
+      "완료"
+    ],
+    "note": "액세서리를 열자마자 주변 갤럭시 기기와 바로 연결",
+    "label": "자동 설정 흐름: 액세서리 상자를 열면 주변 갤럭시 기기가 감지하고, 원클릭으로 연결되어 완료된다"
+  },
+  "mdeAccount": {
+    "cloud": "Samsung 계정 · 클라우드",
+    "nodes": [
+      "무선 (폰)",
+      "VD (TV)",
+      "가전"
+    ],
+    "standard": "업계 표준",
+    "note": "계정에 저장된 기기를 다른 기기에서 이어서 연결",
+    "label": "계정 기반 자동 연결: Samsung 계정과 클라우드에 저장된 기기 정보로 무선·VD·가전 사업부 기기와 업계 표준 기기가 같은 방식으로 연결을 이어받는다"
+  },
+  "engineerCover": {
+    "title": "Mobile 사업부 SW 엔지니어 · 2005 – 2014",
+    "phones": [
+      {
+        "year": "2005",
+        "name": "Samsung 피처폰",
+        "sub": "피처폰 시대"
+      },
+      {
+        "year": "2010",
+        "name": "갤럭시 S",
+        "sub": "첫 안드로이드"
+      },
+      {
+        "year": "2013",
+        "name": "갤럭시 S4",
+        "sub": "안드로이드"
+      }
+    ],
+    "eras": [
+      {
+        "title": "통신 프로토콜",
+        "sub": "GSM · RRM · E-GPRS"
+      },
+      {
+        "title": "시스템 SW",
+        "sub": "안드로이드 · GPS"
+      },
+      {
+        "title": "SIM · eSIM",
+        "sub": "삼성 최초 eSIM"
+      }
+    ],
+    "label": "2005년 Samsung 피처폰에서 2010년 첫 안드로이드 갤럭시 S, 2013년 갤럭시 S4까지 휴대폰이 커지며 이어지는 타임라인. 아래에 통신 프로토콜, 시스템 SW, SIM·eSIM 세 시기의 엔지니어 역할이 표시된다",
+    "caption": "포트폴리오용으로 재구성한 도식"
+  },
+  "navCover": {
+    "title": "Flexible SW Navigation Key",
+    "lead": "화면 특성에 맞춰 바뀌는 내비게이션 바",
+    "screens": [
+      {
+        "src": "/images/advanced-ux/nav-1-lock.png",
+        "name": "잠금 화면",
+        "type": "숨김"
+      },
+      {
+        "src": "/images/advanced-ux/nav-2-home.png",
+        "name": "홈",
+        "type": "투명"
+      },
+      {
+        "src": "/images/advanced-ux/nav-3-app.png",
+        "name": "일반 앱",
+        "type": "불투명"
+      },
+      {
+        "src": "/images/advanced-ux/nav-4-gallery.png",
+        "name": "갤러리 상세",
+        "type": "투명·반투명"
+      },
+      {
+        "src": "/images/advanced-ux/nav-5-movie.png",
+        "name": "동영상 재생",
+        "type": "숨김"
+      }
+    ],
+    "label": "잠금 화면·홈·일반 앱·갤러리 상세·동영상 재생 다섯 화면에서 하단 내비게이션 바가 숨김·투명·불투명·반투명으로 각각 다르게 적용된 예시",
+    "caption": "2016 발명 자료의 화면 예시를 포트폴리오용으로 재편집 · 특허 US10852944"
+  },
+  "formFactorMatrix": {
+    "cols": [
+      "새 폼팩터 UX 발굴",
+      "특허",
+      "제품 적용"
+    ],
+    "rows": [
+      {
+        "concept": "Flexible SW Navigation Key",
+        "sub": "물리 키 대신 화면에 맞춰 바뀌는 내비게이션",
+        "patent": "US10852944",
+        "product": "갤럭시 S8",
+        "applied": true
+      },
+      {
+        "concept": "전면 카메라 펀치홀 USP",
+        "sub": "화면 안 카메라 영역을 활용하는 UX",
+        "patent": "",
+        "product": "USP 콘셉트 발굴",
+        "applied": false
+      },
+      {
+        "concept": "길어진 화면 × 멀티 윈도우",
+        "sub": "Extra 영역 · 가로 키패드",
+        "patent": "US10295870 · US10444920 외",
+        "product": "",
+        "applied": false
+      },
+      {
+        "concept": "듀얼 디스플레이 카메라",
+        "sub": "접히는 폼팩터의 카메라 UX",
+        "patent": "US10681263 외",
+        "product": "갤럭시 폴드 USP",
+        "applied": true
+      }
+    ],
+    "empty": "—",
+    "label": "새 폼팩터 UX 발굴부터 특허, 제품 적용까지의 표: Flexible SW Navigation Key는 특허 US10852944로 등록되어 갤럭시 S8에 적용, 전면 카메라 펀치홀 USP는 콘셉트로 발굴, 길어진 화면의 멀티 윈도우 UX는 특허 등록, 듀얼 디스플레이 카메라는 특허 등록 후 갤럭시 폴드 USP로 적용",
+    "caption": "포트폴리오용으로 재구성한 도식"
+  }
+}

@@ -52,7 +52,7 @@
   font-size: var(--fs-body);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px), print {
   .section__page {
     /* desktop: fixed 16:9 page that scales with the frame (never below 0.85 design px) */
     --px: max(0.85px, calc(100cqi / var(--layout-page-width-n)));
@@ -102,7 +102,7 @@
   grid-column: 1 / -1;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px), print {
   .col-3 { grid-column: span 3; }
   .col-4 { grid-column: span 4; }
   .col-5 { grid-column: span 5; }

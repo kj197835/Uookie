@@ -1,0 +1,62 @@
+---
+/**
+ * Public photo (press / newsroom / exhibition) with a caption and a required source link.
+ * Images live in public/images/<case>/; originals + SOURCES.md in public/images/<case>/refer/.
+ */
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  source: { label: string; url: string };
+  class?: string;
+}
+const { src, alt, caption, source, class: className } = Astro.props;
+---
+
+<figure class:list={['photo', className]}>
+  <div class="photo__frame">
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+  </div>
+  <figcaption>
+    {caption && <span>{caption}</span>}
+    <a href={source.url} target="_blank" rel="noopener">{source.label} ↗</a>
+  </figcaption>
+</figure>
+
+<style>
+  .photo {
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 * var(--px, 1px));
+    height: 100%;
+  }
+
+  /* Photo sits at the top with its caption directly underneath. */
+  .photo__frame {
+    display: grid;
+    place-items: start;
+  }
+
+  /* The photo keeps its own proportions; no letterbox box around it. */
+  .photo__frame img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(416 * var(--px, 1px));
+    border-radius: var(--radius-lg);
+  }
+
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.5;
+  }
+
+  figcaption a {
+    color: inherit;
+  }
+</style>

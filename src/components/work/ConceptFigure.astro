@@ -1,0 +1,67 @@
+---
+/**
+ * Wrapper for concept / reconstructed visuals. Prints the "reconstructed, not a real screen" caption
+ * by default (CLAUDE.md rule 10), a custom caption + source link when the visual uses a public image,
+ * and a 대외비 chip when the work shown is confidential.
+ */
+import StatusBadges from './StatusBadges.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  confidential?: boolean;
+  /** Overrides the default "reconstructed" caption (e.g. when built on a public official image). */
+  caption?: string;
+  /** Public source of an embedded image. */
+  source?: { label: string; url: string };
+  class?: string;
+}
+const { confidential = false, caption, source, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<figure class:list={['concept', className]}>
+  <div class="concept__art">
+    <slot />
+  </div>
+  <figcaption>
+    {confidential && <StatusBadges status={{ confidential: true }} />}
+    <span>{caption ?? t.work.conceptCaption}</span>
+    {
+      source && (
+        <a href={source.url} target="_blank" rel="noopener">
+          {source.label} ↗
+        </a>
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .concept {
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 * var(--px, 1px));
+    height: 100%;
+  }
+
+  .concept__art {
+    flex: 1;
+    display: grid;
+    align-items: start;
+    justify-items: center;
+  }
+
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.5;
+  }
+
+  figcaption a {
+    color: inherit;
+  }
+</style>

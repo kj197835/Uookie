@@ -175,7 +175,7 @@ const caseLink = (slug: string) => localizePath(`/work/${slug}`, lang);
 
   .patents td,
   .patents tbody th {
-    padding: calc(4 * var(--px)) calc(12 * var(--px)) calc(4 * var(--px)) 0;
+    padding: calc(2 * var(--px)) calc(12 * var(--px)) calc(2 * var(--px)) 0;
     text-align: left;
     vertical-align: top;
     line-height: 1.35;
@@ -217,7 +217,7 @@ const caseLink = (slug: string) => localizePath(`/work/${slug}`, lang);
     color: var(--color-muted);
   }
 
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .patents thead {
       display: none;
     }

@@ -63,5 +63,28 @@ function write(file: string, content: string) {
   console.log(`tokens → ${file}`);
 }
 
+/** One resolved DTCG set per mode (Figma: Tokens Studio sets / Variables modes). */
+function modeSet(mode: 'light' | 'dark'): Group {
+  const clone = structuredClone(source);
+  const visit = (group: Group) => {
+    for (const [key, node] of Object.entries(group)) {
+      if (key.startsWith('$') || typeof node !== 'object' || !node) continue;
+      if (isToken(node)) {
+        const dark = node.$extensions?.mode?.dark;
+        if (mode === 'dark' && dark !== undefined) node.$value = dark;
+        if (node.$extensions) {
+          delete node.$extensions.mode;
+          if (!Object.keys(node.$extensions).length) delete node.$extensions;
+        }
+      } else visit(node as Group);
+    }
+  };
+  visit(clone);
+  clone.$description = `uookie.net design tokens — ${mode} mode (resolved from src/tokens/tokens.json).`;
+  return clone;
+}
+
 write('src/styles/tokens.css', css);
 write('export/tokens.json', JSON.stringify(source, null, 2) + '\n');
+write('export/tokens/light.tokens.json', JSON.stringify(modeSet('light'), null, 2) + '\n');
+write('export/tokens/dark.tokens.json', JSON.stringify(modeSet('dark'), null, 2) + '\n');

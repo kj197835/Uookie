@@ -16,6 +16,7 @@
   .no-print,
   .site-header,
   .site-footer,
+  .case-nav,
   .skip-link {
     display: none !important;
   }

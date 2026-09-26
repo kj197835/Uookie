@@ -1,0 +1,170 @@
+---
+/**
+ * Korean apartment stakeholder structure (roles only, no company names), split into
+ * before sale / construction and after move-in / operation. The constructor is the Home IoT
+ * decision maker. Text: src/content/visuals.<lang>.json → b2bStakeholdersKR.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.b2bStakeholdersKR;
+---
+
+<svg class="map" viewBox="0 0 640 380" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <rect class="zone" x="455" y="8" width="185" height="366" rx="14" />
+  <text class="zone-label" x="20" y="24">{v.before}</text>
+  <text class="zone-label" x="475" y="36">{v.after}</text>
+
+  <!-- links -->
+  <g class="link">
+    <path d="M130 62 H150" />
+    <path d="M225 84 V150" />
+    <path d="M375 84 C 375 130, 350 182, 310 182" />
+    <path d="M225 246 V300" />
+    <path d="M225 262 H75 V300" />
+    <path d="M225 262 H375 V300" />
+    <path d="M550 104 V150" />
+    <path d="M550 202 V260" />
+  </g>
+  <path class="move-in" d="M430 330 C 452 330, 452 282, 470 282" />
+  <path class="arrowhead" d="M462 276 L471 282 L462 288" />
+  <text class="link-label" x="476" y="324">{v.moveIn}</text>
+
+  <!-- before sale / construction -->
+  <g id="finance">
+    <rect class="box" x="20" y="40" width="110" height="44" rx="10" />
+    <text class="name" x="75" y="67" text-anchor="middle">{v.finance}</text>
+  </g>
+  <g id="developer">
+    <rect class="box" x="150" y="40" width="150" height="44" rx="10" />
+    <text class="name" x="225" y="67" text-anchor="middle">{v.developer}</text>
+  </g>
+  <g id="architect">
+    <rect class="box" x="320" y="40" width="110" height="44" rx="10" />
+    <text class="name" x="375" y="67" text-anchor="middle">{v.architect}</text>
+  </g>
+  <g id="constructor">
+    <rect class="box box--key" x="140" y="150" width="170" height="64" rx="12" />
+    <text class="name name--key" x="225" y="189" text-anchor="middle">{v.constructor}</text>
+    <rect class="badge" x="130" y="222" width="190" height="26" rx="13" />
+    <text class="badge-text" x="225" y="239" text-anchor="middle">★ {v.decision}</text>
+  </g>
+  <g id="subs">
+    <rect class="box" x="20" y="300" width="110" height="52" rx="10" />
+    <text class="name" x="75" y="331" text-anchor="middle">{v.subs}</text>
+  </g>
+  <g id="homenet">
+    <rect class="box" x="150" y="300" width="150" height="52" rx="10" />
+    <text class="name" x="225" y="322" text-anchor="middle">{v.homenet}</text>
+    <text class="sub" x="225" y="340" text-anchor="middle">{v.homenetSub}</text>
+  </g>
+  <g id="sales">
+    <rect class="box" x="320" y="300" width="110" height="52" rx="10" />
+    <text class="name" x="375" y="322" text-anchor="middle">{v.sales}</text>
+    <text class="sub" x="375" y="340" text-anchor="middle">{v.salesSub}</text>
+  </g>
+
+  <!-- after move-in / operation -->
+  <g id="rrc">
+    <rect class="box" x="470" y="60" width="160" height="44" rx="10" />
+    <text class="name" x="550" y="87" text-anchor="middle">{v.rrc}</text>
+  </g>
+  <g id="mgmt">
+    <rect class="box" x="470" y="150" width="160" height="52" rx="10" />
+    <text class="name" x="550" y="181" text-anchor="middle">{v.mgmt}</text>
+  </g>
+  <g id="residents">
+    <rect class="box box--soft" x="470" y="260" width="160" height="44" rx="10" />
+    <text class="name" x="550" y="287" text-anchor="middle">{v.residents}</text>
+  </g>
+</svg>
+
+<style>
+  .map {
+    width: 100%;
+    height: auto;
+  }
+
+  .zone {
+    fill: color-mix(in srgb, var(--color-accent-soft) 45%, transparent);
+    stroke: var(--color-line);
+    stroke-dasharray: 4 5;
+  }
+
+  .zone-label {
+    fill: var(--color-accent-strong);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .link path {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: 1.5;
+  }
+
+  .move-in {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 3 4;
+  }
+
+  .arrowhead {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .link-label {
+    fill: var(--color-accent-strong);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .box {
+    fill: var(--color-surface);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+
+  .box--key {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+  }
+
+  .box--soft {
+    fill: var(--color-surface-alt);
+  }
+
+  .name {
+    fill: var(--color-navy);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .name--key {
+    font-size: 18px;
+  }
+
+  .sub {
+    fill: var(--color-muted);
+    font-size: 11px;
+  }
+
+  .badge {
+    fill: var(--color-accent);
+  }
+
+  .badge-text {
+    fill: var(--color-surface);
+    font-size: 11px;
+    font-weight: 700;
+  }
+</style>

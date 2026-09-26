@@ -15,6 +15,13 @@ awards:
   - year: 2025
     name: IDEA Design Award, Silver
     url: https://www.idsa.org/awards-recognition/idea/idea-gallery/nbs-b-iot-digital-twin-solution/
+coverImage:
+  src: /images/digital-twin/cover-idea2025.jpg
+  alt: 관제실 대형 벽면 화면에 Samsung b.IoT Digital Twin이 표시되어 있다. 캠퍼스 건물들이 3D로 투명하게 표현되고 층별 온도가 색으로 보이며, 좌우에 에너지 사용·엘리베이터·조명·로봇 운영 대시보드가 있다.
+  caption: 2025 IDEA Design Award Silver — Samsung b.IoT Digital Twin
+  source:
+    label: IDSA — IDEA 2025 수상작
+    url: https://www.idsa.org/awards-recognition/idea/idea-gallery/nbs-b-iot-digital-twin-solution/
 background:
   problem: 흩어져 있던 빌딩·단지의 운영과 에너지 관리를, 공간을 중심으로 하나로 묶을 방법이 필요했습니다.
   context:
@@ -55,7 +62,8 @@ design:
           - label: 삼성 베트남·폴란드 사업장 시범 적용
           - label: 전사 확대 · 국내 R&D 빌딩 적용 · 해외 판매·영업 활용
           - label: 국내 삼성전자 사업장 전체로 확대 적용 진행 중
-          - label: 2026 iF Design Award · 2025 IDEA Design Award Silver
+          - label: 팩토리얼 성수 적용 — 국내 최초 스마트스코어 골드 (2026.01)
+            sub: 삼성 b.IoT 디지털 트윈 · 냉방·공조 에너지 약 27% 절감 (2025.06–09 실증)
   points:
     - title: 공간 기반 Digital Twin 뷰
       body: 빌딩·단지를 공간 그대로 보여 주는 뷰를 운영의 중심에 두었습니다.
@@ -74,8 +82,11 @@ impact:
     - 국내 R&D 빌딩 적용, 해외 판매·영업에 활용
     - 국내 삼성전자 사업장 전체로 확대 적용 진행 중
     - CES 2024 VIP룸 소개
+    - 삼성 b.IoT를 적용한 '팩토리얼 성수'가 국내 최초 스마트 빌딩 국제 인증 WiredScore 스마트스코어 골드 획득 (2026.01) — b.IoT 운영으로 냉방·공조 에너지 사용량 약 27% 절감 (2025.06.01–09.30, 부경대학교 연구팀 실증 기준)
     - 2026 iF Design Award, 2025 IDEA Design Award Silver
 links:
+  - label: 삼성전자 — b.IoT 적용 팩토리얼 성수, 국내 최초 스마트스코어 골드
+    url: https://www.samsung.com/sec/business/insights/news/news_260127_01/
   - label: iF Design Award 2026 — Samsung b.IoT Digital Twin
     url: https://ifdesign.com/en/winner-ranking/project/samsung-biot-digital-twin/756774
   - label: IDEA 2025 — NBS b.IoT Digital Twin Solution

@@ -1,0 +1,15 @@
+{
+  "company": "Samsung Electronics",
+  "total": "2005.02 – present · 21 years",
+  "items": [
+    { "period": "2026.01 – present", "title": "Principal UX Designer", "team": "GenAI UX & Design Automation Lead", "highlight": "GenAI chatbot, AI design automation", "case": "genai", "era": "principal" },
+    { "period": "2024.03 – 2026.01", "title": "Principal UX Designer", "team": "B2B Spatial IoT UX Lead (SmartThings Pro)", "highlight": "SmartThings Pro Interactive View", "case": "interactive-view", "era": "principal" },
+    { "period": "2023.09 – 2024.04", "title": "Principal UX Designer", "team": "UX PM, Digital Twin", "highlight": "Samsung's first Digital Twin", "case": "digital-twin", "era": "principal" },
+    { "period": "2023.01 – 2023.12", "title": "Principal UX Designer", "team": "Spatial UX Lead (SmartThings Map View)", "highlight": "SmartThings Map View", "case": "map-view", "era": "principal" },
+    { "period": "2021.11 – 2022.12", "title": "Senior UX Researcher & Designer", "team": "Smart Apartment IoT", "highlight": "Smart-apartment IoT usability research", "case": "apartment-research", "era": "ux" },
+    { "period": "2018.09 – 2021.10", "title": "Senior UX Designer & Researcher", "team": "B2B Home IoT Strategy", "highlight": "B2B Home IoT opportunity & business", "case": "b2b-iot-research", "era": "ux" },
+    { "period": "2016.09 – 2018.09", "title": "Senior UX Designer", "team": "Connectivity & Multi-Device Experience Lead, Mobile (MX)", "highlight": "MDE, Bixby VUI, connectivity UX", "case": "mde", "era": "ux" },
+    { "period": "2014.04 – 2016.09", "title": "Senior UX Designer", "team": "Advanced UX Concept & Prototyping, Mobile (MX)", "highlight": "New form-factor USPs, prototyping", "case": "advanced-ux", "era": "ux" },
+    { "period": "2005.02 – 2014.03", "title": "Software Engineer", "team": "Mobile Protocol, System & SIM/eSIM, Mobile (MX)", "highlight": "Protocols, GPS, SIM/eSIM", "case": "engineer", "era": "engineer" }
+  ]
+}

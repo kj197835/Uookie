@@ -7,8 +7,30 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@/components/Section.astro';
 import VisualSlot from '@/components/work/VisualSlot.astro';
 import Journey from '@/components/diagrams/Journey.astro';
+import ConceptFigure from '@/components/work/ConceptFigure.astro';
+import PhotoFigure from '@/components/work/PhotoFigure.astro';
+import PhotoGallery from '@/components/work/PhotoGallery.astro';
+import StepFlow from '@/components/work/StepFlow.astro';
+import StatusBadges from '@/components/work/StatusBadges.astro';
+import GenAIHero from '@/components/mockups/GenAIHero.astro';
+import GenAIChatbot from '@/components/mockups/GenAIChatbot.astro';
+import GenAIPipeline from '@/components/mockups/GenAIPipeline.astro';
+import B2BSnowball from '@/components/diagrams/B2BSnowball.astro';
+import StakeholderMapUS from '@/components/diagrams/StakeholderMapUS.astro';
+import StakeholderMapKR from '@/components/diagrams/StakeholderMapKR.astro';
+import ResearchProcess from '@/components/diagrams/ResearchProcess.astro';
+import InsightMap from '@/components/diagrams/InsightMap.astro';
+import MdeCover from '@/components/diagrams/MdeCover.astro';
+import MdeAutoSetup from '@/components/diagrams/MdeAutoSetup.astro';
+import MdeAccount from '@/components/diagrams/MdeAccount.astro';
+import EngineerCover from '@/components/diagrams/EngineerCover.astro';
+import NavTypesCover from '@/components/mockups/NavTypesCover.astro';
+import FormFactorMatrix from '@/components/diagrams/FormFactorMatrix.astro';
 import { caseNumber, caseSlug, chapterAnchor, chapterOf, getChapters, type Case } from '@/lib/cases';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
 
 interface Props {
   entry: Case;
@@ -31,16 +53,59 @@ const chapterHref = localizePath(`/work#${chapterAnchor(chapter)}`, lang);
 const newer = prev && { entry: prev, chapter: chapterOf(chapters, prev) };
 const older = next && { entry: next, chapter: chapterOf(chapters, next) };
 const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.title}`;
+
+// In-code concept visuals, referenced from frontmatter by key (coverVisual / design[].visual.diagram).
+// `confidential: false` = built on public material, so no 대외비 chip even inside a confidential case.
+type Visual = {
+  Component: typeof GenAIHero;
+  confidential?: boolean;
+  caption?: string;
+  source?: { label: string; url: string };
+};
+const diagrams: Record<string, Visual> = {
+  'genai-hero': {
+    Component: GenAIHero,
+    confidential: false,
+    caption: visuals.genaiHero.caption,
+    source: visuals.genaiHero.source,
+  },
+  'genai-chatbot': { Component: GenAIChatbot },
+  'genai-pipeline': { Component: GenAIPipeline },
+  // research diagrams: redrawn from internal research, roles only → no 대외비 chip, custom caption
+  'b2b-snowball': { Component: B2BSnowball, confidential: false, caption: visuals.b2bSnowball.caption },
+  'stakeholders-us': { Component: StakeholderMapUS, confidential: false, caption: visuals.b2bStakeholdersUS.caption },
+  'stakeholders-kr': { Component: StakeholderMapKR, confidential: false, caption: visuals.b2bStakeholdersKR.caption },
+  'apt-research-process': { Component: ResearchProcess, confidential: false, caption: visuals.aptResearch.caption },
+  'apt-insight-map': { Component: InsightMap, confidential: false, caption: visuals.aptInsights.caption },
+  'mde-cover': { Component: MdeCover, confidential: false, caption: visuals.mdeCover.caption },
+  'mde-auto-setup': { Component: MdeAutoSetup },
+  'mde-account': { Component: MdeAccount },
+  'nav-types-cover': { Component: NavTypesCover, confidential: false, caption: visuals.navCover.caption },
+  'form-factor-matrix': { Component: FormFactorMatrix, confidential: false, caption: visuals.formFactorMatrix.caption },
+  'engineer-cover': { Component: EngineerCover, confidential: false, caption: visuals.engineerCover.caption },
+};
+const approachHasDiagram = data.approach.items.some((item) => item.diagram);
+const diagramFor = (key?: string) => (key ? diagrams[key] : undefined);
+const caseConfidential = data.status?.confidential ?? false;
+const coverVisual = diagramFor(data.coverVisual);
+const CoverVisual = coverVisual?.Component;
+
+// One or more key-design pages; tones keep alternating whatever the count.
+const designs = data.design ? (Array.isArray(data.design) ? data.design : [data.design]) : [];
+const designTone = (i: number) => (i % 2 === 0 ? 'default' : 'alt');
+const impactTone = designs.length % 2 === 0 ? 'default' : 'alt';
 ---
 
 <BaseLayout title={data.title} description={data.summary}>
   <Section id="cover" kind="cover" label={t.work.cover} tone="navy" pdf="summary">
+    <div class="cover__eyebrow">
+      <p class="eyebrow">{eyebrow}</p>
+      <a class="cover__chapter" href={chapterHref}>{chapterLabel(chapter)}</a>
+      <StatusBadges status={data.status} class="cover__badges" />
+    </div>
+    <!-- Title (left) and cover visual (right) share the same top line. -->
     <div class="grid cover">
       <div class="col-7 stack cover__text">
-        <div class="cover__eyebrow">
-          <p class="eyebrow">{eyebrow}</p>
-          <a class="cover__chapter" href={chapterHref}>{chapterLabel(chapter)}</a>
-        </div>
         <div class="stack cover__head">
           <h1 class="t-display">{data.title}</h1>
           {data.subtitle && <p class="t-h3 cover__subtitle">{data.subtitle}</p>}
@@ -67,7 +132,21 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
         {data.note && <p class="t-small note">{data.note}</p>}
       </div>
       <div class="col-5">
-        <VisualSlot description={`${data.title} — ${lang === 'ko' ? '대표 이미지 (공개 자료 또는 재구성 SVG)' : 'Key visual'}`} />
+        {
+          CoverVisual ? (
+            <ConceptFigure
+              confidential={coverVisual?.confidential ?? caseConfidential}
+              caption={coverVisual?.caption}
+              source={coverVisual?.source}
+            >
+              <div data-diagram={data.coverVisual} class="diagram-key"><CoverVisual /></div>
+            </ConceptFigure>
+          ) : data.coverImage ? (
+            <PhotoFigure {...data.coverImage} class="cover__photo" />
+          ) : (
+            <VisualSlot description={`${data.title} — ${lang === 'ko' ? '대표 이미지 (공개 자료 또는 재구성 SVG)' : 'Key visual'}`} />
+          )
+        }
       </div>
     </div>
   </Section>
@@ -94,6 +173,32 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
       <p class="eyebrow">{t.work.approach}</p>
       <h2 class="t-h2">{data.approach.heading}</h2>
       <p class="t-small t-muted">{t.work.role}: {data.role}</p>
+      {approachHasDiagram ? (
+        <div class="grid decisions decisions--feature">
+          <ol class="col-8 decisions__main">
+            {data.approach.items.map((item, i) => item.diagram && (() => {
+              const Mini = diagramFor(item.diagram)?.Component;
+              return (
+                <li class="card card--raised">
+                  <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 class="t-h3">{item.title}</h3>
+                  <p class="t-small">{item.body}</p>
+                  {Mini && <div class="card__art" data-diagram={item.diagram}><Mini /></div>}
+                </li>
+              );
+            })())}
+          </ol>
+          <ol class="col-4 decisions__side">
+            {data.approach.items.map((item, i) => !item.diagram && (
+              <li class="card card--raised card--compact">
+                <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="t-body point__title">{item.title}</h3>
+                <p class="t-small">{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ) : (
       <ol class="grid decisions">
         {
           data.approach.items.map((item, i) => (
@@ -105,43 +210,94 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
           ))
         }
       </ol>
+      )}
+      {approachHasDiagram && <p class="t-caption approach-note">{t.work.conceptCaption}</p>}
     </div>
   </Section>
 
   {
-    data.design && (
-      <Section id="design" kind="design" label={t.work.design}>
-        <div class="stack page-body">
-          <p class="eyebrow">{t.work.design}</p>
-          <h2 class="t-h2">{data.design.heading}</h2>
-          <div class="grid design">
-            <div class="col-7">
-              {data.design.visual.journey ? (
-                <figure class="diagram">
-                  <Journey groups={data.design.visual.journey} label={data.design.visual.description} />
-                </figure>
-              ) : (
-                <VisualSlot description={data.design.visual.description} />
-              )}
+    designs.map((design, di) => {
+      const visual = diagramFor(design.visual.diagram);
+      const Diagram = visual?.Component;
+      return (
+        <Section id={di === 0 ? 'design' : `design-${di + 1}`} kind="design" label={t.work.design} tone={designTone(di)}>
+          <div class="stack page-body">
+            <p class="eyebrow">
+              {t.work.design}
+              {design.label && <span class="eyebrow__label"> · {design.label}</span>}
+            </p>
+            <h2 class="t-h2">{design.heading}</h2>
+            {design.layout === 'wide' ? (
+              <div class="design-wide">
+                {Diagram ? (
+                  <ConceptFigure confidential={visual?.confidential ?? caseConfidential} caption={visual?.caption} source={visual?.source}>
+                    <div data-diagram={design.visual.diagram} class="diagram-key"><Diagram /></div>
+                  </ConceptFigure>
+                ) : design.visual.flow ? (
+                  <StepFlow {...design.visual.flow} />
+                ) : (
+                  <VisualSlot description={design.visual.description} />
+                )}
+                <ol class="grid points points--row">
+                  {design.points.map((p, i) => (
+                    <li class={`col-${Math.max(3, Math.floor(12 / design.points.length))}`}>
+                      <span class="num">{i + 1}</span>
+                      <div>
+                        <h3 class="t-body point__title">{p.title}</h3>
+                        <p class="t-small t-muted">{p.body}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : (
+            <div class="grid design">
+              <div class="col-7">
+                {Diagram ? (
+                  <ConceptFigure
+                    confidential={visual?.confidential ?? caseConfidential}
+                    caption={visual?.caption}
+                    source={visual?.source}
+                    class="diagram diagram--concept"
+                  >
+                    <div data-diagram={design.visual.diagram} class="diagram-key"><Diagram /></div>
+                  </ConceptFigure>
+                ) : Array.isArray(design.visual.image) ? (
+                  design.visual.image.length > 1 ? (
+                    <PhotoGallery photos={design.visual.image} />
+                  ) : (
+                    <PhotoFigure {...design.visual.image[0]} />
+                  )
+                ) : design.visual.image ? (
+                  <PhotoFigure {...design.visual.image} />
+                ) : design.visual.journey ? (
+                  <figure class="diagram" data-diagram={design.visual.id}>
+                    <Journey groups={design.visual.journey} label={design.visual.description} />
+                  </figure>
+                ) : (
+                  <VisualSlot description={design.visual.description} />
+                )}
+              </div>
+              <ol class="col-5 points">
+                {design.points.map((p, i) => (
+                  <li>
+                    <span class="num">{i + 1}</span>
+                    <div>
+                      <h3 class="t-body point__title">{p.title}</h3>
+                      <p class="t-small t-muted">{p.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <ol class="col-5 points">
-              {data.design.points.map((p, i) => (
-                <li>
-                  <span class="num">{i + 1}</span>
-                  <div>
-                    <h3 class="t-body point__title">{p.title}</h3>
-                    <p class="t-small t-muted">{p.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            )}
           </div>
-        </div>
-      </Section>
-    )
+        </Section>
+      );
+    })
   }
 
-  <Section id="impact" kind="impact" label={t.work.impact} tone="alt">
+  <Section id="impact" kind="impact" label={t.work.impact} tone={impactTone}>
     <div class="stack page-body">
       <p class="eyebrow">{t.work.impact}</p>
       {
@@ -156,9 +312,23 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
           </ul>
         )
       }
-      <ul class="results">
-        {data.impact.results.map((r) => <li>{r}</li>)}
-      </ul>
+      {
+        data.impact.photo ? (
+          <div class="grid impact-evidence">
+            <div class="col-5">
+              <PhotoFigure {...data.impact.photo} class="impact-photo" />
+            </div>
+            <ul class="col-7 results">
+              {data.impact.results.map((r) => <li>{r}</li>)}
+            </ul>
+          </div>
+        ) : (
+          <ul class="results">
+            {data.impact.results.map((r) => <li>{r}</li>)}
+          </ul>
+        )
+      }
+      {data.impact.flow && <StepFlow {...data.impact.flow} />}
       {
         data.links.length > 0 && (
           <div class="links push-end">
@@ -211,6 +381,11 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
 </BaseLayout>
 
 <style>
+  /* data-diagram wrapper: names a diagram for `npm run export-svg`, no effect on layout */
+  .diagram-key {
+    display: contents;
+  }
+
   .page-body {
     flex: 1;
   }
@@ -225,6 +400,16 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
     display: flex;
     flex-direction: column;
     gap: calc(6 * var(--px));
+    margin-bottom: calc(14 * var(--px));
+  }
+
+  /* keep square cover concept art within the 16:9 page */
+  .cover :global(.shot) {
+    max-width: calc(420 * var(--px));
+  }
+
+  .cover :global(.concept__art) {
+    justify-items: start;
   }
 
   .cover__chapter {
@@ -318,6 +503,48 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
     margin-top: auto;
   }
 
+  .card__art {
+    margin-top: auto;
+    padding-top: calc(8 * var(--px));
+  }
+
+  /* feature layout: illustrated items side by side (left), text-only items stacked (right) */
+  .decisions--feature {
+    align-items: stretch;
+  }
+
+  .decisions__main {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap);
+    padding: 0;
+    list-style: none;
+  }
+
+  .decisions__side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    padding: 0;
+    list-style: none;
+  }
+
+  .card--compact {
+    flex: 1;
+    gap: calc(6 * var(--px));
+    padding: calc(18 * var(--px)) calc(20 * var(--px));
+  }
+
+  @media screen and (max-width: 1023px) {
+    .decisions__main {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .approach-note {
+    margin-top: calc(-8 * var(--px));
+  }
+
   .num {
     color: var(--color-accent);
     font-size: var(--fs-small);
@@ -326,15 +553,44 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
   }
 
   /* Design */
+  .cover__eyebrow :global(.cover__badges) {
+    margin-top: calc(4 * var(--px));
+  }
+
   .diagram {
-    padding: calc(20 * var(--px)) calc(24 * var(--px));
+    padding: calc(14 * var(--px)) calc(24 * var(--px));
     border-radius: var(--radius-lg);
     background: var(--color-surface-alt);
   }
 
+  /* keep the part name's own casing (e.g. "GenAI") inside the uppercase eyebrow */
+  .eyebrow__label {
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+
+  .diagram--concept {
+    padding: calc(4 * var(--px)) 0 0;
+    background: none;
+  }
+
+  .design-wide {
+    display: flex;
+    flex-direction: column;
+    gap: calc(22 * var(--px));
+  }
+
+  /* wide layout: points sit side by side under the visual */
+  .points.points--row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+
+  /* Visual and point ① share the same top line. */
   .design {
     flex: 1;
-    align-items: stretch;
+    align-items: start;
   }
 
   .points {
@@ -372,6 +628,14 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
     gap: calc(8 * var(--px));
     padding-bottom: calc(20 * var(--px));
     border-bottom: var(--stroke-hair) solid var(--color-line);
+  }
+
+  .impact-evidence {
+    align-items: start;
+  }
+
+  .impact-evidence :global(.impact-photo img) {
+    max-height: calc(250 * var(--px));
   }
 
   .results {
@@ -460,7 +724,7 @@ const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.
     text-decoration: none;
   }
 
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .case-nav {
       grid-template-columns: 1fr 1fr;
     }

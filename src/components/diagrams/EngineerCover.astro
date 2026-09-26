@@ -1,0 +1,163 @@
+---
+/**
+ * Cover diagram for the Software Engineer case: three phones on one timeline — a feature phone
+ * (2005) → the first Android Galaxy S (2010) → Galaxy S4 (2013) — above the three engineering eras.
+ * Text: src/content/visuals.<lang>.json → engineerCover.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.engineerCover;
+const BASE = 300; // phones stand on this line
+const [feature, galaxyS, s4] = v.phones;
+---
+
+<svg class="eng" viewBox="0 0 460 430" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+  <text class="title" x="0" y="18">{v.title}</text>
+
+  <!-- 2005 feature phone: small candy bar with keypad -->
+  <g id="feature-phone">
+    <rect class="body" x="46" y={BASE - 120} width="58" height="120" rx="12" />
+    <rect class="screen" x="54" y={BASE - 110} width="42" height="36" rx="3" />
+    {
+      Array.from({ length: 12 }, (_, i) => (
+        <rect class="key" x={57 + (i % 3) * 13} y={BASE - 64 + Math.floor(i / 3) * 13} width="10" height="8" rx="2" />
+      ))
+    }
+  </g>
+
+  <!-- 2010 Galaxy S -->
+  <g id="galaxy-s">
+    <rect class="body" x="190" y={BASE - 170} width="84" height="170" rx="13" />
+    <rect class="screen screen--on" x="197" y={BASE - 156} width="70" height="132" rx="3" />
+    <rect class="home" x="220" y={BASE - 17} width="24" height="7" rx="3.5" />
+  </g>
+
+  <!-- 2013 Galaxy S4 -->
+  <g id="galaxy-s4">
+    <rect class="body" x="336" y={BASE - 210} width="100" height="210" rx="15" />
+    <rect class="screen screen--on" x="342" y={BASE - 196} width="88" height="176" rx="3" />
+    <rect class="home" x="373" y={BASE - 14} width="26" height="6" rx="3" />
+  </g>
+
+  <!-- timeline -->
+  <path class="axis" d={`M20 ${BASE + 14} H450`} />
+  <path class="arrow" d={`M442 ${BASE + 8} L450 ${BASE + 14} L442 ${BASE + 20}`} />
+  {
+    [
+      { x: 75, p: feature },
+      { x: 232, p: galaxyS },
+      { x: 386, p: s4 },
+    ].map(({ x, p }) => (
+      <g>
+        <circle class="dot" cx={x} cy={BASE + 14} r="5" />
+        <text class="year" x={x} y={BASE + 38} text-anchor="middle">{p.year}</text>
+        <text class="name" x={x} y={BASE + 58} text-anchor="middle">{p.name}</text>
+        <text class="sub" x={x} y={BASE + 74} text-anchor="middle">{p.sub}</text>
+      </g>
+    ))
+  }
+
+  <!-- engineering eras -->
+  {
+    v.eras.map((e, i) => (
+      <g>
+        <rect class:list={['era', `era--${i}`]} x={i * 153} y="392" width="147" height="38" rx="8" />
+        <text class="era-title" x={i * 153 + 73.5} y="408" text-anchor="middle">{e.title}</text>
+        <text class="era-sub" x={i * 153 + 73.5} y="423" text-anchor="middle">{e.sub}</text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  .eng {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .title {
+    fill: var(--color-navy);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .body {
+    fill: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+  }
+
+  .screen {
+    fill: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  .screen--on {
+    fill: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+
+  .key,
+  .home {
+    fill: var(--color-accent);
+    opacity: 0.7;
+  }
+
+  .axis {
+    stroke: var(--color-line);
+    stroke-width: 2;
+  }
+
+  .arrow {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .dot {
+    fill: var(--color-accent);
+  }
+
+  .year {
+    fill: var(--color-accent);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .name {
+    fill: var(--color-navy);
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .sub {
+    fill: var(--color-navy);
+    font-size: 11.5px;
+    opacity: 0.8;
+  }
+
+  .era {
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .era--0 { fill: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+  .era--1 { fill: color-mix(in srgb, var(--color-accent) 18%, transparent); }
+  .era--2 { fill: color-mix(in srgb, var(--color-accent) 28%, transparent); }
+
+  .era-title {
+    fill: var(--color-navy);
+    font-size: 12.5px;
+    font-weight: 700;
+  }
+
+  .era-sub {
+    fill: var(--color-navy);
+    font-size: 10.5px;
+    opacity: 0.8;
+  }
+</style>

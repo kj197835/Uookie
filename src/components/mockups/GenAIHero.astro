@@ -1,0 +1,169 @@
+---
+/**
+ * Cover visual: the official SmartThings Pro dashboard image (samsung.com, public) with an AI layer
+ * floating in its empty upper area — an AI orb and a short AI conversation, linked to the
+ * dashboard's energy widgets. The photo is shown square (bottom-aligned crop of the 720×900 original);
+ * the overlay uses the same 720×720 coordinate space. Text: src/content/visuals.<lang>.json → genaiHero.
+ */
+import { getLangFromUrl } from '@/i18n/utils';
+import { getVisuals } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const visuals = getVisuals(__lang);
+
+const v = visuals.genaiHero;
+const sparkle = (cx: number, cy: number, s: number) =>
+  `M${cx} ${cy - s} Q${cx} ${cy} ${cx + s} ${cy} Q${cx} ${cy} ${cx} ${cy + s} Q${cx} ${cy} ${cx - s} ${cy} Q${cx} ${cy} ${cx} ${cy - s}Z`;
+---
+
+<div class="shot">
+  <img src={v.image} alt={v.imageAlt} width="720" height="900" loading="eager" decoding="async" />
+  <svg class="overlay" viewBox="0 0 720 720" role="img" aria-label={v.label} xmlns="http://www.w3.org/2000/svg" font-family="Pretendard, system-ui, sans-serif">
+    <text class="title" x="28" y="44">{v.title}</text>
+
+    <!-- links from the AI layer down to the real dashboard widgets -->
+    <g class="link">
+      <path d="M150 226 C 150 330, 190 420, 176 548" />
+      <path d="M470 282 C 480 380, 520 470, 522 560" />
+    </g>
+    <circle class="link-end" cx="176" cy="552" r="7" />
+    <circle class="link-end" cx="522" cy="564" r="7" />
+
+    <!-- AI orb -->
+    <g id="ai-orb">
+      <circle class="orb-ring orb-ring--outer" cx="150" cy="160" r="66" />
+      <circle class="orb-ring" cx="150" cy="160" r="46" />
+      <circle class="orb-core" cx="150" cy="160" r="30" />
+      <path class="orb-spark" d={sparkle(150, 160, 20)} />
+      <path class="orb-spark orb-spark--small" d={sparkle(214, 104, 7)} />
+      <path class="orb-spark orb-spark--small" d={sparkle(92, 222, 5)} />
+    </g>
+
+    <!-- AI conversation card -->
+    <g id="ai-chat">
+      <rect class="glass" x="250" y="64" width="440" height="218" rx="22" />
+      <path class="spark-small" d={sparkle(280, 96, 9)} />
+      <text class="ai-name" x="298" y="102">{v.aiName}</text>
+      <rect class="bubble-user" x="398" y="118" width="274" height="40" rx="20" />
+      <text class="text-user" x="656" y="144" text-anchor="end">{v.userMsg}</text>
+      <rect class="bubble-ai" x="270" y="170" width="300" height="62" rx="16" />
+      <text class="text-ai" x="288" y="196">{v.aiMsg}</text>
+      <text class="text-ai" x="288" y="218">{v.aiMsg2}</text>
+      <rect class="action" x="270" y="242" width="176" height="30" rx="15" />
+      <text class="action-text" x="358" y="262" text-anchor="middle">{v.action}</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .shot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #0f1a24;
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .title {
+    fill: #ffffff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .link path {
+    fill: none;
+    stroke: #8bd3ff;
+    stroke-width: 2;
+    stroke-dasharray: 4 6;
+    stroke-linecap: round;
+  }
+
+  .link-end {
+    fill: #8bd3ff;
+    stroke: rgba(139, 211, 255, 0.35);
+    stroke-width: 8;
+  }
+
+  .orb-ring {
+    fill: none;
+    stroke: rgba(139, 211, 255, 0.55);
+    stroke-width: 1.5;
+  }
+
+  .orb-ring--outer {
+    stroke: rgba(255, 255, 255, 0.25);
+    stroke-dasharray: 3 5;
+  }
+
+  .orb-core {
+    fill: rgba(139, 211, 255, 0.22);
+  }
+
+  .orb-spark {
+    fill: #ffffff;
+  }
+
+  .orb-spark--small {
+    fill: #8bd3ff;
+  }
+
+  .glass {
+    fill: rgba(255, 255, 255, 0.1);
+    stroke: rgba(255, 255, 255, 0.35);
+    stroke-width: 1.2;
+  }
+
+  .spark-small {
+    fill: #8bd3ff;
+  }
+
+  .ai-name {
+    fill: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .bubble-user {
+    fill: #2e75b6;
+  }
+
+  .text-user {
+    fill: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .bubble-ai {
+    fill: rgba(255, 255, 255, 0.14);
+  }
+
+  .text-ai {
+    fill: #ffffff;
+    font-size: 14px;
+  }
+
+  .action {
+    fill: #ffffff;
+  }
+
+  .action-text {
+    fill: #1f3864;
+    font-size: 13px;
+    font-weight: 700;
+  }
+</style>

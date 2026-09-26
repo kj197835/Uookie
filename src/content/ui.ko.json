@@ -51,7 +51,11 @@
     "flowHint": "챕터를 누르면 해당 시기로 이동합니다",
     "newer": "더 최근 작업",
     "older": "이전 작업",
-    "chapterNav": "챕터 바로가기"
+    "chapterNav": "챕터 바로가기",
+    "inProgress": "진행 중",
+    "confidential": "대외비",
+    "confidentialHint": "대외비 업무라 세부 화면과 데이터 대신 원칙·구조 수준의 컨셉 이미지로 소개합니다",
+    "conceptCaption": "컨셉 이미지 · 포트폴리오용으로 재구성했으며 실제 화면이 아닙니다"
   },
   "home": {
     "numbers": "핵심 숫자",
@@ -63,10 +67,10 @@
     "careerLead": "엔지니어에서 AI UX 리더까지, 21년",
     "recognition": "Recognition",
     "recognitionLead": "글로벌 디자인 어워드 6회+",
-    "patentsLine": "등록 특허·GUI 디자인 12건+ · 출원 6건",
+    "patentsLine": "등록 특허·GUI 디자인 13건+ · 출원 5건",
     "viewRecognition": "수상·특허 전체 보기",
     "contactTitle": "포트폴리오에 대해 이야기 나누고 싶다면",
-    "signatureLabel": "2D 도면이 3D 공간이 되고, 공간의 기기 데이터가 AI-ready 토큰 그리드로 이어지는 라인 드로잉"
+    "signatureLabel": "2D 도면이 3D 공간 IoT가 되고, 공간의 기기 데이터가 AI-ready 디자인 토큰으로 이어지는 일러스트"
   },
   "era": {
     "engineer": "Software Engineer",
@@ -94,7 +98,7 @@
     "awardsLead": "글로벌 디자인 어워드 6회+",
     "awardsNote": "대표 수상 6건을 소개합니다. 이 밖의 수상 이력도 있습니다.",
     "patents": "특허 · GUI 디자인",
-    "patentsLead": "등록 12건+ · 출원 6건",
+    "patentsLead": "등록 13건+ · 출원 5건",
     "patentsNote": "대표 특허·GUI 디자인을 소개합니다. 이 밖의 등록 특허도 있습니다.",
     "granted": "등록",
     "pending": "출원",

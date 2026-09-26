@@ -2,15 +2,16 @@
 /** Home: hero + numbers → selected work → capabilities → career flow → recognition & contact. */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Section from '@/components/Section.astro';
-import HeroSignature from '@/components/brand/HeroSignature.astro';
 import CaseCard from '@/components/work/CaseCard.astro';
 import CopyText from '@/components/CopyText.astro';
 import CareerFlow from '@/components/about/CareerFlow.astro';
-import profile from '@/content/profile.ko.json';
 import recognition from '@/content/recognition.json';
 import site from '@/content/site.json';
 import { caseSlug, getCases } from '@/lib/cases';
 import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+import { getProfile } from '@/lib/content';
+const __lang = getLangFromUrl(Astro.url);
+const profile = getProfile(__lang);
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -35,7 +36,16 @@ const [lead, rest] = [featured.slice(0, 3), featured.slice(3)];
         <p class="t-small hero__summary">{profile.summary}</p>
       </div>
       <div class="col-5 hero__visual">
-        <HeroSignature label={t.home.signatureLabel} />
+        <img
+          class="hero__image"
+          src="/images/home/spatial-iot-hero.webp"
+          alt={t.home.signatureLabel}
+          width="1400"
+          height="1035"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
       </div>
     </div>
     <ul class="grid numbers" style={`--n:${profile.numbers.length}`} aria-label={t.home.numbers}>
@@ -180,6 +190,24 @@ const [lead, rest] = [featured.slice(0, 3), featured.slice(3)];
     align-self: center;
   }
 
+  /* Illustration has a white background: blend it into the light page, show it as a card in dark mode. */
+  .hero__image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    mix-blend-mode: multiply;
+  }
+
+  :global([data-theme='dark']) .hero__image {
+    mix-blend-mode: normal;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .hero__image {
+      mix-blend-mode: normal;
+    }
+  }
+
   /* Numbers strip */
   .numbers {
     margin-top: calc(24 * var(--px));
@@ -194,7 +222,7 @@ const [lead, rest] = [featured.slice(0, 3), featured.slice(3)];
     gap: calc(4 * var(--px));
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px), print {
     .numbers {
       grid-template-columns: repeat(var(--n), minmax(0, 1fr));
     }
@@ -203,7 +231,7 @@ const [lead, rest] = [featured.slice(0, 3), featured.slice(3)];
     }
   }
 
-  @media (min-width: 480px) and (max-width: 1023px) {
+  @media screen and (min-width: 480px) and (max-width: 1023px) {
     .numbers li {
       grid-column: span 6;
     }

@@ -1,0 +1,50 @@
+[
+  {
+    "no": 6,
+    "id": "ai",
+    "title": "AI UX & design automation",
+    "period": "2026.01 – present",
+    "bridge": "Making complex B2B solutions easy for anyone, through conversational AI and design automation",
+    "cases": ["genai"]
+  },
+  {
+    "no": 5,
+    "id": "b2b-spatial",
+    "title": "Expanding the B2B spatial platform",
+    "period": "2023.09 – 2026.01",
+    "bridge": "Taking the spatial experience proven in B2C Map View to buildings, complexes and ships",
+    "cases": ["interactive-view", "digital-twin"]
+  },
+  {
+    "no": 4,
+    "id": "spatial",
+    "title": "Advancing spatial UX",
+    "period": "2023.01 – 2023.12",
+    "bridge": "Turning floor-plan and device know-how from smart apartments into seeing the home in 3D instead of a list",
+    "cases": ["map-view"]
+  },
+  {
+    "no": 3,
+    "id": "b2b-research",
+    "title": "New B2B business research → launch",
+    "period": "2018.09 – 2022.12",
+    "bridge": "Building on connected-device experience to find, through research, where SmartThings could grow into B2B — and launching it",
+    "cases": ["apartment-research", "b2b-iot-research"]
+  },
+  {
+    "no": 2,
+    "id": "mobile",
+    "title": "Mobile UX",
+    "period": "2014.04 – 2018.09",
+    "bridge": "From an engineer who knows the technology deeply to a UX designer who shapes how people use it",
+    "cases": ["mde", "advanced-ux"]
+  },
+  {
+    "no": 1,
+    "id": "engineering",
+    "title": "Engineering",
+    "period": "2005.02 – 2014.03",
+    "bridge": "The starting point: technical depth from protocol, system and SIM/eSIM development",
+    "cases": ["engineer"]
+  }
+]

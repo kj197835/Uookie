@@ -3,8 +3,9 @@ node_modules/
 dist/
 .astro/
 
-# generated
+# generated (portfolio PDFs and Figma exports stay local — not uploaded)
 export/
+public/pdf/
 src/styles/tokens.css
 
 # env / os / editor

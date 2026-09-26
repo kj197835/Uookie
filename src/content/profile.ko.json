@@ -12,7 +12,7 @@
     "Digital Twin",
     "UX Research"
   ],
-  "summary": "SW 엔지니어 9년, UX 디자이너 12년의 경험으로 복잡한 기술을 누구나 쉽게 쓰는 경험으로 바꾸는 Principal UX Designer. 삼성전자에서 GenAI 챗봇 UX와 AI 기반 디자인 자동화를 이끌고 있으며, 삼성 최초 Digital Twin 등 공간 기반 IoT 솔루션을 0에서 1로 만들어 글로벌 디자인 어워드 6회 이상 수상. 리서치로 사업 기회를 발굴하고, 필요하면 UX PM 역할까지 맡아 실제 출시와 사업 성과로 연결.",
+  "summary": "SW 엔지니어 9년, UX 디자이너 12년의 경험으로 복잡한 기술을 누구나 쉽게 쓰는 경험으로 바꾸는 Principal UX Designer. 삼성전자에서 GenAI 챗봇 UX와 AI 기반 디자인 자동화를 이끌고 있으며, 삼성 최초 Digital Twin 등 공간 기반 IoT 솔루션을 0에서 1로 만들어 글로벌 디자인 어워드 6회 이상 수상, 등록 특허 13건 이상. 리서치로 사업 기회를 발굴하고, 필요하면 UX PM 역할까지 맡아 실제 출시와 사업 성과로 연결.",
   "numbers": [
     {
       "value": "21년",
@@ -25,9 +25,9 @@
       "note": "Red Dot · iF · IDEA · Good Design 등"
     },
     {
-      "value": "12건+",
+      "value": "13건+",
       "label": "등록 특허·GUI 디자인",
-      "note": "+ 출원 6건"
+      "note": "+ 출원 5건"
     },
     {
       "value": "13만+",
@@ -43,14 +43,14 @@
   "competencies": [
     {
       "title": "AI UX & 디자인 자동화",
-      "body": "GenAI 챗봇 UX·솔루션 아키텍처, AI 번역 가이드 체계, PRD 기반 Figma UI 가이드 자동 생성과 AI-ready 디자인 토큰 표준화. UX 그룹 AI 툴 도입·운영 담당.",
+      "body": "GenAI 챗봇 UX·솔루션 아키텍처를 설계해 SmartThings Pro 판매 기능으로 출시. Claude·Figma MCP로 PRD에서 Figma UI 가이드를 자동 생성하는 시스템과 AI-ready 디자인 토큰, AI 번역 가이드 체계를 만들고 UX 그룹 AI 툴 도입을 이끔.",
       "cases": [
         "genai"
       ]
     },
     {
       "title": "복잡계 B2B 공간 UX",
-      "body": "Digital Twin, 3D 도면 기반 IoT·로봇·선박·히트맵 관리 등 빌딩·산업 현장의 복잡한 정보를 직관적인 공간 경험으로 설계.",
+      "body": "2D 도면을 3D 맵으로 바꾸고 IoT·로봇·선박·차량·재실 히트맵을 한 공간에서 관리하는 경험을 설계. 삼성 최초 Digital Twin은 국내 최초 스마트스코어 골드 빌딩으로 이어짐.",
       "cases": [
         "interactive-view",
         "digital-twin",
@@ -59,7 +59,7 @@
     },
     {
       "title": "UX 리서치 & 사업 전략",
-      "body": "한·미 이해관계자 인터뷰·섀도잉·가정 방문으로 B2B 기회 영역을 발굴하고, 정량 조사·좌담회·가정 방문 조사를 결합한 리서치로 사용성 개선과 연동률 향상.",
+      "body": "한·미 이해관계자 인터뷰·섀도잉·가정 방문으로 B2B 기회 영역을 발굴해 13만+ 가구 사업화로 연결. UX 리서처로 3개 단지 사용성 리서치를 설계·운영해 연동률 8% → 12%.",
       "cases": [
         "b2b-iot-research",
         "apartment-research"
@@ -67,7 +67,7 @@
     },
     {
       "title": "기술 기반 혁신",
-      "body": "통신 프로토콜·GPS·eSIM SW 엔지니어 9년 경력, 새 폼팩터 USP 발굴, 미·유럽·중국·한국 등록 특허 12건 이상.",
+      "body": "통신 프로토콜·GPS·삼성 최초 eSIM SW 엔지니어 9년. 새 폼팩터 UX를 발굴해 갤럭시 S8·폴드에 적용하고 CES 2018 MDE 첫 주제로 선정, 미·유럽·중국·한국 등록 특허 13건 이상.",
       "cases": [
         "engineer",
         "advanced-ux",
@@ -247,7 +247,7 @@
         "데이터 분석",
         "특허 발굴"
       ],
-      "basis": "TRIZ Expert Level 2·사내 강사, Data Science Level 2, 등록 특허 12건 이상"
+      "basis": "TRIZ Expert Level 2·사내 강사, Data Science Level 2, 등록 특허 13건 이상"
     }
   ]
 }

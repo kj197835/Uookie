@@ -51,7 +51,11 @@
     "flowHint": "Jump to a chapter",
     "newer": "Newer work",
     "older": "Earlier work",
-    "chapterNav": "Chapters"
+    "chapterNav": "Chapters",
+    "inProgress": "In progress",
+    "confidential": "Confidential",
+    "confidentialHint": "Confidential work: shown as principle-level concept images instead of real screens or data",
+    "conceptCaption": "Concept image · reconstructed for portfolio, not a real screen"
   },
   "home": {
     "numbers": "Numbers",
@@ -63,10 +67,10 @@
     "careerLead": "From engineer to AI UX leader, 21 years",
     "recognition": "Recognition",
     "recognitionLead": "6+ global design awards",
-    "patentsLine": "12+ granted patents & GUI designs · 6 pending",
+    "patentsLine": "13+ granted patents & GUI designs · 5 pending",
     "viewRecognition": "All awards & patents",
     "contactTitle": "Let's talk about the work",
-    "signatureLabel": "Line drawing: a 2D plan becomes a 3D space, and device data in the space flows into an AI-ready token grid"
+    "signatureLabel": "Illustration: a 2D floor plan becomes a 3D spatial IoT space, and its device data flows into AI-ready design tokens"
   },
   "era": {
     "engineer": "Software Engineer",
@@ -94,7 +98,7 @@
     "awardsLead": "6+ global design awards",
     "awardsNote": "Selected awards; there are more.",
     "patents": "Patents · GUI designs",
-    "patentsLead": "12+ granted · 6 pending",
+    "patentsLead": "13+ granted · 5 pending",
     "patentsNote": "Selected patents and GUI designs; there are more granted patents.",
     "granted": "Granted",
     "pending": "Pending",

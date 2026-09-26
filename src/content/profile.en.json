@@ -1,0 +1,253 @@
+{
+  "name": "KyungJun Lee",
+  "nameAlt": "이경준",
+  "role": "Principal UX Designer · Samsung Electronics",
+  "tagline": "Designing with AI & for AI",
+  "headline": "A UX leader who designs AI experiences and works with AI",
+  "focus": [
+    "GenAI UX",
+    "Conversational AI",
+    "AI Design Automation",
+    "Spatial IoT",
+    "Digital Twin",
+    "UX Research"
+  ],
+  "summary": "Principal UX Designer with 21 years at Samsung Electronics — 9 as a software engineer, 12 in UX — turning complex technology into experiences anyone can use. Now leading GenAI chatbot UX and AI-driven design automation. Built Samsung's first Digital Twin and spatial IoT products from 0 to 1, with 6+ global design awards and 13+ granted patents. Finds business opportunities through research and steps into the UX PM role when needed.",
+  "numbers": [
+    {
+      "value": "21 yrs",
+      "label": "at Samsung Electronics",
+      "note": "9 in software · 12 in UX"
+    },
+    {
+      "value": "6+",
+      "label": "Global design awards",
+      "note": "Red Dot · iF · IDEA · Good Design and more"
+    },
+    {
+      "value": "13+",
+      "label": "Granted patents & GUI designs",
+      "note": "+ 5 pending"
+    },
+    {
+      "value": "130K+",
+      "label": "Smart-apartment households on SmartThings",
+      "note": "B2B Home IoT business"
+    },
+    {
+      "value": "8% → 12%",
+      "label": "SmartThings adoption after usability fixes",
+      "note": "Smart-apartment research"
+    }
+  ],
+  "competencies": [
+    {
+      "title": "AI UX & design automation",
+      "body": "Designed GenAI chatbot UX and architecture, now sold as a SmartThings Pro feature. Building PRD-to-Figma UI guide automation with Claude and Figma MCP, AI-ready tokens and AI translation guidelines.",
+      "cases": [
+        "genai"
+      ]
+    },
+    {
+      "title": "Complex B2B spatial UX",
+      "body": "Turns 2D plans into 3D maps managing IoT, robots, ships, vehicles and occupancy. Samsung's first Digital Twin now runs Korea's first SmartScore Gold building.",
+      "cases": [
+        "interactive-view",
+        "digital-twin",
+        "map-view"
+      ]
+    },
+    {
+      "title": "UX research & business strategy",
+      "body": "Found B2B opportunities through Korea–US interviews, shadowing and home visits, growing to 130K+ households. As UX researcher, raised adoption from 8% to 12%.",
+      "cases": [
+        "b2b-iot-research",
+        "apartment-research"
+      ]
+    },
+    {
+      "title": "Engineering-driven innovation",
+      "body": "Nine years on protocols, GPS and Samsung's first eSIM. Form-factor UX shipped on Galaxy S8 and Fold, the first CES 2018 MDE theme, 13+ patents.",
+      "cases": [
+        "engineer",
+        "advanced-ux",
+        "mde"
+      ]
+    }
+  ],
+  "story": [
+    {
+      "period": "2005 – 2014",
+      "title": "Depth in technology, as an engineer",
+      "body": "Nine years building mobile protocols, system software and SIM/eSIM. Led Samsung's first eSIM with Sprint and verified in the field across the US, Europe and Asia."
+    },
+    {
+      "period": "2014 – 2022",
+      "title": "The human view, in UX",
+      "body": "Moved to UX, covering concept, design and working prototypes on my own. Led the multi-device connection experience (MDE), then found B2B opportunities through Korea–US research and turned them into the smart-apartment business."
+    },
+    {
+      "period": "2023 – now",
+      "title": "0→1 and the AI shift, as a Principal",
+      "body": "Built spatial IoT solutions from 0 to 1 — SmartThings Map View, Samsung's first Digital Twin and SmartThings Pro Interactive View. Now leading GenAI chatbot UX and AI-driven design automation."
+    }
+  ],
+  "tools": [
+    {
+      "category": "AI tools",
+      "items": [
+        "Gemini",
+        "ChatGPT",
+        "Claude",
+        "Midjourney",
+        "Adobe Firefly",
+        "AI video & music tools"
+      ],
+      "basis": "Led AI tool adoption for the UX group; building AI design automation"
+    },
+    {
+      "category": "Design",
+      "items": [
+        "Figma",
+        "Sketch"
+      ],
+      "basis": "Led Figma adoption for the organization; UI/UX design throughout"
+    },
+    {
+      "category": "Prototyping & video",
+      "items": [
+        "Android Studio",
+        "Final Cut Pro X",
+        "Motion design tools"
+      ],
+      "basis": "Working prototypes in Advanced UX; MDE and connectivity UX prototypes"
+    },
+    {
+      "category": "Collaboration & docs",
+      "items": [
+        "PowerPoint",
+        "Confluence",
+        "Jira"
+      ],
+      "basis": "PRDs, research reports, exhibition concepts"
+    },
+    {
+      "category": "Development & debugging",
+      "items": [
+        "Trace32"
+      ],
+      "basis": "System and protocol debugging as a software engineer"
+    }
+  ],
+  "education": [
+    {
+      "title": "B.S. in Computer Engineering, Dongguk University",
+      "period": "2005"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Samsung Data Science Level 2",
+      "period": "2025.02"
+    },
+    {
+      "title": "TRIZ Expert Level 2 · In-house Instructor Level 1",
+      "period": "2017.01"
+    }
+  ],
+  "skills": [
+    {
+      "category": "AI UX",
+      "items": [
+        "Generative AI UX",
+        "Conversational Design",
+        "Voice UI (VUI)",
+        "AI Design Automation",
+        "AI-ready Design Tokens",
+        "Prompt Engineering"
+      ],
+      "basis": "GenAI chatbot, AI translation, automated Figma UI guides, Bixby VUI"
+    },
+    {
+      "category": "UX & UI design",
+      "items": [
+        "UX Strategy",
+        "UI Design",
+        "Design Systems",
+        "Interaction Design",
+        "Spatial & 3D UX",
+        "Multi-Device UX"
+      ],
+      "basis": "Map View, Interactive View, Digital Twin, MDE"
+    },
+    {
+      "category": "UX research",
+      "items": [
+        "Surveys",
+        "Focus groups (FGD)",
+        "IDI",
+        "Shadowing",
+        "Home visits",
+        "Usability testing",
+        "Stakeholder mapping",
+        "Journey maps"
+      ],
+      "basis": "Korea–US IDIs, shadowing and home visits; research at three smart-apartment complexes"
+    },
+    {
+      "category": "Planning & leadership",
+      "items": [
+        "UX PM (PRDs)",
+        "Roadmaps & priorities",
+        "Cross-functional lead",
+        "Exhibition concepts"
+      ],
+      "basis": "Digital Twin UX PM; CES 2018, 2024 and 2025 exhibitions"
+    },
+    {
+      "category": "Domains",
+      "items": [
+        "IoT",
+        "Smart Home",
+        "Smart Building",
+        "BMS",
+        "Digital Twin",
+        "Energy management (BEMS)",
+        "Robotics",
+        "B2B solutions"
+      ],
+      "basis": "SmartThings, SmartThings Pro, Samsung Heavy Industries, Big Wave Robotics"
+    },
+    {
+      "category": "Programming",
+      "items": [
+        "Python",
+        "R",
+        "Java",
+        "C"
+      ],
+      "basis": "Data analysis, Android prototypes, embedded software"
+    },
+    {
+      "category": "Engineering",
+      "items": [
+        "GSM · RRM · E-GPRS",
+        "GPS",
+        "SIM & eSIM",
+        "Bluetooth & BLE",
+        "Wi-Fi",
+        "Android system software"
+      ],
+      "basis": "Nine years as a software engineer, Samsung's first eSIM, connectivity UX"
+    },
+    {
+      "category": "Methods & analysis",
+      "items": [
+        "TRIZ",
+        "Data analysis",
+        "Patent ideation"
+      ],
+      "basis": "TRIZ Expert Level 2 & instructor, Data Science Level 2, 13+ patents"
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+---
+/**
+ * A numbered screenshot flow (e.g. how a Map View gets created), laid out in one row with arrows.
+ * Steps flagged `auto` get an "automatic" tag (e.g. done automatically for smart apartments).
+ * Public screenshots → caption + required source link.
+ */
+interface Step {
+  src: string;
+  alt: string;
+  title: string;
+  sub?: string;
+  auto?: boolean;
+}
+interface Props {
+  steps: Step[];
+  caption?: string;
+  source: { label: string; url: string };
+  /** Label for the auto tag (from the case data, e.g. "스마트 아파트 자동"). */
+  autoLabel?: string;
+}
+const { steps, caption, source, autoLabel } = Astro.props;
+---
+
+<figure class="flow">
+  <ol class="flow__steps" style={`--n:${steps.length}`}>
+    {
+      steps.map((s, i) => (
+        <li class="step">
+          <div class="step__shot">
+            <img src={s.src} alt={s.alt} loading="lazy" decoding="async" />
+            <span class="step__no">{i + 1}</span>
+          </div>
+          <p class="step__title">{s.title}</p>
+          {s.sub && <p class="step__sub">{s.sub}</p>}
+          {s.auto && autoLabel && <span class="step__auto">{autoLabel}</span>}
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption>
+    {caption && <span>{caption}</span>}
+    <a href={source.url} target="_blank" rel="noopener">{source.label} ↗</a>
+  </figcaption>
+</figure>
+
+<style>
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: calc(12 * var(--px, 1px));
+  }
+
+  .flow__steps {
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    gap: calc(22 * var(--px, 1px));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 * var(--px, 1px));
+  }
+
+  /* arrow between steps */
+  .step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    top: calc(78 * var(--px, 1px));
+    right: calc(-17 * var(--px, 1px));
+    color: var(--color-accent);
+    font-size: var(--fs-small, var(--size-small));
+    font-weight: var(--font-weight-bold);
+  }
+
+  .step__shot {
+    position: relative;
+    margin-bottom: calc(6 * var(--px, 1px));
+  }
+
+  .step__shot img {
+    width: 100%;
+    height: auto;
+    border: var(--stroke-hair) solid var(--color-line-soft);
+    border-radius: var(--radius-md);
+    background: #ffffff;
+  }
+
+  .step__no {
+    position: absolute;
+    top: calc(6 * var(--px, 1px));
+    left: calc(6 * var(--px, 1px));
+    display: grid;
+    place-items: center;
+    width: calc(22 * var(--px, 1px));
+    height: calc(22 * var(--px, 1px));
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: var(--color-surface);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-bold);
+  }
+
+  .step__title {
+    color: var(--color-navy);
+    font-size: var(--fs-small, var(--size-small));
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.35;
+  }
+
+  .step__sub {
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.4;
+  }
+
+  .step__auto {
+    align-self: flex-start;
+    margin-top: calc(2 * var(--px, 1px));
+    padding: 0 calc(8 * var(--px, 1px));
+    border-radius: var(--radius-pill);
+    background: var(--color-accent-soft);
+    color: var(--color-navy);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.7;
+  }
+
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.5;
+  }
+
+  figcaption a {
+    color: inherit;
+  }
+
+  @media screen and (max-width: 767px) {
+    .flow__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: calc(20 * var(--px, 1px));
+    }
+    .step::after {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+/**
+ * Several public photos for one key-design page: the first one large, the rest in a row below,
+ * each numbered and credited in a caption list (source link required per photo).
+ */
+interface Photo {
+  src: string;
+  alt: string;
+  caption?: string;
+  source: { label: string; url: string };
+  marker?: string;
+}
+interface Props {
+  photos: Photo[];
+}
+const { photos } = Astro.props;
+const [main, ...rest] = photos;
+// Badge = the point number(s) the photo illustrates; falls back to its position.
+const badge = (p: Photo, i: number) => p.marker ?? String(i + 1);
+---
+
+<figure class="gallery">
+  <div class="gallery__grid" style={`--cols:${Math.max(rest.length, 1)}`}>
+    <div class="gallery__item gallery__item--main">
+      <img src={main.src} alt={main.alt} loading="lazy" decoding="async" />
+      <span class="gallery__no" aria-hidden="true">{badge(main, 0)}</span>
+    </div>
+    {
+      rest.map((p, i) => (
+        <div class="gallery__item">
+          <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+          <span class="gallery__no" aria-hidden="true">{badge(p, i + 1)}</span>
+        </div>
+      ))
+    }
+  </div>
+  <figcaption>
+    <ol>
+      {
+        photos.map((p, i) => (
+          <li>
+            <span class="gallery__ref">{badge(p, i)}</span>
+            {p.caption && <span>{p.caption}</span>}
+            <a href={p.source.url} target="_blank" rel="noopener">
+              {p.source.label} ↗
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </figcaption>
+</figure>
+
+<style>
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 * var(--px, 1px));
+    max-width: calc(486 * var(--px, 1px));
+  }
+
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: calc(10 * var(--px, 1px));
+  }
+
+  .gallery__item {
+    position: relative;
+  }
+
+  .gallery__item--main {
+    grid-column: 1 / -1;
+  }
+
+  .gallery__item img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .gallery__no {
+    position: absolute;
+    top: calc(8 * var(--px, 1px));
+    left: calc(8 * var(--px, 1px));
+    display: grid;
+    place-items: center;
+    min-width: calc(22 * var(--px, 1px));
+    height: calc(22 * var(--px, 1px));
+    padding: 0 calc(6 * var(--px, 1px));
+    border-radius: var(--radius-pill);
+    background: var(--color-navy);
+    color: var(--color-surface);
+    font-size: var(--fs-caption, var(--size-caption));
+    font-weight: var(--font-weight-bold);
+  }
+
+  figcaption ol {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.45;
+  }
+
+  figcaption li span {
+    margin-right: 8px;
+  }
+
+  .gallery__ref {
+    display: inline-block;
+    min-width: 2.4em;
+    color: var(--color-navy);
+    font-weight: var(--font-weight-bold);
+  }
+
+  figcaption a {
+    color: inherit;
+  }
+</style>
