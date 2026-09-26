@@ -1,0 +1,119 @@
+{
+  "site": {
+    "title": "KyungJun Lee — Principal UX Designer",
+    "description": "Designing with AI & for AI. Portfolio of KyungJun Lee, Principal UX Designer at Samsung Electronics leading GenAI UX, spatial IoT, Digital Twin and UX research.",
+    "logotype": "Home"
+  },
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "recognition": "Recognition",
+    "resume": "Resume",
+    "primary": "Primary",
+    "skip": "Skip to content"
+  },
+  "lang": {
+    "label": "Language",
+    "switchTo": "한국어",
+    "switchToShort": "KO"
+  },
+  "theme": {
+    "toggle": "Toggle dark mode"
+  },
+  "footer": {
+    "builtWith": "Designed & built with Claude"
+  },
+  "common": {
+    "comingSoon": "This page is coming soon.",
+    "backHome": "Home",
+    "reconstructed": "Reconstructed for portfolio",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
+  "work": {
+    "title": "Work",
+    "intro": "From engineer to Mobile UX, B2B research, spatial UX and now AI UX: 21 years of work, newest first. Each chapter builds on the one before.",
+    "viewAll": "View all work",
+    "viewCase": "View case",
+    "period": "Period",
+    "role": "Role",
+    "awards": "Awards",
+    "links": "Links",
+    "background": "Context · Problem",
+    "approach": "Role · Approach",
+    "design": "Key Design",
+    "impact": "Impact",
+    "cover": "Cover",
+    "allWork": "All work",
+    "visualPending": "Image / diagram coming soon",
+    "chapter": "CH.",
+    "flow": "Career flow",
+    "flowHint": "Jump to a chapter",
+    "newer": "Newer work",
+    "older": "Earlier work",
+    "chapterNav": "Chapters"
+  },
+  "home": {
+    "numbers": "Numbers",
+    "selected": "Selected Work",
+    "capabilities": "Capabilities",
+    "capabilitiesLead": "Four ways I work",
+    "related": "Related cases",
+    "career": "Career",
+    "careerLead": "From engineer to AI UX leader, 21 years",
+    "recognition": "Recognition",
+    "recognitionLead": "6+ global design awards",
+    "patentsLine": "12+ granted patents & GUI designs · 6 pending",
+    "viewRecognition": "All awards & patents",
+    "contactTitle": "Let's talk about the work",
+    "signatureLabel": "Line drawing: a 2D plan becomes a 3D space, and device data in the space flows into an AI-ready token grid"
+  },
+  "era": {
+    "engineer": "Software Engineer",
+    "ux": "UX Designer & Researcher",
+    "principal": "Principal UX Designer"
+  },
+  "about": {
+    "title": "About",
+    "story": "Story",
+    "storyLead": "Turning complex technology into experiences anyone can use",
+    "timeline": "Career timeline",
+    "earlier": "Earlier work",
+    "tools": "Tools",
+    "education": "Education",
+    "certifications": "Certifications",
+    "skills": "Skills",
+    "category": "Category",
+    "toolCol": "Tools",
+    "skillCol": "Skills",
+    "basis": "Where used"
+  },
+  "recognition": {
+    "title": "Recognition",
+    "awards": "Awards",
+    "awardsLead": "6+ global design awards",
+    "awardsNote": "Selected awards; there are more.",
+    "patents": "Patents · GUI designs",
+    "patentsLead": "12+ granted · 6 pending",
+    "patentsNote": "Selected patents and GUI designs; there are more granted patents.",
+    "granted": "Granted",
+    "pending": "Pending",
+    "field": "Field",
+    "name": "Title",
+    "number": "Country / No.",
+    "status": "Status",
+    "exhibitions": "Exhibitions",
+    "exhibitionsLead": "Designed and ran exhibitions at CES and more",
+    "official": "Official page"
+  },
+  "resume": {
+    "title": "Resume",
+    "lead": "Résumé summary",
+    "download": "Download PDF",
+    "requestPdf": "For a PDF résumé, please ask by email.",
+    "career": "Experience",
+    "skills": "Skills",
+    "education": "Education · Certifications",
+    "tools": "Tools"
+  }
+}

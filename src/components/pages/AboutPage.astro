@@ -1,0 +1,200 @@
+---
+/** About: story (engineer → UX leader) → career timeline → skills → tools + education. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/Section.astro';
+import SkillTable from '@/components/about/SkillTable.astro';
+import profile from '@/content/profile.ko.json';
+import career from '@/content/career.ko.json';
+import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t.about.title} description={profile.summary}>
+  <Section id="story" kind="content" label={t.about.story}>
+    <div class="stack page-body">
+      <div class="stack gap-s">
+        <p class="eyebrow">{t.about.title} · {profile.name} {profile.nameAlt}</p>
+        <h1 class="t-h1">{t.about.storyLead}</h1>
+      </div>
+      <p class="t-body t-muted lead">{profile.summary}</p>
+      <ol class="grid acts push-end">
+        {
+          profile.story.map((act, i) => (
+            <li class="col-4">
+              <span class="acts__no">{`0${i + 1}`}</span>
+              <span class="acts__period">{act.period}</span>
+              <h2 class="t-h3">{act.title}</h2>
+              <p class="t-small t-muted">{act.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Section>
+
+  <Section id="timeline" kind="content" label={t.about.timeline} tone="alt">
+    <div class="stack page-body">
+      <div class="stack gap-s">
+        <p class="eyebrow">{t.about.timeline}</p>
+        <h2 class="t-h2">{career.company} · {career.total}</h2>
+      </div>
+      <table class="timeline">
+        <caption class="visually-hidden">{t.about.timeline}</caption>
+        <tbody>
+          {
+            career.items.map((item) => (
+              <tr>
+                <th scope="row">{item.period}</th>
+                <td>
+                  <span class="timeline__title">{item.title}</span>
+                  <span class="timeline__team"> · {item.team}</span>
+                </td>
+                <td>
+                  <a href={localizePath(`/work/${item.case}`, lang)}>{item.highlight}</a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="skills" kind="content" label={t.about.skills}>
+    <div class="stack page-body">
+      <p class="eyebrow">{t.about.skills}</p>
+      <SkillTable rows={profile.skills} caption={t.about.skills} itemLabel={t.about.skillCol} />
+    </div>
+  </Section>
+
+  <Section id="tools" kind="content" label={t.about.tools} tone="alt">
+    <div class="stack page-body">
+      <p class="eyebrow">{t.about.tools}</p>
+      <SkillTable rows={profile.tools} caption={t.about.tools} itemLabel={t.about.toolCol} />
+      <div class="grid push-end creds">
+        <div class="col-6">
+          <h2 class="eyebrow">{t.about.education}</h2>
+          <ul>
+            {profile.education.map((e) => <li><span>{e.title}</span><span class="t-muted">{e.period}</span></li>)}
+          </ul>
+        </div>
+        <div class="col-6">
+          <h2 class="eyebrow">{t.about.certifications}</h2>
+          <ul>
+            {profile.certifications.map((c) => <li><span>{c.title}</span><span class="t-muted">{c.period}</span></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .page-body {
+    flex: 1;
+  }
+
+  .gap-s {
+    gap: calc(8 * var(--px));
+  }
+
+  .lead {
+    max-width: 44em;
+  }
+
+  .acts,
+  .creds ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .acts li {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--px));
+    padding-top: calc(20 * var(--px));
+    border-top: var(--stroke-bold) solid var(--color-navy);
+  }
+
+  .acts__no {
+    color: var(--color-accent);
+    font-size: var(--fs-small);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .acts__period {
+    color: var(--color-muted);
+    font-size: var(--fs-caption);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Timeline table */
+  .timeline {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-small);
+  }
+
+  .timeline tr {
+    border-top: var(--stroke-hair) solid var(--color-line);
+  }
+
+  .timeline th,
+  .timeline td {
+    padding: calc(9 * var(--px)) calc(12 * var(--px)) calc(9 * var(--px)) 0;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.45;
+  }
+
+  .timeline th {
+    width: 17%;
+    color: var(--color-muted);
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .timeline__title {
+    color: var(--color-navy);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .timeline__team {
+    color: var(--color-muted);
+    font-size: var(--fs-caption);
+  }
+
+  .timeline td:last-child {
+    width: 28%;
+  }
+
+  @media (max-width: 767px) {
+    .timeline tr {
+      display: grid;
+      padding-block: calc(10 * var(--px));
+    }
+    .timeline th,
+    .timeline td {
+      width: auto !important;
+      padding: calc(2 * var(--px)) 0;
+    }
+  }
+
+  /* Credentials */
+  .creds ul {
+    display: grid;
+    gap: calc(8 * var(--px));
+    margin-top: calc(12 * var(--px));
+  }
+
+  .creds li {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(16 * var(--px));
+    padding-bottom: calc(8 * var(--px));
+    border-bottom: var(--stroke-hair) solid var(--color-line-soft);
+  }
+</style>

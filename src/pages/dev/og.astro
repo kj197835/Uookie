@@ -1,0 +1,80 @@
+---
+/**
+ * 1200×630 link-preview card (noindex). Screenshot it to public/og-image.png:
+ * start the dev/preview server, open /dev/og at a 1200×630 viewport, capture the viewport.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSignature from '@/components/brand/HeroSignature.astro';
+import profile from '@/content/profile.ko.json';
+import site from '@/content/site.json';
+---
+
+<BaseLayout title="OG" noindex bare>
+  <div class="og">
+    <div class="og__text">
+      <p class="eyebrow">{profile.role}</p>
+      <h1>{profile.name} <span>{profile.nameAlt}</span></h1>
+      <p class="og__tagline">{profile.tagline}</p>
+      <p class="og__focus">GenAI UX · Spatial IoT · Digital Twin · UX Research</p>
+      <p class="og__meta">6+ Global Design Awards · 12+ Patents · {site.domain}</p>
+    </div>
+    <div class="og__visual">
+      <HeroSignature label={profile.tagline} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .og {
+    --px: 1px;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    align-items: center;
+    gap: 40px;
+    width: 1200px;
+    height: 630px;
+    padding: 64px 72px;
+    background: var(--color-surface);
+    border-top: 10px solid var(--color-navy);
+  }
+
+  .og__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  h1 {
+    font-size: 76px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  h1 span {
+    display: block;
+    margin-top: 10px;
+    color: var(--color-muted);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  .og__tagline {
+    color: var(--color-accent-strong);
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .og__focus {
+    color: var(--color-text);
+    font-size: 21px;
+    font-weight: 500;
+  }
+
+  .og__meta {
+    margin-top: 12px;
+    color: var(--color-muted);
+    font-size: 18px;
+  }
+</style>

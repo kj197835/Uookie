@@ -1,0 +1,253 @@
+{
+  "name": "이경준",
+  "nameAlt": "KyungJun Lee",
+  "role": "Principal UX Designer · 삼성전자",
+  "tagline": "Designing with AI & for AI",
+  "headline": "AI 경험을 설계하고, AI로 일하는 UX 리더",
+  "focus": [
+    "GenAI UX",
+    "Conversational AI",
+    "AI Design Automation",
+    "Spatial IoT",
+    "Digital Twin",
+    "UX Research"
+  ],
+  "summary": "SW 엔지니어 9년, UX 디자이너 12년의 경험으로 복잡한 기술을 누구나 쉽게 쓰는 경험으로 바꾸는 Principal UX Designer. 삼성전자에서 GenAI 챗봇 UX와 AI 기반 디자인 자동화를 이끌고 있으며, 삼성 최초 Digital Twin 등 공간 기반 IoT 솔루션을 0에서 1로 만들어 글로벌 디자인 어워드 6회 이상 수상. 리서치로 사업 기회를 발굴하고, 필요하면 UX PM 역할까지 맡아 실제 출시와 사업 성과로 연결.",
+  "numbers": [
+    {
+      "value": "21년",
+      "label": "삼성전자 경력",
+      "note": "SW 9년 · UX 12년"
+    },
+    {
+      "value": "6회+",
+      "label": "글로벌 디자인 어워드",
+      "note": "Red Dot · iF · IDEA · Good Design 등"
+    },
+    {
+      "value": "12건+",
+      "label": "등록 특허·GUI 디자인",
+      "note": "+ 출원 6건"
+    },
+    {
+      "value": "13만+",
+      "label": "SmartThings 연동 스마트 아파트 가구",
+      "note": "B2B Home IoT 사업화"
+    },
+    {
+      "value": "8% → 12%",
+      "label": "사용성 개선 후 SmartThings 연동률",
+      "note": "스마트 아파트 리서치"
+    }
+  ],
+  "competencies": [
+    {
+      "title": "AI UX & 디자인 자동화",
+      "body": "GenAI 챗봇 UX·솔루션 아키텍처, AI 번역 가이드 체계, PRD 기반 Figma UI 가이드 자동 생성과 AI-ready 디자인 토큰 표준화. UX 그룹 AI 툴 도입·운영 담당.",
+      "cases": [
+        "genai"
+      ]
+    },
+    {
+      "title": "복잡계 B2B 공간 UX",
+      "body": "Digital Twin, 3D 도면 기반 IoT·로봇·선박·히트맵 관리 등 빌딩·산업 현장의 복잡한 정보를 직관적인 공간 경험으로 설계.",
+      "cases": [
+        "interactive-view",
+        "digital-twin",
+        "map-view"
+      ]
+    },
+    {
+      "title": "UX 리서치 & 사업 전략",
+      "body": "한·미 이해관계자 인터뷰·섀도잉·가정 방문으로 B2B 기회 영역을 발굴하고, 정량 조사·좌담회·가정 방문 조사를 결합한 리서치로 사용성 개선과 연동률 향상.",
+      "cases": [
+        "b2b-iot-research",
+        "apartment-research"
+      ]
+    },
+    {
+      "title": "기술 기반 혁신",
+      "body": "통신 프로토콜·GPS·eSIM SW 엔지니어 9년 경력, 새 폼팩터 USP 발굴, 미·유럽·중국·한국 등록 특허 12건 이상.",
+      "cases": [
+        "engineer",
+        "advanced-ux",
+        "mde"
+      ]
+    }
+  ],
+  "story": [
+    {
+      "period": "2005 – 2014",
+      "title": "엔지니어로 기술의 깊이를",
+      "body": "9년간 모바일 통신 프로토콜, 시스템 SW, SIM/eSIM을 개발했습니다. 미국 Sprint와 삼성 최초 eSIM 구현을 주도하고, 미국·유럽·아시아 현장에서 직접 테스트·검증하며 복잡한 기술이 실제로 어떻게 동작하는지 배웠습니다."
+    },
+    {
+      "period": "2014 – 2022",
+      "title": "디자이너·리서처로 사람의 관점을",
+      "body": "개발에서 UX로 전환해 콘셉트 발굴·디자인·실제 프로토타이핑을 1인 3역으로 수행했습니다. 기기 간 연결 경험(MDE)을 이끌고, 한·미 리서치로 B2B 기회를 찾아 스마트 아파트 사업화와 사용성 개선으로 연결했습니다."
+    },
+    {
+      "period": "2023 – 현재",
+      "title": "Principal로 0→1과 AI 전환을",
+      "body": "SmartThings Map View, 삼성 최초 Digital Twin, SmartThings Pro Interactive View 등 공간 기반 IoT 솔루션을 0에서 1로 만들었습니다. 지금은 GenAI 챗봇 UX와 AI 기반 디자인 자동화를 이끌고 있습니다."
+    }
+  ],
+  "tools": [
+    {
+      "category": "AI 툴",
+      "items": [
+        "Gemini",
+        "ChatGPT",
+        "Claude",
+        "Midjourney",
+        "Adobe Firefly",
+        "AI 영상·음악 생성 툴"
+      ],
+      "basis": "UX 그룹 AI 툴 도입·운영 담당, AI 디자인 자동화 개발"
+    },
+    {
+      "category": "디자인",
+      "items": [
+        "Figma",
+        "Sketch"
+      ],
+      "basis": "조직 Figma 도입 담당, 전 경력 UI/UX 디자인"
+    },
+    {
+      "category": "프로토타이핑·영상",
+      "items": [
+        "Android Studio",
+        "Final Cut Pro X",
+        "모션 디자인 툴"
+      ],
+      "basis": "Advanced UX 실제 동작 프로토타입, MDE·연결성 UX 프로토타입"
+    },
+    {
+      "category": "협업·문서",
+      "items": [
+        "PowerPoint",
+        "Confluence",
+        "Jira"
+      ],
+      "basis": "PRD 작성, 리서치 보고, 전시 콘셉트 설계"
+    },
+    {
+      "category": "개발·디버깅",
+      "items": [
+        "Trace32"
+      ],
+      "basis": "SW 엔지니어 시절 시스템·프로토콜 디버깅"
+    }
+  ],
+  "education": [
+    {
+      "title": "동국대학교 컴퓨터공학 학사",
+      "period": "2005"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Samsung Data Science Level 2",
+      "period": "2025.02"
+    },
+    {
+      "title": "TRIZ Expert Level 2 · 사내 강사 Level 1",
+      "period": "2017.01"
+    }
+  ],
+  "skills": [
+    {
+      "category": "AI UX",
+      "items": [
+        "Generative AI UX",
+        "Conversational Design",
+        "Voice UI(VUI)",
+        "AI Design Automation",
+        "AI-ready Design Tokens",
+        "Prompt Engineering"
+      ],
+      "basis": "GenAI 챗봇, AI 번역 체계, Figma UI 가이드 자동 생성, Bixby VUI"
+    },
+    {
+      "category": "UX·UI 디자인",
+      "items": [
+        "UX Strategy",
+        "UI Design",
+        "Design Systems",
+        "Interaction Design",
+        "Spatial·3D UX",
+        "Multi-Device UX"
+      ],
+      "basis": "Map View, Interactive View, Digital Twin, MDE"
+    },
+    {
+      "category": "UX 리서치",
+      "items": [
+        "정량 조사",
+        "좌담회(FGD)",
+        "IDI",
+        "섀도잉",
+        "가정 방문 조사",
+        "사용성 평가",
+        "이해관계자 매핑",
+        "저니 맵"
+      ],
+      "basis": "한·미 이해관계자 IDI·섀도잉·가정 방문, 스마트 아파트 3개 단지 사용성 리서치"
+    },
+    {
+      "category": "기획·리더십",
+      "items": [
+        "UX PM(PRD 작성)",
+        "로드맵·우선순위 설계",
+        "크로스펑셔널 리딩",
+        "전시 콘셉트 설계"
+      ],
+      "basis": "Digital Twin UX PM, CES 2018·2024·2025 전시"
+    },
+    {
+      "category": "도메인",
+      "items": [
+        "IoT",
+        "Smart Home",
+        "Smart Building",
+        "BMS",
+        "Digital Twin",
+        "에너지 관리(BEMS)",
+        "로보틱스",
+        "B2B 솔루션"
+      ],
+      "basis": "SmartThings, SmartThings Pro, 삼성중공업·빅웨이브로보틱스 협업"
+    },
+    {
+      "category": "프로그래밍",
+      "items": [
+        "Python",
+        "R",
+        "Java",
+        "C"
+      ],
+      "basis": "데이터 분석, 안드로이드 프로토타입, 임베디드 SW"
+    },
+    {
+      "category": "엔지니어링",
+      "items": [
+        "모바일 통신 프로토콜(GSM, RRM, E-GPRS)",
+        "GPS",
+        "SIM·eSIM",
+        "Bluetooth·BLE",
+        "Wi-Fi",
+        "안드로이드 시스템 SW"
+      ],
+      "basis": "SW 엔지니어 9년, 삼성 최초 eSIM, 연결성 UX"
+    },
+    {
+      "category": "방법론·분석",
+      "items": [
+        "TRIZ",
+        "데이터 분석",
+        "특허 발굴"
+      ],
+      "basis": "TRIZ Expert Level 2·사내 강사, Data Science Level 2, 등록 특허 12건 이상"
+    }
+  ]
+}

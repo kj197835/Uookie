@@ -1,0 +1,177 @@
+---
+/**
+ * Signature line drawing for the home hero — the career in one picture:
+ * 2D floor plan → 3D isometric space with IoT devices → AI-ready token grid.
+ * Colors come from CSS classes (theme-aware); `id`s become Figma layer names.
+ * Isometric floor: iso(u, v) = (290 + 120u − 120v, 150 + 60u + 60v), u, v ∈ [0, 1].
+ */
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+
+// 4×4 token grid; which cells are "active" (filled) — purely decorative.
+const active = new Set([1, 4, 6, 9, 11, 14]);
+const strong = new Set([6, 9]);
+const cells = Array.from({ length: 16 }, (_, i) => ({ i, x: 440 + (i % 4) * 26, y: 40 + Math.floor(i / 4) * 26 }));
+---
+
+<svg class="signature" viewBox="0 0 560 440" role="img" aria-label={label} xmlns="http://www.w3.org/2000/svg">
+  <g id="plan-2d" class="line">
+    <rect x="16" y="300" width="140" height="110" rx="2" />
+    <path d="M96 300 V338 M96 356 V410 M16 350 H60 M76 350 H96 M96 372 H156" />
+    <circle class="dot-muted" cx="50" cy="325" r="3" />
+    <circle class="dot-muted" cx="126" cy="330" r="3" />
+    <circle class="dot-muted" cx="46" cy="385" r="3" />
+    <circle class="dot-muted" cx="126" cy="392" r="3" />
+  </g>
+
+  <path id="flow-plan-to-space" class="flow" d="M162 312 C 190 300, 196 276, 206 258" />
+  <path class="arrow" d="M200 262 L206 256 L208 265" />
+
+  <g id="space-3d">
+    <polygon class="wall" points="170,210 290,150 290,100 170,160" />
+    <polygon class="wall wall--side" points="290,150 410,210 410,160 290,100" />
+    <polygon class="floor" points="290,150 410,210 290,270 170,210" />
+    <g class="line line--soft">
+      <path d="M356 183 L236 243" />
+      <path d="M230 180 L296 213" />
+      <path d="M350 240 L383 223" />
+    </g>
+    <g id="devices">
+      <g class="device device--iot"><circle class="ring" cx="290" cy="180" r="11" /><circle cx="290" cy="180" r="4.5" /></g>
+      <g class="device device--robot"><circle class="ring" cx="350" cy="216" r="11" /><circle cx="350" cy="216" r="4.5" /></g>
+      <g class="device device--heat"><circle class="ring" cx="236" cy="213" r="11" /><circle cx="236" cy="213" r="4.5" /></g>
+      <g class="device device--ship"><circle class="ring" cx="290" cy="246" r="11" /><circle cx="290" cy="246" r="4.5" /></g>
+    </g>
+  </g>
+
+  <g id="flow-space-to-tokens" class="flow">
+    <path d="M290 169 C 300 110, 380 70, 434 63" />
+    <path d="M358 206 C 390 170, 410 130, 434 115" />
+    <path d="M296 236 C 360 200, 400 170, 434 141" />
+  </g>
+
+  <g id="token-grid">
+    {
+      cells.map((c) => (
+        <rect
+          class:list={['token', active.has(c.i) && 'token--on', strong.has(c.i) && 'token--strong']}
+          x={c.x}
+          y={c.y}
+          width="20"
+          height="20"
+          rx="4"
+        />
+      ))
+    }
+  </g>
+
+  <g class="label">
+    <text x="16" y="432">2D PLAN</text>
+    <text x="226" y="300">SPATIAL IOT</text>
+    <text x="440" y="164">AI-READY TOKENS</text>
+  </g>
+</svg>
+
+<style>
+  .signature {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .line,
+  .line rect,
+  .line path {
+    fill: none;
+    stroke: var(--color-navy);
+    stroke-width: var(--stroke-base);
+    stroke-linecap: round;
+  }
+
+  .line--soft path {
+    stroke: var(--color-line);
+  }
+
+  .dot-muted {
+    fill: var(--color-line);
+    stroke: none;
+  }
+
+  .floor {
+    fill: var(--color-surface-alt);
+    stroke: var(--color-navy);
+    stroke-width: var(--stroke-base);
+    stroke-linejoin: round;
+  }
+
+  .wall {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-navy);
+    stroke-width: var(--stroke-base);
+    stroke-linejoin: round;
+  }
+
+  .wall--side {
+    fill: color-mix(in srgb, var(--color-accent-soft) 55%, var(--color-surface));
+  }
+
+  .flow,
+  .flow path {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: var(--stroke-hair);
+    stroke-dasharray: 3 4;
+  }
+
+  .arrow {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: var(--stroke-base);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .device circle {
+    stroke: none;
+  }
+
+  .device .ring {
+    fill: none;
+    stroke-width: var(--stroke-hair);
+    opacity: 0.7;
+  }
+
+  .device--iot circle { fill: var(--color-data-iot); }
+  .device--iot .ring { stroke: var(--color-data-iot); }
+  .device--robot circle { fill: var(--color-data-robot); }
+  .device--robot .ring { stroke: var(--color-data-robot); }
+  .device--heat circle { fill: var(--color-data-heat); }
+  .device--heat .ring { stroke: var(--color-data-heat); }
+  .device--ship circle { fill: var(--color-data-ship); }
+  .device--ship .ring { stroke: var(--color-data-ship); }
+  .device .ring { fill: none; }
+
+  .token {
+    fill: none;
+    stroke: var(--color-line);
+    stroke-width: var(--stroke-hair);
+  }
+
+  .token--on {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-accent);
+  }
+
+  .token--strong {
+    fill: var(--color-accent);
+  }
+
+  .label text {
+    fill: var(--color-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+  }
+</style>

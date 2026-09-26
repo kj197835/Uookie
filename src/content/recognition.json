@@ -1,0 +1,33 @@
+{
+  "awards": [
+    { "year": 2026, "award": "iF Design Award", "work": "Samsung b.IoT Digital Twin", "case": "digital-twin", "url": "https://ifdesign.com/en/winner-ranking/project/samsung-biot-digital-twin/756774" },
+    { "year": 2025, "award": "Red Dot Design Award", "work": "SmartThings Pro", "case": "interactive-view" },
+    { "year": 2025, "award": "IDEA Design Award, Silver", "work": "NBS b.IoT Digital Twin Solution", "case": "digital-twin", "url": "https://www.idsa.org/awards-recognition/idea/idea-gallery/nbs-b-iot-digital-twin-solution/" },
+    { "year": 2024, "award": "iF Design Award", "work": "SmartThings Map View", "case": "map-view", "url": "https://ifdesign.com/en/winner-ranking/project/smartthings-map-view/644344" },
+    { "year": 2020, "award": "iF Design Award", "work": "Immersive Home Experience", "case": "b2b-iot-research" },
+    { "year": 2019, "award": "Good Design Award, Silver", "work": "Samsung Home IoT Resident App", "case": "b2b-iot-research", "url": "https://award.kidp.or.kr/Exhibit/index_gd_view.do?idx_exhibit=5306" }
+  ],
+  "patentSummary": { "granted": 12, "pending": 6 },
+  "patents": [
+    { "field": "Form Factor", "title": { "ko": "Dual Display Camera Form Factor", "en": "Dual Display Camera Form Factor" }, "numbers": [{ "no": "US10681263", "url": "https://patents.google.com/patent/US10681263" }], "status": "granted" },
+    { "field": "Form Factor", "title": { "ko": "Rotational UI for Upside-Down Device", "en": "Rotational UI for Upside-Down Device" }, "numbers": [{ "no": "US10560565", "url": "https://patents.google.com/patent/US10560565" }], "status": "granted" },
+    { "field": "USP", "title": { "ko": "Landscape Keypad with Multi Window", "en": "Landscape Keypad with Multi Window" }, "numbers": [{ "no": "US10642437", "url": "https://patents.google.com/patent/US10642437" }, { "no": "US10444920", "url": "https://patents.google.com/patent/US10444920" }], "status": "granted" },
+    { "field": "USP", "title": { "ko": "Extra Area in Multi Window", "en": "Extra Area in Multi Window" }, "numbers": [{ "no": "US10295870", "url": "https://patents.google.com/patent/US10295870" }], "status": "granted" },
+    { "field": "Adaptive UI", "title": { "ko": "Chameleon UX", "en": "Chameleon UX" }, "numbers": [{ "no": "EP3457268 (DK, IT)", "url": "https://patents.google.com/patent/EP3457268" }], "status": "granted" },
+    { "field": "Emotion UX", "title": { "ko": "Emotion to Layer", "en": "Emotion to Layer" }, "numbers": [{ "no": "US10078441", "url": "https://patents.google.com/patent/US10078441" }], "status": "granted" },
+    { "field": "Voice UX", "title": { "ko": "Voice UX", "en": "Voice UX" }, "numbers": [{ "no": "US10049662", "url": "https://patents.google.com/patent/US10049662" }, { "no": "CN ZL201610178076" }], "status": "granted" },
+    { "field": "GUI Design", "title": { "ko": "스마트 아파트 엘리베이터·디머·온도조절기 GUI", "en": "Smart apartment elevator, dimmer & thermostat GUI" }, "numbers": [{ "no": "KR 30-1059416" }, { "no": "30-1059418" }, { "no": "30-1059420" }], "status": "granted" },
+    { "field": "Spatial IoT", "title": { "ko": "2D/3D 맵에서의 IoT", "en": "IoT on 2D/3D maps" }, "numbers": [{ "no": "PCT/KR2024/007937" }], "status": "pending" },
+    { "field": "Spatial IoT", "title": { "ko": "IoT 기기·모드·자동화 사용성 개선을 위한 맵뷰 시스템", "en": "Map view system for IoT device, mode & automation usability" }, "numbers": [{ "no": "US 19/191,822" }], "status": "pending" },
+    { "field": "B2B IoT", "title": { "ko": "관리자를 위한 IoT Location UX", "en": "IoT Location UX for administrators" }, "numbers": [{ "no": "P20200031273" }], "status": "pending" },
+    { "field": "AI", "title": { "ko": "머신러닝 기반의 보정된 신뢰성 있는 인포그래픽 제공", "en": "Calibrated, reliable infographics based on machine learning" }, "numbers": [{ "no": "PCT/KR2019/007522" }], "status": "pending" },
+    { "field": "MDE", "title": { "ko": "클라우드 정보를 이용한 Connection Switching", "en": "Connection switching using cloud information" }, "numbers": [{ "no": "US 16/960,862" }], "status": "pending" },
+    { "field": "MDE", "title": { "ko": "BLE Advertisement 기반 Adaptive Easy Pairing", "en": "Adaptive easy pairing based on BLE advertisement" }, "numbers": [{ "no": "US 16/014,716" }], "status": "pending" }
+  ],
+  "exhibitions": [
+    { "year": 2025, "name": "CES 2025", "role": { "ko": "SmartThings Pro·선박 부스 콘셉트·디자인 리드 및 운영", "en": "Concept, design lead & operation of the SmartThings Pro and ship booths" }, "case": "interactive-view" },
+    { "year": 2025, "name": "KIES 2025 · AW 2025", "role": { "ko": "SmartThings Pro 전시 화면 설계", "en": "Exhibition screen design for SmartThings Pro" }, "case": "interactive-view" },
+    { "year": 2024, "name": "CES 2024", "role": { "ko": "VIP룸에서 삼성 최초 Digital Twin 소개", "en": "Samsung's first Digital Twin presented in the VIP room" }, "case": "digital-twin" },
+    { "year": 2018, "name": "CES 2018", "role": { "ko": "MDE Effortless Connection 첫 주제 선정, 전시관 콘셉트 설계", "en": "MDE Effortless Connection selected as a first theme; booth concept design" }, "case": "mde" }
+  ]
+}

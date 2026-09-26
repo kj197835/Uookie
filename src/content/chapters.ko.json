@@ -1,0 +1,50 @@
+[
+  {
+    "no": 6,
+    "id": "ai",
+    "title": "AI UX & 디자인 자동화",
+    "period": "2026.01 – 현재",
+    "bridge": "복잡해진 B2B 솔루션을 누구나 쉽게 쓰도록, 대화형 AI와 디자인 자동화로",
+    "cases": ["genai"]
+  },
+  {
+    "no": 5,
+    "id": "b2b-spatial",
+    "title": "B2B 공간 플랫폼 확장",
+    "period": "2023.09 – 2026.01",
+    "bridge": "B2C Map View에서 검증한 공간 경험을 빌딩·단지·선박 운영으로 확장",
+    "cases": ["interactive-view", "digital-twin"]
+  },
+  {
+    "no": 4,
+    "id": "spatial",
+    "title": "공간 UX 고도화",
+    "period": "2023.01 – 2023.12",
+    "bridge": "스마트 아파트 연동으로 쌓은 도면·기기 경험을, 목록 대신 3D 공간에서 보는 경험으로",
+    "cases": ["map-view"]
+  },
+  {
+    "no": 3,
+    "id": "b2b-research",
+    "title": "B2B 신사업 리서치 → 사업화",
+    "period": "2018.09 – 2022.12",
+    "bridge": "기기 연결 경험을 바탕으로, SmartThings를 B2B로 넓힐 기회를 리서치로 찾고 사업화",
+    "cases": ["apartment-research", "b2b-iot-research"]
+  },
+  {
+    "no": 2,
+    "id": "mobile",
+    "title": "Mobile UX",
+    "period": "2014.04 – 2018.09",
+    "bridge": "기술을 깊이 아는 엔지니어에서, 그 기술을 쓰는 사람의 경험을 설계하는 UX로",
+    "cases": ["mde", "advanced-ux"]
+  },
+  {
+    "no": 1,
+    "id": "engineering",
+    "title": "Engineering",
+    "period": "2005.02 – 2014.03",
+    "bridge": "통신·시스템·SIM/eSIM 개발로 기술의 깊이를 쌓은 출발점",
+    "cases": ["engineer"]
+  }
+]

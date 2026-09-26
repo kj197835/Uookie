@@ -1,0 +1,60 @@
+---
+/**
+ * Reserved spot for a diagram, reconstructed mockup or public image.
+ * Swap the slot content for the real SVG / <Image> later; the description says what goes here.
+ */
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  description: string;
+  class?: string;
+}
+const { description, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<figure class:list={['visual-slot', className]} role="img" aria-label={`${t.work.visualPending}: ${description}`}>
+  <slot>
+    <figcaption>
+      <span class="visual-slot__label">{t.work.visualPending}</span>
+      <span class="visual-slot__desc">{description}</span>
+    </figcaption>
+  </slot>
+</figure>
+
+<style>
+  .visual-slot {
+    display: grid;
+    place-items: center;
+    min-height: calc(280 * var(--px, 1px));
+    height: 100%;
+    padding: calc(24 * var(--px, 1px));
+    border: var(--stroke-base) dashed var(--color-line);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--color-surface-alt) 60%, transparent);
+    text-align: center;
+  }
+
+  :global(.section--navy) .visual-slot {
+    background: color-mix(in srgb, #ffffff 6%, transparent);
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--px, 1px));
+    max-width: 36em;
+  }
+
+  .visual-slot__label {
+    color: var(--color-accent-strong);
+    font-size: var(--fs-small, var(--size-small));
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .visual-slot__desc {
+    color: var(--color-muted);
+    font-size: var(--fs-caption, var(--size-caption));
+    line-height: 1.5;
+  }
+</style>

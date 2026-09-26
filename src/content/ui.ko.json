@@ -1,0 +1,119 @@
+{
+  "site": {
+    "title": "이경준 — Principal UX Designer",
+    "description": "Designing with AI & for AI. GenAI UX, 공간 IoT·Digital Twin, UX 리서치를 이끄는 삼성전자 Principal UX Designer 이경준의 포트폴리오.",
+    "logotype": "Home"
+  },
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "recognition": "Recognition",
+    "resume": "Resume",
+    "primary": "주요 메뉴",
+    "skip": "본문으로 건너뛰기"
+  },
+  "lang": {
+    "label": "언어",
+    "switchTo": "English",
+    "switchToShort": "EN"
+  },
+  "theme": {
+    "toggle": "다크 모드 전환"
+  },
+  "footer": {
+    "builtWith": "Designed & built with Claude"
+  },
+  "common": {
+    "comingSoon": "준비 중인 페이지입니다.",
+    "backHome": "홈으로",
+    "reconstructed": "포트폴리오용으로 재구성한 화면입니다",
+    "copy": "복사",
+    "copied": "복사됨"
+  },
+  "work": {
+    "title": "Work",
+    "intro": "엔지니어로 시작해 Mobile UX, B2B 신사업 리서치, 공간 UX를 거쳐 AI UX까지. 21년의 작업을 최신순으로 정리했습니다. 각 챕터는 앞 단계의 경험 위에 쌓였습니다.",
+    "viewAll": "전체 작업 보기",
+    "viewCase": "케이스 보기",
+    "period": "기간",
+    "role": "역할",
+    "awards": "수상",
+    "links": "관련 링크",
+    "background": "배경 · 문제",
+    "approach": "내 역할 · 접근",
+    "design": "핵심 설계",
+    "impact": "결과 · 임팩트",
+    "cover": "커버",
+    "allWork": "전체 작업",
+    "visualPending": "이미지·다이어그램 추가 예정",
+    "chapter": "CH.",
+    "flow": "커리어 흐름",
+    "flowHint": "챕터를 누르면 해당 시기로 이동합니다",
+    "newer": "더 최근 작업",
+    "older": "이전 작업",
+    "chapterNav": "챕터 바로가기"
+  },
+  "home": {
+    "numbers": "핵심 숫자",
+    "selected": "대표 작업",
+    "capabilities": "핵심 역량",
+    "capabilitiesLead": "네 가지 축으로 일합니다",
+    "related": "관련 케이스",
+    "career": "커리어 흐름",
+    "careerLead": "엔지니어에서 AI UX 리더까지, 21년",
+    "recognition": "Recognition",
+    "recognitionLead": "글로벌 디자인 어워드 6회+",
+    "patentsLine": "등록 특허·GUI 디자인 12건+ · 출원 6건",
+    "viewRecognition": "수상·특허 전체 보기",
+    "contactTitle": "포트폴리오에 대해 이야기 나누고 싶다면",
+    "signatureLabel": "2D 도면이 3D 공간이 되고, 공간의 기기 데이터가 AI-ready 토큰 그리드로 이어지는 라인 드로잉"
+  },
+  "era": {
+    "engineer": "Software Engineer",
+    "ux": "UX Designer & Researcher",
+    "principal": "Principal UX Designer"
+  },
+  "about": {
+    "title": "About",
+    "story": "스토리",
+    "storyLead": "복잡한 기술을, 누구나 쉽게 쓰는 경험으로",
+    "timeline": "경력 타임라인",
+    "earlier": "초기 경력",
+    "tools": "사용 툴",
+    "education": "학력",
+    "certifications": "자격",
+    "skills": "보유 기술",
+    "category": "카테고리",
+    "toolCol": "툴",
+    "skillCol": "기술",
+    "basis": "활용 근거"
+  },
+  "recognition": {
+    "title": "Recognition",
+    "awards": "수상",
+    "awardsLead": "글로벌 디자인 어워드 6회+",
+    "awardsNote": "대표 수상 6건을 소개합니다. 이 밖의 수상 이력도 있습니다.",
+    "patents": "특허 · GUI 디자인",
+    "patentsLead": "등록 12건+ · 출원 6건",
+    "patentsNote": "대표 특허·GUI 디자인을 소개합니다. 이 밖의 등록 특허도 있습니다.",
+    "granted": "등록",
+    "pending": "출원",
+    "field": "분야",
+    "name": "제목",
+    "number": "국가 / 번호",
+    "status": "상태",
+    "exhibitions": "전시",
+    "exhibitionsLead": "CES와 국내외 전시에서 직접 설계하고 운영했습니다",
+    "official": "공식 페이지"
+  },
+  "resume": {
+    "title": "Resume",
+    "lead": "이력 요약",
+    "download": "PDF 다운로드",
+    "requestPdf": "PDF 이력서·경력기술서가 필요하시면 이메일로 요청해 주세요.",
+    "career": "경력",
+    "skills": "보유 기술",
+    "education": "학력 · 자격",
+    "tools": "사용 툴"
+  }
+}

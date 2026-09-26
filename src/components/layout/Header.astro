@@ -1,0 +1,160 @@
+---
+import { alternatePath, getLangFromUrl, localizePath, stripLang, useTranslations } from '@/i18n/utils';
+import ThemeToggle from './ThemeToggle.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const otherLang = lang === 'ko' ? 'en' : 'ko';
+const current = stripLang(Astro.url.pathname);
+
+const items = [
+  { href: '/work', label: t.nav.work, match: '/work' },
+  { href: '/about', label: t.nav.about, match: '/about' },
+  { href: '/recognition', label: t.nav.recognition, match: '/recognition' },
+  { href: '/resume', label: t.nav.resume, match: '/resume' },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="logotype" href={localizePath('/', lang)}>{t.site.logotype}</a>
+
+    <nav aria-label={t.nav.primary}>
+      <ul class="nav">
+        {
+          items.map((item) => (
+            <li>
+              <a
+                href={localizePath(item.href, lang)}
+                aria-current={current.startsWith(item.match) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="tools">
+      <a class="lang" href={alternatePath(Astro.url, otherLang)} hreflang={otherLang} lang={otherLang}>
+        <span aria-hidden="true">{t.lang.switchToShort}</span>
+        <span class="visually-hidden">{t.lang.switchTo}</span>
+      </a>
+      <ThemeToggle label={t.theme.toggle} />
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, padding 0.2s;
+  }
+
+  .site-header:global(.is-scrolled) {
+    border-bottom-color: var(--color-line-soft);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    height: 72px;
+    transition: height 0.2s;
+  }
+
+  .site-header:global(.is-scrolled) .site-header__inner {
+    height: 56px;
+  }
+
+  .logotype {
+    color: var(--color-navy);
+    font-weight: var(--font-weight-bold);
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  nav {
+    margin-left: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav a {
+    color: var(--color-muted);
+    font-size: var(--size-small);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    padding-block: var(--space-2);
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current='page'] {
+    color: var(--color-navy);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .lang {
+    display: grid;
+    place-items: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: var(--radius-pill);
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+  }
+
+  .lang:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 767px) {
+    .site-header__inner {
+      gap: var(--space-3);
+    }
+    .nav {
+      gap: var(--space-3);
+    }
+    .nav a {
+      font-size: 13px;
+    }
+    .logotype {
+      font-size: 17px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .nav li:nth-child(4) {
+      display: none;
+    }
+  }
+</style>

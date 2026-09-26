@@ -1,0 +1,124 @@
+---
+/** Plain text (not a link) with a copy-to-clipboard button — used for the email address. */
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<span class:list={['copy', className]} data-copy-root>
+  <span class="copy__text">{text}</span>
+  <button
+    type="button"
+    class="copy__button no-print"
+    data-copy={text}
+    data-label={t.common.copy}
+    data-done={t.common.copied}
+    aria-label={`${text} ${t.common.copy}`}
+    title={t.common.copy}
+  >
+    <svg class="icon icon--copy" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+      <rect x="5" y="5" width="9" height="9" rx="1.5" />
+      <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" />
+    </svg>
+    <svg class="icon icon--done" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+      <path d="M3 8.5 6.5 12 13 4.5" />
+    </svg>
+    <span class="copy__label visually-hidden" aria-live="polite">{t.common.copy}</span>
+  </button>
+</span>
+
+<script>
+  async function copy(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // Fallback for browsers/contexts without the async clipboard API.
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.append(area);
+      area.select();
+      const ok = document.execCommand('copy');
+      area.remove();
+      return ok;
+    }
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const label = button.querySelector('.copy__label');
+    let timer: number | undefined;
+    button.addEventListener('click', async () => {
+      if (!(await copy(button.dataset.copy ?? ''))) return;
+      button.classList.add('is-done');
+      if (label) label.textContent = button.dataset.done ?? '';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        button.classList.remove('is-done');
+        if (label) label.textContent = button.dataset.label ?? '';
+      }, 1800);
+    });
+  });
+</script>
+
+<style>
+  .copy {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(10 * var(--px, 1px));
+  }
+
+  .copy__text {
+    user-select: all;
+  }
+
+  .copy__button {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .copy__button:hover {
+    border-color: var(--color-accent);
+  }
+
+  .copy__button.is-done {
+    border-color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  }
+
+  .icon {
+    grid-area: 1 / 1;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon--done,
+  .copy__button.is-done .icon--copy {
+    visibility: hidden;
+  }
+
+  .copy__button.is-done .icon--done {
+    visibility: visible;
+    stroke-width: 1.8;
+  }
+</style>

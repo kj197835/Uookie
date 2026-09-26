@@ -1,0 +1,40 @@
+---
+/**
+ * One 16:9 page. On screen it is a scrolling block; in print/PDF it is exactly one 1920×1080 page.
+ * Lay out children with the .grid / .col-* / .t-* helpers from styles/section.css.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+export type SectionKind =
+  | 'cover' | 'problem' | 'approach' | 'design' | 'impact' | 'learning'
+  | 'hero' | 'numbers' | 'list' | 'contact' | 'content';
+
+interface Props extends Omit<HTMLAttributes<'section'>, 'id'> {
+  /** Anchor id — also used by the case table of contents. */
+  id?: string;
+  kind?: SectionKind;
+  /** Short label for the table of contents. */
+  label?: string;
+  /** Which PDF variants include this page. */
+  pdf?: 'full' | 'summary' | 'none';
+  tone?: 'default' | 'alt' | 'navy';
+}
+
+const { id, kind = 'content', label, pdf = 'full', tone = 'default', class: className, ...rest } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={['section', tone !== 'default' && `section--${tone}`, className]}
+  data-kind={kind}
+  data-pdf={pdf}
+  data-label={label}
+  aria-label={label}
+  {...rest}
+>
+  <div class="section__frame">
+    <div class="section__page">
+      <slot />
+    </div>
+  </div>
+</section>

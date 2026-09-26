@@ -1,0 +1,116 @@
+/*
+ * Section = one 16:9 page.
+ * The page is designed on a 1280px frame; `--px` is "one design pixel" and scales with the frame
+ * (container query units), so the same layout prints 1:1.5 on the 1920×1080 PDF page.
+ * Use sizes as calc(N * var(--px)) or the --fs-* / --sp-* helpers below.
+ */
+
+.section {
+  background: var(--color-surface);
+}
+
+.section--alt {
+  background: var(--color-surface-alt);
+}
+
+.section--navy {
+  --color-text: #f3f6fb;
+  --color-muted: #c3cfdf;
+  --color-navy: #ffffff;
+  --color-accent: #8bbbea;
+  --color-accent-strong: #a9cdf1;
+  --color-line: #3b5486;
+  --color-line-soft: #2c4474;
+  background: #1f3864;
+  color: var(--color-text);
+}
+
+.section__frame {
+  container-type: inline-size;
+  width: min(100% - 2 * var(--space-4), var(--layout-page-width));
+  margin-inline: auto;
+}
+
+.section__page {
+  /* mobile / tablet: natural flow, fixed sizes */
+  --px: 1px;
+  --pad: var(--space-5);
+  --fs-display: 40px;
+  --fs-h1: 30px;
+  --fs-h2: 24px;
+  --fs-h3: 19px;
+  --fs-body: 17px;
+  --fs-small: 15px;
+  --fs-caption: 13px;
+  --fs-stat: 40px;
+  --gap: var(--space-5);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--pad) * 2) 0;
+  font-size: var(--fs-body);
+}
+
+@media (min-width: 1024px) {
+  .section__page {
+    /* desktop: fixed 16:9 page that scales with the frame (never below 0.85 design px) */
+    --px: max(0.85px, calc(100cqi / var(--layout-page-width-n)));
+    --pad: calc(var(--layout-page-padding-n) * var(--px));
+    --fs-display: calc(var(--size-display-n) * var(--px));
+    --fs-h1: calc(var(--size-h1-n) * var(--px));
+    --fs-h2: calc(var(--size-h2-n) * var(--px));
+    --fs-h3: calc(var(--size-h3-n) * var(--px));
+    --fs-body: calc(var(--size-body-n) * var(--px));
+    --fs-small: calc(var(--size-small-n) * var(--px));
+    --fs-caption: calc(var(--size-caption-n) * var(--px));
+    --fs-stat: calc(var(--size-stat-n) * var(--px));
+    --gap: calc(var(--layout-gutter-n) * var(--px));
+
+    aspect-ratio: 16 / 9; /* acts as min-height: content may still grow on screen */
+    padding: var(--pad);
+  }
+}
+
+/* Type helpers (scale with the page) */
+.t-display { font-size: var(--fs-display); line-height: 1.1; letter-spacing: -0.03em; }
+.t-h1 { font-size: var(--fs-h1); line-height: 1.2; }
+.t-h2 { font-size: var(--fs-h2); line-height: 1.25; }
+.t-h3 { font-size: var(--fs-h3); line-height: 1.35; }
+.t-body { font-size: var(--fs-body); }
+.t-small { font-size: var(--fs-small); }
+.t-caption { font-size: var(--fs-caption); color: var(--color-muted); }
+.t-stat {
+  font-size: var(--fs-stat);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+.t-muted { color: var(--color-muted); }
+.section__page .eyebrow { font-size: var(--fs-small); }
+
+/* 12-column grid inside a page */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.grid > * {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-5 { grid-column: span 5; }
+  .col-6 { grid-column: span 6; }
+  .col-7 { grid-column: span 7; }
+  .col-8 { grid-column: span 8; }
+  .col-12 { grid-column: 1 / -1; }
+}
+
+.stack { display: flex; flex-direction: column; gap: var(--gap); }
+.push-end { margin-top: auto; }

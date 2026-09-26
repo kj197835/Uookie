@@ -1,0 +1,136 @@
+---
+/**
+ * Career flow: three eras (Engineer → UX Designer & Researcher → Principal), column widths
+ * roughly proportional to their length, each listing its roles with links to the case pages.
+ */
+import career from '@/content/career.ko.json';
+import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const eras = [
+  { key: 'engineer', years: '2005.02 – 2014.03' },
+  { key: 'ux', years: '2014.04 – 2022.12' },
+  { key: 'principal', years: lang === 'ko' ? '2023.01 – 현재' : '2023.01 – Present' },
+] as const;
+
+// Oldest first so the flow reads left → right.
+const items = [...career.items].reverse();
+---
+
+<ol class="flow" aria-label={t.home.career}>
+  {
+    eras.map((era) => (
+      <li class:list={['era', `era--${era.key}`]}>
+        <div class="era__bar">
+          <span class="era__name">{t.era[era.key]}</span>
+          <span class="era__years">{era.years}</span>
+        </div>
+        <ul class="era__roles">
+          {items
+            .filter((item) => item.era === era.key)
+            .map((item) => (
+              <li>
+                <span class="role__period">{item.period}</span>
+                <a class="role__link" href={localizePath(`/work/${item.case}`, lang)}>
+                  {item.highlight}
+                </a>
+                <span class="role__team">{item.team}</span>
+              </li>
+            ))}
+        </ul>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(24 * var(--px));
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 1024px) {
+    .flow {
+      grid-template-columns: minmax(0, 9fr) minmax(0, 9fr) minmax(0, 8fr);
+      gap: calc(8 * var(--px));
+    }
+  }
+
+  .era__bar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--px));
+    padding: calc(14 * var(--px)) calc(16 * var(--px));
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+  }
+
+  .era--engineer .era__bar {
+    background: #3b4a63;
+  }
+
+  .era--ux .era__bar {
+    background: #2e5d94;
+  }
+
+  .era--principal .era__bar {
+    background: #1f3864;
+  }
+
+  .era__name {
+    font-size: var(--fs-body);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .era__years {
+    font-size: var(--fs-caption);
+    opacity: 0.85;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .era__roles {
+    display: flex;
+    flex-direction: column;
+    gap: calc(14 * var(--px));
+    margin-top: calc(16 * var(--px));
+    padding: 0 calc(4 * var(--px));
+    list-style: none;
+  }
+
+  .era__roles li {
+    display: flex;
+    flex-direction: column;
+    gap: calc(2 * var(--px));
+    padding-left: calc(12 * var(--px));
+    border-left: var(--stroke-base) solid var(--color-line);
+  }
+
+  .role__period {
+    color: var(--color-muted);
+    font-size: var(--fs-caption);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .role__link {
+    color: var(--color-navy);
+    font-size: var(--fs-small);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+  }
+
+  .role__link:hover {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+  }
+
+  .role__team {
+    color: var(--color-muted);
+    font-size: var(--fs-caption);
+    line-height: 1.45;
+  }
+</style>

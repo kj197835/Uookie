@@ -1,0 +1,24 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="meta">© {year} KyungJun Lee · {t.footer.builtWith}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-line-soft);
+    padding-block: var(--space-5);
+  }
+  .meta {
+    text-align: right;
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+  }
+</style>

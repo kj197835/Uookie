@@ -1,0 +1,23 @@
+---
+/** Temporary page body until the real page is built in a later phase. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/Section.astro';
+import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={title} noindex>
+  <Section kind="content" label={title} pdf="none">
+    <div class="stack" style="justify-content:center;flex:1">
+      <p class="eyebrow">{title}</p>
+      <h1 class="t-h1">{t.common.comingSoon}</h1>
+      <p><a href={localizePath('/', lang)}>← {t.common.backHome}</a></p>
+    </div>
+  </Section>
+</BaseLayout>

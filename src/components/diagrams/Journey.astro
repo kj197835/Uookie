@@ -1,0 +1,113 @@
+---
+/**
+ * Vertical journey diagram. The first group is drawn solid ("what I led"),
+ * later groups dashed ("what happened after"), so hand-overs read honestly.
+ * All text comes from the case frontmatter (design.visual.journey).
+ */
+interface Step {
+  label: string;
+  sub?: string;
+}
+interface Group {
+  title: string;
+  steps: Step[];
+}
+interface Props {
+  groups: Group[];
+  label: string;
+}
+const { groups, label } = Astro.props;
+
+const W = 640;
+const X = 22; // spine x
+const HEADER = 34;
+const GAP = 14;
+
+let y = 0;
+const layout = groups.map((group, gi) => {
+  const header = { y: y + 20 };
+  y += HEADER;
+  const steps = group.steps.map((step) => {
+    const h = step.sub ? 52 : 38;
+    const node = { ...step, cy: y + 12, y };
+    y += h;
+    return node;
+  });
+  const g = { ...group, gi, header, steps, top: steps[0].cy, bottom: steps[steps.length - 1].cy };
+  y += GAP;
+  return g;
+});
+const H = y - GAP + 4;
+---
+
+<svg class="journey" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} xmlns="http://www.w3.org/2000/svg">
+  {
+    layout.map((g) => (
+      <g id={`journey-group-${g.gi + 1}`} class:list={['group', g.gi > 0 && 'group--after']}>
+        <text class="group__title" x={X - 8} y={g.header.y} font-family="Pretendard, system-ui, sans-serif">
+          {g.title}
+        </text>
+        <line class="spine" x1={X} y1={g.top} x2={X} y2={g.bottom} />
+        {g.steps.map((s) => (
+          <g class="step">
+            <circle class="node" cx={X} cy={s.cy} r="7" />
+            <text class="step__label" x={X + 24} y={s.cy + 7} font-family="Pretendard, system-ui, sans-serif">
+              {s.label}
+            </text>
+            {s.sub && (
+              <text class="step__sub" x={X + 24} y={s.cy + 29} font-family="Pretendard, system-ui, sans-serif">
+                {s.sub}
+              </text>
+            )}
+          </g>
+        ))}
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  .journey {
+    width: 100%;
+    height: auto;
+  }
+
+  .group__title {
+    fill: var(--color-accent-strong);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .spine {
+    stroke: var(--color-navy);
+    stroke-width: 2;
+  }
+
+  .node {
+    fill: var(--color-navy);
+    stroke: var(--color-surface);
+    stroke-width: 2;
+  }
+
+  .step__label {
+    fill: var(--color-navy);
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .step__sub {
+    fill: var(--color-muted);
+    font-size: 14px;
+  }
+
+  .group--after .spine {
+    stroke: var(--color-accent);
+    stroke-dasharray: 4 5;
+  }
+
+  .group--after .node {
+    fill: var(--color-surface);
+    stroke: var(--color-accent);
+  }
+</style>

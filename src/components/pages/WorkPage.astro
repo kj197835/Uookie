@@ -1,0 +1,325 @@
+---
+/**
+ * Work: every case as one career flow. A chapter strip (oldest → newest, like a time axis)
+ * jumps into a vertical timeline that reads newest first. Chapters: src/content/chapters.<lang>.json
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CaseCard from '@/components/work/CaseCard.astro';
+import { chapterAnchor, getChapters } from '@/lib/cases';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const chapters = await getChapters(lang);
+const oldestFirst = [...chapters].reverse();
+---
+
+<BaseLayout title={t.work.title} description={t.work.intro}>
+  <div class="container work">
+    <header class="work__intro">
+      <p class="eyebrow">{t.work.flow}</p>
+      <h1 class="t-h1">{t.work.title}</h1>
+      <p class="work__lead">{t.work.intro}</p>
+    </header>
+
+    <nav class="strip" aria-label={t.work.chapterNav}>
+      <ol>
+        {
+          oldestFirst.map((ch) => (
+            <li>
+              <a href={`#${chapterAnchor(ch)}`}>
+                <span class="strip__no">
+                  {t.work.chapter}
+                  {ch.no}
+                </span>
+                <span class="strip__title">{ch.title}</span>
+                <span class="strip__period">{ch.period}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="strip__hint">{t.work.flowHint}</p>
+    </nav>
+
+    <ol class="timeline">
+      {
+        chapters.map((ch, i) => (
+          <li id={chapterAnchor(ch)} class:list={['chapter', i === 0 && 'chapter--latest']}>
+            <p class="chapter__period">{ch.period}</p>
+            <div class="chapter__body">
+              <p class="chapter__no">
+                {t.work.chapter}
+                {ch.no}
+              </p>
+              <h2 class="chapter__title">{ch.title}</h2>
+              <p class="bridge">
+                {ch.no > 1 && (
+                  <span class="bridge__from">
+                    {t.work.chapter}
+                    {ch.no - 1} → {t.work.chapter}
+                    {ch.no}
+                  </span>
+                )}
+                {ch.bridge}
+              </p>
+              <div class="chapter__cases">
+                {ch.cases.map((entry) => (
+                  <div class="cell">
+                    <CaseCard entry={entry} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Not a 16:9 Section: define the scale variables CaseCard expects. */
+  .work {
+    --px: 1px;
+    --fs-h1: var(--size-h1);
+    --fs-h3: var(--size-h3);
+    --fs-small: var(--size-small);
+    --fs-caption: var(--size-caption);
+    padding-block: var(--space-8) var(--space-9);
+  }
+
+  .work__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 46em;
+  }
+
+  .work__lead {
+    color: var(--color-muted);
+  }
+
+  /* Chapter strip — oldest → newest */
+  .strip {
+    margin-top: var(--space-7);
+  }
+
+  .strip ol {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .strip a {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    padding: var(--space-3) var(--space-3) var(--space-4);
+    border-top: 3px solid var(--color-line);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background: var(--color-surface-alt);
+    color: var(--color-navy);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .strip li:last-child a {
+    border-top-color: var(--color-accent);
+  }
+
+  .strip a:hover {
+    border-top-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  .strip__no {
+    color: var(--color-accent-strong);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.04em;
+  }
+
+  .strip__title {
+    font-size: var(--size-small);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.35;
+  }
+
+  .strip__period {
+    margin-top: auto;
+    padding-top: var(--space-1);
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .strip__hint {
+    margin-top: var(--space-2);
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+  }
+
+  /* Timeline — newest first */
+  .timeline {
+    margin-top: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
+
+  .chapter {
+    --rail: 150px;
+    --gutter: 48px;
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--gutter);
+    padding-bottom: var(--space-8);
+    scroll-margin-top: 88px;
+  }
+
+  /* spine */
+  .chapter::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    bottom: -14px;
+    left: calc(var(--rail) + var(--gutter) / 2 - 1px);
+    width: 2px;
+    background: var(--color-line);
+  }
+
+  .chapter:last-child::before {
+    display: none;
+  }
+
+  /* node */
+  .chapter::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: calc(var(--rail) + var(--gutter) / 2 - 8px);
+    width: 16px;
+    height: 16px;
+    border: 3px solid var(--color-navy);
+    border-radius: 50%;
+    background: var(--color-surface);
+  }
+
+  .chapter--latest::after {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+
+  .chapter__period {
+    padding-top: 2px;
+    color: var(--color-navy);
+    font-size: var(--size-small);
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .chapter__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .chapter__no {
+    color: var(--color-accent-strong);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.06em;
+  }
+
+  .chapter__title {
+    font-size: var(--size-h2);
+  }
+
+  .bridge {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+    max-width: 48em;
+    color: var(--color-muted);
+    font-size: var(--size-small);
+  }
+
+  .bridge__from {
+    padding: 1px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent-soft);
+    color: var(--color-navy);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  .chapter__cases {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-4);
+  }
+
+  .cell {
+    display: flex;
+  }
+
+  .cell > :global(*) {
+    flex: 1;
+  }
+
+  @media (max-width: 1023px) {
+    .strip ol {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: var(--space-2);
+    }
+
+    .strip li {
+      flex: 0 0 150px;
+      scroll-snap-align: start;
+    }
+
+    .chapter {
+      --rail: 0px;
+      --gutter: 0px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2);
+      padding-left: 32px;
+    }
+
+    .chapter::before {
+      left: 7px;
+    }
+
+    .chapter::after {
+      left: 0;
+    }
+
+    .chapter__period {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .work {
+      padding-block: var(--space-7);
+    }
+
+    .chapter__title {
+      font-size: var(--size-h3);
+    }
+
+    .chapter__cases {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+/* Print / PDF: every Section becomes exactly one 1920×1080 page. */
+
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    background: var(--color-surface);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print,
+  .site-header,
+  .site-footer,
+  .skip-link {
+    display: none !important;
+  }
+
+  .section {
+    break-after: page;
+    break-inside: avoid;
+  }
+
+  .section__frame {
+    width: var(--layout-print-width);
+  }
+
+  .section__page {
+    --px: calc(100cqi / var(--layout-page-width-n));
+    height: var(--layout-print-height);
+    aspect-ratio: auto;
+    overflow: hidden;
+  }
+
+  /* Sections excluded from the PDF */
+  .section[data-pdf='none'] {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

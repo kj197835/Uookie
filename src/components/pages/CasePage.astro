@@ -1,0 +1,479 @@
+---
+/**
+ * Case study page: cover → background → approach → (design) → impact.
+ * Each block is one Section = one 16:9 PDF page. All text comes from src/content/cases.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/Section.astro';
+import VisualSlot from '@/components/work/VisualSlot.astro';
+import Journey from '@/components/diagrams/Journey.astro';
+import { caseNumber, caseSlug, chapterAnchor, chapterOf, getChapters, type Case } from '@/lib/cases';
+import { getLangFromUrl, localizePath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  entry: Case;
+  prev?: Case;
+  next?: Case;
+}
+const { entry, prev, next } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { data } = entry;
+const no = caseNumber(entry);
+const eyebrow = `Case ${no} · ${data.theme}`;
+const approachCol = data.approach.items.length % 3 === 0 ? 'col-4' : 'col-6';
+const caseHref = (c: Case) => localizePath(`/work/${caseSlug(c)}`, lang);
+
+// Career chapter context: `prev` is the newer case (above on /work), `next` the earlier one.
+const chapters = await getChapters(lang);
+const chapter = chapterOf(chapters, entry);
+const chapterHref = localizePath(`/work#${chapterAnchor(chapter)}`, lang);
+const newer = prev && { entry: prev, chapter: chapterOf(chapters, prev) };
+const older = next && { entry: next, chapter: chapterOf(chapters, next) };
+const chapterLabel = (ch: typeof chapter) => `${t.work.chapter}${ch.no} · ${ch.title}`;
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <Section id="cover" kind="cover" label={t.work.cover} tone="navy" pdf="summary">
+    <div class="grid cover">
+      <div class="col-7 stack cover__text">
+        <div class="cover__eyebrow">
+          <p class="eyebrow">{eyebrow}</p>
+          <a class="cover__chapter" href={chapterHref}>{chapterLabel(chapter)}</a>
+        </div>
+        <div class="stack cover__head">
+          <h1 class="t-display">{data.title}</h1>
+          {data.subtitle && <p class="t-h3 cover__subtitle">{data.subtitle}</p>}
+        </div>
+        <p class="t-h3 cover__summary">{data.summary}</p>
+        <dl class="meta push-end">
+          <div>
+            <dt>{t.work.period}</dt>
+            <dd>{data.period}</dd>
+          </div>
+          <div>
+            <dt>{t.work.role}</dt>
+            <dd>{data.role}</dd>
+          </div>
+          {
+            data.awards.length > 0 && (
+              <div>
+                <dt>{t.work.awards}</dt>
+                <dd>{data.awards.map((a) => `${a.year} ${a.name}`).join(' · ')}</dd>
+              </div>
+            )
+          }
+        </dl>
+        {data.note && <p class="t-small note">{data.note}</p>}
+      </div>
+      <div class="col-5">
+        <VisualSlot description={`${data.title} — ${lang === 'ko' ? '대표 이미지 (공개 자료 또는 재구성 SVG)' : 'Key visual'}`} />
+      </div>
+    </div>
+  </Section>
+
+  <Section id="background" kind="problem" label={t.work.background}>
+    <div class="stack page-body">
+      <p class="eyebrow">{t.work.background}</p>
+      <h2 class="t-h1 problem">{data.background.problem}</h2>
+      <div class="grid push-end">
+        {
+          data.background.context.map((c) => (
+            <div class={`${data.background.context.length === 2 ? 'col-6' : 'col-4'} card`}>
+              <h3 class="t-h3">{c.title}</h3>
+              <p class="t-small t-muted">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  <Section id="approach" kind="approach" label={t.work.approach} tone="alt">
+    <div class="stack page-body">
+      <p class="eyebrow">{t.work.approach}</p>
+      <h2 class="t-h2">{data.approach.heading}</h2>
+      <p class="t-small t-muted">{t.work.role}: {data.role}</p>
+      <ol class="grid decisions">
+        {
+          data.approach.items.map((item, i) => (
+            <li class={`${approachCol} card card--raised`}>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="t-h3">{item.title}</h3>
+              <p class="t-small">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Section>
+
+  {
+    data.design && (
+      <Section id="design" kind="design" label={t.work.design}>
+        <div class="stack page-body">
+          <p class="eyebrow">{t.work.design}</p>
+          <h2 class="t-h2">{data.design.heading}</h2>
+          <div class="grid design">
+            <div class="col-7">
+              {data.design.visual.journey ? (
+                <figure class="diagram">
+                  <Journey groups={data.design.visual.journey} label={data.design.visual.description} />
+                </figure>
+              ) : (
+                <VisualSlot description={data.design.visual.description} />
+              )}
+            </div>
+            <ol class="col-5 points">
+              {data.design.points.map((p, i) => (
+                <li>
+                  <span class="num">{i + 1}</span>
+                  <div>
+                    <h3 class="t-body point__title">{p.title}</h3>
+                    <p class="t-small t-muted">{p.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  <Section id="impact" kind="impact" label={t.work.impact} tone="alt">
+    <div class="stack page-body">
+      <p class="eyebrow">{t.work.impact}</p>
+      {
+        data.impact.metrics.length > 0 && (
+          <ul class="grid metrics">
+            {data.impact.metrics.map((m) => (
+              <li class="col-6">
+                <span class="t-stat">{m.value}</span>
+                <span class="t-small t-muted">{m.label}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <ul class="results">
+        {data.impact.results.map((r) => <li>{r}</li>)}
+      </ul>
+      {
+        data.links.length > 0 && (
+          <div class="links push-end">
+            <p class="t-caption">{t.work.links}</p>
+            <ul>
+              {data.links.map((l) => (
+                <li>
+                  <a href={l.url} target="_blank" rel="noopener">
+                    {l.label} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </Section>
+
+  <nav class="container case-nav" aria-label={t.work.chapterNav}>
+    {
+      newer ? (
+        <a href={caseHref(newer.entry)} rel="prev" class="case-nav__link">
+          <span class="case-nav__dir">↑ {t.work.newer}</span>
+          <span class="case-nav__title">{newer.entry.data.title}</span>
+          {newer.chapter.no !== chapter.no && (
+            <>
+              <span class="case-nav__chapter">{chapterLabel(newer.chapter)}</span>
+              <span class="case-nav__bridge">{newer.chapter.bridge}</span>
+            </>
+          )}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    <a class="case-nav__all" href={chapterHref}>{t.work.allWork}</a>
+    {
+      older ? (
+        <a href={caseHref(older.entry)} rel="next" class="case-nav__link case-nav__link--older">
+          <span class="case-nav__dir">{t.work.older} ↓</span>
+          <span class="case-nav__title">{older.entry.data.title}</span>
+          {older.chapter.no !== chapter.no && <span class="case-nav__chapter">{chapterLabel(older.chapter)}</span>}
+        </a>
+      ) : (
+        <span />
+      )
+    }
+  </nav>
+</BaseLayout>
+
+<style>
+  .page-body {
+    flex: 1;
+  }
+
+  /* Cover */
+  .cover {
+    flex: 1;
+    align-items: stretch;
+  }
+
+  .cover__eyebrow {
+    display: flex;
+    flex-direction: column;
+    gap: calc(6 * var(--px));
+  }
+
+  .cover__chapter {
+    align-self: flex-start;
+    color: var(--color-muted);
+    font-size: var(--fs-small);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+  }
+
+  .cover__chapter:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .cover__head {
+    gap: calc(12 * var(--px));
+  }
+
+  .cover__subtitle {
+    color: var(--color-muted);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .cover__summary {
+    font-weight: var(--font-weight-regular);
+    max-width: 30em;
+  }
+
+  .meta {
+    display: grid;
+    gap: calc(12 * var(--px));
+    padding-top: calc(20 * var(--px));
+    border-top: var(--stroke-hair) solid var(--color-line);
+  }
+
+  .meta div {
+    display: grid;
+    grid-template-columns: calc(72 * var(--px)) 1fr;
+    gap: calc(16 * var(--px));
+  }
+
+  .meta dt {
+    color: var(--color-muted);
+    font-size: var(--fs-caption);
+    font-weight: var(--font-weight-semibold);
+    padding-top: 0.2em;
+  }
+
+  .meta dd {
+    font-size: var(--fs-small);
+  }
+
+  .note {
+    padding: calc(12 * var(--px)) calc(16 * var(--px));
+    border-left: var(--stroke-bold) solid var(--color-accent);
+    color: var(--color-muted);
+  }
+
+  /* Cards */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 * var(--px));
+    padding: calc(24 * var(--px));
+    border-top: var(--stroke-bold) solid var(--color-navy);
+    background: var(--color-surface-alt);
+  }
+
+  .card--raised {
+    border-top-color: var(--color-accent);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .problem {
+    max-width: 24em;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .decisions,
+  .points,
+  .metrics,
+  .results,
+  .links ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  .decisions {
+    margin-top: auto;
+  }
+
+  .num {
+    color: var(--color-accent);
+    font-size: var(--fs-small);
+    font-weight: var(--font-weight-bold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Design */
+  .diagram {
+    padding: calc(20 * var(--px)) calc(24 * var(--px));
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-alt);
+  }
+
+  .design {
+    flex: 1;
+    align-items: stretch;
+  }
+
+  .points {
+    display: flex;
+    flex-direction: column;
+    gap: calc(18 * var(--px));
+  }
+
+  .points li {
+    display: grid;
+    grid-template-columns: calc(32 * var(--px)) 1fr;
+    gap: calc(12 * var(--px));
+  }
+
+  .points .num {
+    display: grid;
+    place-items: center;
+    width: calc(28 * var(--px));
+    height: calc(28 * var(--px));
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    color: var(--color-navy);
+    font-size: var(--fs-caption);
+  }
+
+  .point__title {
+    margin-bottom: calc(4 * var(--px));
+    font-size: var(--fs-body);
+  }
+
+  /* Impact */
+  .metrics li {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--px));
+    padding-bottom: calc(20 * var(--px));
+    border-bottom: var(--stroke-hair) solid var(--color-line);
+  }
+
+  .results {
+    display: grid;
+    gap: calc(12 * var(--px));
+  }
+
+  .results li {
+    position: relative;
+    padding-left: calc(24 * var(--px));
+  }
+
+  .results li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: calc(10 * var(--px));
+    height: var(--stroke-bold);
+    background: var(--color-accent);
+  }
+
+  .links ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(8 * var(--px)) calc(20 * var(--px));
+    margin-top: calc(6 * var(--px));
+    font-size: var(--fs-small);
+  }
+
+  /* Prev / next (screen only) */
+  .case-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: var(--space-5);
+    padding-block: var(--space-7);
+    border-top: 1px solid var(--color-line-soft);
+  }
+
+  .case-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    max-width: 26em;
+    color: var(--color-navy);
+    text-decoration: none;
+  }
+
+  .case-nav__link--older {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .case-nav__dir {
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+  }
+
+  .case-nav__title {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .case-nav__link:hover .case-nav__title {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+  }
+
+  .case-nav__chapter {
+    color: var(--color-accent-strong);
+    font-size: var(--size-caption);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .case-nav__bridge {
+    color: var(--color-muted);
+    font-size: var(--size-caption);
+    line-height: 1.5;
+  }
+
+  .case-nav .case-nav__all {
+    align-self: center;
+    font-size: var(--size-small);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent-strong);
+    text-decoration: none;
+  }
+
+  @media (max-width: 767px) {
+    .case-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+    .case-nav__all {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-self: center;
+    }
+  }
+
+  @media print {
+    .case-nav {
+      display: none;
+    }
+  }
+</style>

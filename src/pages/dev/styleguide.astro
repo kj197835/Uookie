@@ -1,0 +1,108 @@
+---
+/** Internal style guide (noindex, excluded from PDF): tokens, type scale, section tones, grid. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/Section.astro';
+import tokens from '@/tokens/tokens.json';
+
+const colors = Object.entries(tokens.color).filter(([k]) => !k.startsWith('$')) as [
+  string,
+  { $value: string; $description?: string; $extensions: { mode: { dark: string } } },
+][];
+const type = ['display', 'h1', 'h2', 'h3', 'body', 'small', 'caption'] as const;
+---
+
+<BaseLayout title="Style guide" noindex>
+  <Section kind="content" label="Colors" pdf="none">
+    <p class="eyebrow">Tokens · src/tokens/tokens.json</p>
+    <h1 class="t-h1" style="margin-bottom:var(--gap)">Color</h1>
+    <div class="swatches">
+      {
+        colors.map(([name, token]) => (
+          <div class="swatch">
+            <div class="chip" style={`background:var(--color-${name})`} />
+            <p class="t-small"><strong>{name}</strong></p>
+            <p class="t-caption">
+              {token.$value} / {token.$extensions.mode.dark}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section kind="content" label="Type" tone="alt" pdf="none">
+    <p class="eyebrow">Pretendard · scales with the 16:9 page</p>
+    <div class="stack" style="margin-top:var(--gap)">
+      {
+        type.map((name) => (
+          <div class="type-row">
+            <span class="t-caption">{name} · {tokens.size[name].$value}</span>
+            <p class={`t-${name}`}>디자인으로 복잡한 기술을 쉽게 — Designing with AI & for AI</p>
+          </div>
+        ))
+      }
+      <div class="type-row">
+        <span class="t-caption">stat · {tokens.size.stat.$value}</span>
+        <p class="t-stat">8% → 12%</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section kind="content" label="Grid" tone="navy" pdf="none">
+    <p class="eyebrow">12-column grid · navy tone</p>
+    <h2 class="t-h1" style="margin-block:var(--gap)">한 섹션 = PDF 한 페이지</h2>
+    <div class="grid push-end">
+      {Array.from({ length: 12 }, (_, i) => <div class="col-cell">{i + 1}</div>)}
+      <div class="col-7 demo">col-7</div>
+      <div class="col-5 demo">col-5</div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(calc(150 * var(--px)), 1fr));
+    gap: var(--gap);
+  }
+  .chip {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-line-soft);
+    margin-bottom: var(--space-2);
+  }
+  .type-row {
+    display: grid;
+    grid-template-columns: calc(140 * var(--px)) 1fr;
+    align-items: baseline;
+    gap: var(--gap);
+    border-top: 1px solid var(--color-line-soft);
+    padding-top: calc(8 * var(--px));
+  }
+  .type-row p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .col-cell {
+    grid-column: span 1 !important;
+    padding: calc(8 * var(--px)) 0;
+    text-align: center;
+    font-size: var(--fs-caption);
+    border: 1px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+  }
+  .demo {
+    padding: calc(24 * var(--px));
+    border-radius: var(--radius-md);
+    background: var(--color-line-soft);
+  }
+  @media (max-width: 1023px) {
+    .col-cell {
+      display: none;
+    }
+    .type-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
